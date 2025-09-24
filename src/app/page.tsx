@@ -1,3 +1,5 @@
-export default function Home() {
-    return <h1>Hello World</h1>;
+import HomepageIndex from '@/components/pages/HomepageIndex';
+
+export default function Page() {
+    return <HomepageIndex />;
 }

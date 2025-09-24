@@ -1,0 +1,36 @@
+@theme {
+    --breakpoint-sm: 576px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-2xl: 1400px;
+    /*--breakpoint-sm: 57.6rem;*/
+    /*--breakpoint-md: 76.8rem;*/
+    /*--breakpoint-lg: 99.2rem;*/
+    /*--breakpoint-xl: 120rem;*/
+    /*--breakpoint-2xl: 140rem;*/
+}
+
+@theme {
+    /*--container-*: initial;*/
+    /*--container-sm: 5rem;*/
+    /*--breakpoint-md: 76.8rem;*/
+    /*--container-xl: 11.4rem;*/
+    /*--container-2xl: 13.4rem;*/
+
+    /*--container-sm: 5rem;*/
+    /*--breakpoint-md: 76.8rem;*/
+    /*--container-xl: 11.4rem;*/
+    --container-2xl: 1340px;
+}
+
+@theme {
+    --spacing: 1rem;
+    --spacing-auto: auto;
+}
+
+@theme {
+    --text-sm: 1rem;
+    --text-base: 1.6rem;
+    --text-md: 2rem;
+}
