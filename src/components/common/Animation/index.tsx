@@ -4,11 +4,11 @@ import React, { useEffect, useRef } from 'react';
 
 import { createScope, Scope } from 'animejs';
 
-import { ANIMATION_ATTRIBUTE } from '@/components/common/Animation/handles';
+import { ANIMATION_ATTRIBUTE, ANIMATION_HANDLES } from '@/components/common/Animation/handles';
 import { ANIMATION_DATA_HANDLES } from '@/components/common/Animation/handlesData';
 
 export type AnimationTypes = {
-    type?: (typeof ANIMATIONS_TYPE)[keyof typeof ANIMATIONS_TYPE];
+    type?: (typeof ANIMATION_HANDLES)[keyof typeof ANIMATION_HANDLES];
     children: React.ReactElement;
 };
 
