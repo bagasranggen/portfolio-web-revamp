@@ -1,0 +1,9 @@
+@layer base {
+    html {
+        @apply text-[62.5%]
+    }
+
+    body {
+        @apply text-base;
+    }
+}
