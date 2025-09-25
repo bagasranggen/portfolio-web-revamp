@@ -1,0 +1,7 @@
+import { RefComponent } from '@/libs/@types';
+
+import Base, { BaseTypes } from '@/components/common/Picture/Base';
+
+export type PictureComposition = {};
+
+export default Object.assign<RefComponent<BaseTypes, HTMLPictureElement>, PictureComposition>(Base, {});
