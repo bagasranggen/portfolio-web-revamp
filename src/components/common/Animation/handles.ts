@@ -4,4 +4,5 @@ export const ANIMATION_ATTRIBUTE = {
 
 export const ANIMATION_HANDLES = {
     FADE: 'fade',
+    MARQUEE: 'marquee',
 } as const;

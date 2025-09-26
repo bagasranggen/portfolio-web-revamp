@@ -9,10 +9,11 @@ import { ANIMATION_DATA_HANDLES } from '@/components/common/Animation/handlesDat
 
 export type AnimationTypes = {
     type?: (typeof ANIMATION_HANDLES)[keyof typeof ANIMATION_HANDLES];
+    trigger?: number;
     children: React.ReactElement;
 };
 
-const Animation = ({ type, children }: AnimationTypes): React.ReactElement => {
+const Animation = ({ type, trigger, children }: AnimationTypes): React.ReactElement => {
     const root = useRef(null);
     const scope = useRef<Scope | null>(null);
 
@@ -38,7 +39,7 @@ const Animation = ({ type, children }: AnimationTypes): React.ReactElement => {
         return () => {
             if (scope.current) scope.current.revert();
         };
-    }, [type]);
+    }, [type, trigger]);
 
     return React.cloneElement(children, props);
 };
