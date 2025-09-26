@@ -2,6 +2,6 @@ export const clearStyle = ({ target, style }: { target: HTMLElement; style: stri
     if (!target || !style || style.length === 0) return;
 
     style.forEach((item) => {
-        target.style[item] = '';
+        target.style[item as any] = '';
     });
 };
