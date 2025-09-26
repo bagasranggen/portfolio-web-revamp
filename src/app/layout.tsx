@@ -3,8 +3,10 @@ import localFont from 'next/font/local';
 
 import '@/assets/styles/globals.css';
 
+import Footer from '@/components/layout/Footer';
+
 const murecho = localFont({
-    src:[
+    src: [
         {
             path: '../assets/fonts/Murecho/Murecho-Black.woff2',
             weight: '900',
@@ -20,7 +22,7 @@ const murecho = localFont({
         {
             path: '../assets/fonts/Murecho/Murecho-SemiBold.woff2',
             weight: '600',
-            style: 'normal'
+            style: 'normal',
         },
         {
             path: '../assets/fonts/Murecho/Murecho-Medium.woff2',
@@ -54,7 +56,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
         <html lang="en">
-            <body className={murecho.variable}>{children}</body>
+            <body className={murecho.variable}>
+                {children}
+
+                <Footer />
+            </body>
         </html>
     );
 }
