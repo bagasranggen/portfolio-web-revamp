@@ -1,0 +1,23 @@
+@layer components {
+    .marquee {
+        @apply flex overflow-hidden;
+
+        & &__item {
+            @apply flex items-center;
+            @apply whitespace-nowrap;
+            @apply uppercase text-[14rem] font-extralight tracking-[3rem] leading-16;
+
+            &&:not(:last-child) {
+                @apply me-5;
+            }
+
+            &&:after {
+                @apply aspect-square w-[4.5rem];
+                @apply border border-3 rounded-full;
+                @apply ms-2;
+
+                content: '';
+            }
+        }
+    }
+}
