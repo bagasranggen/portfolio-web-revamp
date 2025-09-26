@@ -1,0 +1,21 @@
+@layer components {
+    .list {
+        &.list--inline {
+            @apply flex;
+
+            .list__item {
+                @apply text-[2.5rem] font-light tracking-[1rem] uppercase;
+
+                &:not(:last-child) {
+                    @apply me-3;
+
+                    &:after {
+                        @apply ms-3;
+
+                        content: '|';
+                    }
+                }
+            }
+        }
+    }
+}
