@@ -1,3 +1,5 @@
+import React, { JSX } from 'react';
+
 export type Component<Props> = {
     (props: Props): React.ReactElement | null;
 };
@@ -7,5 +9,7 @@ export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props
 export type ClassnameTypes = Pick<React.HTMLAttributes<HTMLElement>, 'className'>;
 
 export type ArrayStringTypes = string | string[];
+
+export type ElementTagsTypes = keyof JSX.IntrinsicElements;
 
 export type BreakpointsTypes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
