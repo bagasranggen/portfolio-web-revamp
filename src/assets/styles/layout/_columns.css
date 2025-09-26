@@ -2,8 +2,8 @@
 @source inline("{sm:,md:,lg:,xl:,2xl:,}column-offset-{1,{2..10..1},12}");
 @source inline("{sm:,md:,lg:,xl:,2xl:,}{gutter-,gutter-x-,gutter-y-}{1,{2..10..1},10}");
 
+/* column width */
 @theme {
-    /* column width */
     --column-width-1: 8.333333%;
     --column-width-2: 16.666667%;
     --column-width-3: 25%;
@@ -27,7 +27,7 @@
 }
 
 @utility column-offset-* {
-    @apply ms-[--value(--column-width-*)];
+    margin-left: --value(--column-width-*);
 }
 
 @utility gutter-y-* {

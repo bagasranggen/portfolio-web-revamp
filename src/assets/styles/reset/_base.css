@@ -4,4 +4,8 @@
 
         font-family: var(--font-murecho);
     }
+
+    p:not(:last-child) {
+        @apply mb-2.5;
+    }
 }
