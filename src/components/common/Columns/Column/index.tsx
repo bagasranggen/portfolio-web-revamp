@@ -25,18 +25,21 @@ const Column = ({
     ...props
 }: ColumnTypes): React.ReactElement => {
     const sizesArr = Object.entries({ xs, sm, md, lg, xl, xxl });
-    const utilityClassName = 'column';
-
-    console.log({ offset });
+    const utilityColumnClassName = 'column';
+    const utilityColumnOffsetClassName = 'column-offset';
 
     let columnClass: ArrayStringTypes = [];
 
-    if (sizesArr.length === 0) columnClass.push(utilityClassName);
+    if (sizesArr.length === 0) columnClass.push(utilityColumnClassName);
     if (sizesArr.length > 0) {
         sizesArr.forEach(([key, value]) => {
             if (value && typeof columnClass !== 'string') {
                 columnClass.push(
-                    createBreakpointClass({ breakpoint: key as BreakpointsTypes, className: utilityClassName, value })
+                    createBreakpointClass({
+                        breakpoint: key as BreakpointsTypes,
+                        className: utilityColumnClassName,
+                        value,
+                    })
                 );
             }
         });
@@ -44,12 +47,11 @@ const Column = ({
 
     if (offset) {
         if (typeof offset === 'number') {
-            columnClass.push(createBreakpointClass({ className: 'column-offset', value: offset }));
+            columnClass.push(createBreakpointClass({ className: utilityColumnOffsetClassName, value: offset }));
         }
 
         if (typeof offset === 'object') {
             const offsetArr = Object.entries(offset);
-            console.log({ offset, offsetArr });
 
             if (offsetArr && offsetArr.length > 0) {
                 offsetArr.forEach(([key, value]) => {
@@ -57,7 +59,7 @@ const Column = ({
                         columnClass.push(
                             createBreakpointClass({
                                 breakpoint: key as BreakpointsTypes,
-                                className: 'column-offset',
+                                className: utilityColumnOffsetClassName,
                                 value,
                             })
                         );
