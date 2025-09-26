@@ -16,7 +16,7 @@ export type BaseTypes = {
     items?: BaseItemTypes[];
 } & React.HTMLAttributes<HTMLPictureElement>;
 
-const Base = forwardRef<HTMLPictureElement, BaseTypes>(({ items, className }, ref): React.ReactElement | null => {
+const Base = forwardRef<HTMLPictureElement, BaseTypes>(({ items = [], className }, ref): React.ReactElement | null => {
     let pictureClass: ArrayStringTypes = [];
     if (className) pictureClass.push(className);
     pictureClass = joinArrayString(pictureClass);
