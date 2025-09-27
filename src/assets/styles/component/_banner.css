@@ -1,0 +1,33 @@
+.banner-homepage {
+    @apply h-screen bg-porto-primary;
+
+    & &__media:not([style]),
+    & &__description:not([style]),
+    & &__heading span[data-char]:not([style*='opacity']),
+    & &__label span[data-char]:not([style*='opacity']) {
+        @apply opacity-0;
+    }
+
+    & &__media {
+        @apply block mb-16;
+
+        /*&:not([style]) {*/
+        /*}*/
+    }
+
+    & &__heading {
+        @apply -mx-1 text-[15.5rem] font-[200] tracking-[1.4rem] leading-[14.5rem];
+
+        /*span[data-char]:not([style*='opacity']) {*/
+        /*    @apply opacity-0;*/
+        /*}*/
+    }
+
+    & &__label {
+        @apply uppercase text-md tracking-[1.5rem] font-medium;
+    }
+
+    & &__description {
+        @apply mb-8;
+    }
+}
