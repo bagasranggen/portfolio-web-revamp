@@ -9,17 +9,23 @@ import { ANIMATION_DATA_HANDLES } from '@/components/common/Animation/handlesDat
 
 export type AnimationTypes = {
     type?: (typeof ANIMATION_HANDLES)[keyof typeof ANIMATION_HANDLES];
+    order?: number;
     trigger?: number;
     children: React.ReactElement;
 };
 
-const Animation = ({ type, trigger, children }: AnimationTypes): React.ReactElement => {
+const Animation = ({ type, order, trigger, children }: AnimationTypes): React.ReactElement => {
     const root = useRef(null);
     const scope = useRef<Scope | null>(null);
 
     let props = { ref: root };
+
     if (type) {
         props = Object.assign(props, { [ANIMATION_ATTRIBUTE.TYPE]: type });
+    }
+
+    if (!type && order) {
+        props = Object.assign(props, { [ANIMATION_ATTRIBUTE.ORDER]: order });
     }
 
     useEffect(() => {
@@ -27,6 +33,7 @@ const Animation = ({ type, trigger, children }: AnimationTypes): React.ReactElem
 
         if (!target) return;
         if (!type) return;
+        if (order) return;
 
         const animationType: string | null = (target as HTMLElement)?.getAttribute(ANIMATION_ATTRIBUTE.TYPE);
 
@@ -39,7 +46,7 @@ const Animation = ({ type, trigger, children }: AnimationTypes): React.ReactElem
         return () => {
             if (scope.current) scope.current.revert();
         };
-    }, [type, trigger]);
+    }, [type, trigger, order]);
 
     return React.cloneElement(children, props);
 };
