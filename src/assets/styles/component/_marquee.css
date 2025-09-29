@@ -1,6 +1,10 @@
 @layer components {
     .marquee {
-        @apply flex overflow-hidden;
+        @apply overflow-hidden;
+
+        & &__wrapper {
+            @apply flex;
+        }
 
         & &__item {
             @apply flex items-center;
