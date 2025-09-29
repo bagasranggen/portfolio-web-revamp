@@ -31,7 +31,15 @@
                 .card__heading {
                     @apply text-porto-d-primary;
                 }
+
+                .card__media img {
+                    @apply scale-[1.1];
+                }
             }
+        }
+
+        .card__heading {
+            @apply transition-colors;
         }
 
         .card__count {
@@ -64,6 +72,7 @@
 
                 img {
                     @apply h-full object-cover;
+                    @apply transition-transform;
                 }
             }
         }
