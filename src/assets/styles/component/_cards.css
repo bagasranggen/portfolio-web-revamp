@@ -3,6 +3,7 @@
         @apply pt-28;
 
         .card__item {
+            @apply block;
             @apply bg-porto-light;
             @apply sticky top-[35rem];
 
@@ -24,6 +25,12 @@
 
             .container {
                 margin-top: var(--card-offset-height-difference, 0);
+            }
+
+            @variant hover {
+                .card__heading {
+                    @apply text-porto-d-primary;
+                }
             }
         }
 
@@ -49,6 +56,8 @@
             @apply h-full relative;
 
             picture {
+                @apply overflow-hidden;
+
                 &[style*='width'] {
                     @apply absolute top-0 left-0;
                 }

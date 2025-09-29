@@ -7,19 +7,21 @@ import { useMeasure } from 'react-use';
 import Columns from '@/components/common/Columns';
 import Icon from '@/components/common/Icon';
 import Heading from '@/components/common/Heading';
+import Container from '@/components/common/Container';
+import Button, { BaseAnchorTypes } from '@/components/common/Button';
 import OffsetItemMedia, { OffsetItemMediaTypes } from '@/components/common/Cards/Offset/OffsetItemMedia';
 import OffsetItemDescription, {
     OffsetItemDescriptionTypes,
 } from '@/components/common/Cards/Offset/OffsetItemDescription';
-import Container from '@/components/common/Container';
 
 export type OffsetItemTypes = {
     cardTallestHeight?: number;
     count?: string;
     description?: OffsetItemDescriptionTypes[];
+    link?: BaseAnchorTypes;
 } & Pick<OffsetItemMediaTypes, 'media'>;
 
-const OffsetItem = ({ description, count, cardTallestHeight, media }: OffsetItemTypes): React.ReactElement => {
+const OffsetItem = ({ link, description, count, cardTallestHeight, media }: OffsetItemTypes): React.ReactElement => {
     const cardItemRef = useRef(null);
     const [containerRef, { width: containerWidth, height: containerHeight }] = useMeasure();
 
@@ -56,9 +58,11 @@ const OffsetItem = ({ description, count, cardTallestHeight, media }: OffsetItem
     }, [cardDifference]);
 
     return (
-        <div
+        <Button
             ref={cardItemRef}
+            as={link ? 'anchor' : undefined}
             className="card__item"
+            {...(link as BaseAnchorTypes)}
             {...(style ? { style } : {})}>
             <Container
                 ref={containerRef as Ref<HTMLDivElement>}
@@ -76,7 +80,7 @@ const OffsetItem = ({ description, count, cardTallestHeight, media }: OffsetItem
                             </div>
                         </div>
 
-                        <Heading className="heading heading--title">Sooka Bakedgoods</Heading>
+                        <Heading className="heading heading--title card__heading">Sooka Bakedgoods</Heading>
 
                         {description && description.length > 0 && (
                             <div className="mt-5">
@@ -103,7 +107,7 @@ const OffsetItem = ({ description, count, cardTallestHeight, media }: OffsetItem
                     </Columns.Column>
                 </Columns>
             </Container>
-        </div>
+        </Button>
     );
 };
 

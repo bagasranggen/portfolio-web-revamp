@@ -29,6 +29,7 @@ const Offset = ({ wrapper, items: itemsProps }: OffsetTypes): React.ReactElement
                         description={item.description}
                         count={item.count}
                         media={item.media}
+                        link={item.link}
                     />
                 ),
             });
