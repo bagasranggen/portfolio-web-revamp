@@ -1,0 +1,68 @@
+'use client';
+
+import React, { RefObject, useEffect, useRef, useState } from 'react';
+
+import { useWindowSize } from 'react-use';
+
+import Base, { BaseItemTypes, BaseTypes } from '@/components/common/Cards/Base';
+import OffsetItem, { OffsetItemTypes } from '@/components/common/Cards/Offset/OffsetItem';
+
+export type OffsetTypes = {
+    items: OffsetItemTypes[];
+} & Pick<BaseTypes, 'wrapper'>;
+
+const Offset = ({ wrapper, items: itemsProps }: OffsetTypes): React.ReactElement => {
+    const { width } = useWindowSize();
+
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const [tallestCard, setTallestCard] = useState<number>(0);
+
+    const items: BaseItemTypes[] = [];
+
+    if (itemsProps && itemsProps.length > 0) {
+        itemsProps.forEach((item, i, arr) => {
+            items.push({
+                className: i !== arr.length - 1 ? 'pb-8' : undefined,
+                children: (
+                    <OffsetItem
+                        cardTallestHeight={tallestCard > 0 ? tallestCard : undefined}
+                        description={item.description}
+                        count={item.count}
+                        media={item.media}
+                    />
+                ),
+            });
+        });
+    }
+
+    useEffect(() => {
+        const container = containerRef?.current;
+
+        if (!container) return;
+
+        setTimeout(() => {
+            const cardHeight: number[] = [];
+            const cardItems = container.querySelectorAll('.card__item');
+
+            cardItems.forEach((item) => {
+                cardHeight.push(item.clientHeight);
+            });
+
+            setTallestCard(Math.max(...cardHeight));
+        }, 80);
+    }, [width]);
+
+    return (
+        <Base
+            wrapper={wrapper}
+            container={{
+                ref: containerRef as RefObject<HTMLDivElement>,
+                withContainer: false,
+                className: 'card card--offset',
+            }}
+            items={items}
+        />
+    );
+};
+
+export default Offset;

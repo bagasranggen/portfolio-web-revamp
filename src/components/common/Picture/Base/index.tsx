@@ -16,35 +16,40 @@ export type BaseTypes = {
     items?: BaseItemTypes[];
 } & React.HTMLAttributes<HTMLPictureElement>;
 
-const Base = forwardRef<HTMLPictureElement, BaseTypes>(({ items = [], className }, ref): React.ReactElement | null => {
-    let pictureClass: ArrayStringTypes = [];
-    if (className) pictureClass.push(className);
-    pictureClass = joinArrayString(pictureClass);
+const Base = forwardRef<HTMLPictureElement, BaseTypes>(
+    ({ items = [], className, ...props }, ref): React.ReactElement | null => {
+        let pictureClass: ArrayStringTypes = [];
+        if (className) pictureClass.push(className);
+        pictureClass = joinArrayString(pictureClass);
 
-    if (!items || items.length === 0) return null;
+        let pictureProps = props;
+        if (pictureClass) pictureProps = Object.assign(pictureProps, { className: pictureClass });
 
-    return (
-        <picture
-            ref={ref}
-            {...(pictureClass ? { className: pictureClass } : {})}>
-            {items.map((item, i) => {
-                const Image = items.length - 1 === i ? BaseItemImg : BaseItemSource;
-                const { alt, title, ...restItem } = item as any;
+        if (!items || items.length === 0) return null;
 
-                let props = { ...restItem, alt };
-                if (!alt && title) props = { ...props, alt: title };
+        return (
+            <picture
+                ref={ref}
+                {...pictureProps}>
+                {items.map((item, i) => {
+                    const Image = items.length - 1 === i ? BaseItemImg : BaseItemSource;
+                    const { alt, title, ...restItem } = item as any;
 
-                return (
-                    // eslint-disable-next-line jsx-a11y/alt-text
-                    <Image
-                        key={i}
-                        {...props}
-                    />
-                );
-            })}
-        </picture>
-    );
-});
+                    let props = { ...restItem, alt };
+                    if (!alt && title) props = { ...props, alt: title };
+
+                    return (
+                        // eslint-disable-next-line jsx-a11y/alt-text
+                        <Image
+                            key={i}
+                            {...props}
+                        />
+                    );
+                })}
+            </picture>
+        );
+    }
+);
 
 Base.displayName = 'Base';
 export default Base;

@@ -1,5 +1,5 @@
 .banner-homepage {
-    @apply h-screen bg-porto-primary;
+    @apply flex items-center h-screen bg-porto-primary;
 
     & &__media:not([style]),
     & &__description:not([style]),

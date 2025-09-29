@@ -1,0 +1,5 @@
+.heading {
+    &.heading--title {
+        @apply uppercase text-5xl font-semibold tracking-[.5rem] mt-5;
+    }
+}
