@@ -77,4 +77,36 @@
             }
         }
     }
+
+    &.card--block {
+        .card__item {
+            @apply block;
+
+            @variant hover {
+                .card__title {
+                    @apply text-porto-d-primary;
+                }
+
+                .card__media img {
+                    @apply scale-[1.1];
+                }
+            }
+        }
+
+        .card__title {
+            @apply uppercase text-md font-medium tracking-[.35rem];
+            @apply transition-colors;
+        }
+
+        .card__media {
+            picture {
+                @apply block overflow-hidden;
+
+                img {
+                    @apply h-full object-cover;
+                    @apply transition-transform;
+                }
+            }
+        }
+    }
 }

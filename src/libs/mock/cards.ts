@@ -1,6 +1,6 @@
 import { createArrayFromNumber, createPicsumImage } from '@/libs/factory';
 
-import { OffsetTypes } from '@/components/common/Cards';
+import { BlockTypes, OffsetTypes } from '@/components/common/Cards';
 import { OffsetItemDescriptionTypes } from '@/components/common/Cards/Offset/OffsetItemDescription';
 import parse from 'html-react-parser';
 
@@ -27,5 +27,17 @@ export const CARDS_OFFSET: OffsetTypes['items'] = createArrayFromNumber(3).map((
         link: {
             href: `/portfolio/${i + 1}`,
         },
+    };
+});
+
+export const CARDS_BLOCK: BlockTypes['items'] = createArrayFromNumber(5).map(() => {
+    return {
+        link: {
+            href: '#',
+        },
+        title: '',
+        description: parse(
+            `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae commodi consectetur cumque dignissimos doloremque earum eligendi est eveniet fuga fugiat fugit labore nulla odio placeat, sapiente sit tenetur, voluptates voluptatum.</p>`
+        ),
     };
 });
