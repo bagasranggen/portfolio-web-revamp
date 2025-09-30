@@ -39,7 +39,7 @@
         }
 
         .card__heading {
-            @apply transition-colors;
+            @apply transition-colors mt-5;
         }
 
         .card__count {

@@ -31,3 +31,15 @@
         @apply mb-8;
     }
 }
+
+.banner--text {
+    @apply min-h-70 pt-10;
+
+    .banner__title {
+        @apply [writing-mode:vertical-lr] font-extralight text-[6rem] tracking-[1.75rem];
+    }
+
+    .banner__description {
+        @apply mt-2 text-[2.2rem] font-light tracking-[.15rem];
+    }
+}
