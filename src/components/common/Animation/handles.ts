@@ -7,4 +7,5 @@ export const ANIMATION_HANDLES = {
     FADE: 'fade',
     MARQUEE: 'marquee',
     BANNER_HOMEPAGE: 'banner-homepage',
+    BANNER_TEXT: 'banner-text',
 } as const;
