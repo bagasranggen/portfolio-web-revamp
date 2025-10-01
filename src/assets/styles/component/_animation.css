@@ -1,0 +1,5 @@
+[data-animation-type='fade-in'] {
+    &:not([style]) {
+        @apply opacity-0;
+    }
+}
