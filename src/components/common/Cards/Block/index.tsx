@@ -23,6 +23,7 @@ const Block = ({ items: itemsProps }: BlockTypes): React.ReactElement => {
                 children: (
                     <Columns.Column
                         offset={offset}
+                        md={6}
                         lg={5}>
                         <BlockItem {...item} />
                     </Columns.Column>
@@ -34,7 +35,7 @@ const Block = ({ items: itemsProps }: BlockTypes): React.ReactElement => {
     return (
         <Columns
             className="card card--block"
-            gutterY={8}>
+            gutterY={{ xs: 5, lg: 8 }}>
             <Base items={items} />
         </Columns>
     );

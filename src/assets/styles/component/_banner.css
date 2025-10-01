@@ -33,7 +33,7 @@
 }
 
 .banner--text {
-    @apply min-h-70 pt-10;
+    @apply lg:min-h-60 xl:min-h-70 pt-10;
 
     [data-animation-order='1'] span[data-char]:not([style*='opacity']),
     [data-animation-order='2'] span[data-char]:not([style*='opacity']),
@@ -42,10 +42,14 @@
     }
 
     .banner__title {
-        @apply [writing-mode:vertical-lr] font-extralight text-[6rem] tracking-[1.75rem];
+        @apply lg:[writing-mode:vertical-lr] font-extralight text-[6rem] tracking-[1.75rem];
+    }
+
+    .banner__heading {
+        @apply mt-5 lg:mt-18;
     }
 
     .banner__description {
-        @apply mt-2 text-[2.2rem] font-light tracking-[.15rem];
+        @apply mt-2 text-[1.8rem] lg:text-[2.2rem] font-light tracking-[.15rem];
     }
 }

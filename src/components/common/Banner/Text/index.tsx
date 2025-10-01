@@ -31,7 +31,7 @@ const Text = ({ title, description, children }: TextTypes): React.ReactElement =
                         <Animation order={2}>
                             <Heading
                                 as="h2"
-                                className="mt-18 heading heading--title">
+                                className="heading heading--title banner__heading">
                                 {title}
                             </Heading>
                         </Animation>

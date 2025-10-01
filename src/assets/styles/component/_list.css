@@ -1,7 +1,7 @@
 @layer components {
     .list {
         &.list--inline {
-            @apply flex;
+            @apply flex flex-wrap;
 
             .list__item {
                 @apply text-[2.5rem] font-light tracking-[1rem] uppercase;

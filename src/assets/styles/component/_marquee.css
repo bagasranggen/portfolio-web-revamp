@@ -9,18 +9,21 @@
         & &__item {
             @apply flex items-center;
             @apply whitespace-nowrap;
-            @apply uppercase text-[14rem] font-extralight tracking-[3rem] leading-16;
+            @apply uppercase font-extralight tracking-[3rem];
+            @apply text-[10rem] lg:text-[14rem];
+            @apply leading-12 lg:leading-16;
 
             &&:not(:last-child) {
                 @apply me-5;
             }
 
             &&:after {
-                @apply aspect-square w-[4.5rem];
+                @apply aspect-square;
+                @apply w-[3.5rem] lg:w-[4.5rem];
                 @apply border border-3 rounded-full;
-                @apply ms-2;
 
                 content: '';
+                margin-left: --spacing(2);
             }
         }
     }

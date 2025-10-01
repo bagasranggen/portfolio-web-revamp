@@ -8,25 +8,31 @@ export type FadeAnimationTypes = {
     opacityDelay?: TweenParamValue | undefined;
     clearTarget?: AnimationElementTypes['target'];
     clearStyle?: boolean;
-};
+} & Pick<AnimationParams, 'autoplay'>;
 
 export const fadeAnimation = ({
     y,
     opacityDelay,
     clearTarget,
     clearStyle: clearStyleProps,
+    autoplay,
 }: FadeAnimationTypes): AnimationParams => {
     const clearCssStyle: string[] = ['opacity'];
     if (y) clearCssStyle.push('transform');
 
-    let yAxis = {};
+    let settings = {};
+
     if (y) {
-        yAxis = Object.assign(y, {
+        settings = Object.assign(y, {
             y: {
                 from: y,
                 to: 0,
             },
         });
+    }
+
+    if (autoplay) {
+        settings = Object.assign(settings, { autoplay });
     }
 
     return {
@@ -36,7 +42,7 @@ export const fadeAnimation = ({
             to: 1,
             ...(opacityDelay ? { delay: opacityDelay } : {}),
         },
-        ...yAxis,
+        ...settings,
         onComplete: () => {
             if (clearStyleProps && clearTarget) clearStyle({ target: clearTarget, style: clearCssStyle });
         },

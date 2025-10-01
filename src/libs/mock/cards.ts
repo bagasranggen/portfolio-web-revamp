@@ -35,9 +35,10 @@ export const CARDS_BLOCK: BlockTypes['items'] = createArrayFromNumber(5).map(() 
         link: {
             href: '#',
         },
-        title: '',
+        title: 'Sooka Bakedgoods',
         description: parse(
             `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae commodi consectetur cumque dignissimos doloremque earum eligendi est eveniet fuga fugiat fugit labore nulla odio placeat, sapiente sit tenetur, voluptates voluptatum.</p>`
         ),
+        media: [createPicsumImage({ id: 88, width: 650, height: 488, hasRetina: true })],
     };
 });
