@@ -1,0 +1,26 @@
+.footer {
+    @apply bg-porto-primary pb-6;
+
+    & &__container {
+        @apply py-10 lg:py-20;
+        @apply flex items-center justify-center border-b border-b-porto-dark/30;
+    }
+
+    & &__list {
+        @apply list-inline-spacing-0 lg:list-inline-spacing-3;
+        @apply max-lg:flex-col max-lg:items-center;
+        @apply text-[2.5rem] font-light tracking-[1rem];
+
+        .list__item {
+            @apply max-lg:after:content-[none];
+
+            &:not(:first-child) {
+                @apply max-lg:mt-1;
+            }
+        }
+    }
+
+    & &__copyright {
+        @apply text-sm uppercase font-medium tracking-[.5rem];
+    }
+}

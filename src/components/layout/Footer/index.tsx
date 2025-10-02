@@ -2,34 +2,27 @@ import React from 'react';
 
 import Container from '@/components/common/Container';
 import Marquee from '@/components/common/Marquee';
-import List from '@/components/common/List';
+import List, { SocialTypes } from '@/components/common/List';
 
-export type FooterTypes = {};
+export type FooterTypes = {
+    social?: SocialTypes['items'];
+};
 
-const Footer = ({}: FooterTypes): React.ReactElement => {
+const Footer = ({ social = [] }: FooterTypes): React.ReactElement => {
     const year = new Date().getFullYear();
 
     return (
-        <footer className="bg-porto-primary pb-6">
-            <Container className="min-h-40 flex items-center justify-center border-b border-b-porto-dark/30">
-                <List.Inline
+        <footer className="footer">
+            <Container className="footer__container">
+                <List.Social
                     as="ul"
-                    items={[
-                        {
-                            children: 'Email',
-                        },
-                        {
-                            children: 'Linkedin',
-                        },
-                        {
-                            children: 'Instagram',
-                        },
-                    ]}
+                    className="list-inline-spacing-2 footer__list"
+                    items={social}
                 />
             </Container>
 
             <Container className="mt-2 text-center">
-                <p className="text-sm uppercase font-medium tracking-[.5rem]">&copy; {year} | Bagas Ranggen</p>
+                <p className="footer__copyright">&copy; {year} | Bagas Ranggen</p>
             </Container>
 
             <Marquee className="mt-4">Get In Contact</Marquee>
