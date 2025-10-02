@@ -3,6 +3,8 @@ import localFont from 'next/font/local';
 
 import '@/assets/styles/globals.css';
 
+import { LIST_SOCIAL } from '@/libs/mock';
+
 import Footer from '@/components/layout/Footer';
 
 const murecho = localFont({
@@ -59,7 +61,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
             <body className={murecho.variable}>
                 {children}
 
-                <Footer />
+                <Footer social={LIST_SOCIAL} />
             </body>
         </html>
     );
