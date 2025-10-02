@@ -2,10 +2,9 @@ import React from 'react';
 
 import { CARDS_OFFSET, HOMEPAGE_BANNER } from '@/libs/mock';
 
-import HomepageBanner from '@/components/pages/HomepageIndex/HomepageBanner';
 import Cards from '@/components/common/Cards';
 import Container from '@/components/common/Container';
-import Link from '@/components/common/Link';
+import Banner from '@/components/common/Banner';
 import Button from '@/components/common/Button';
 
 export type HomepageIndexTypes = {};
@@ -13,7 +12,7 @@ export type HomepageIndexTypes = {};
 const HomepageIndex = ({}: HomepageIndexTypes): React.ReactElement => {
     return (
         <>
-            <HomepageBanner {...HOMEPAGE_BANNER} />
+            <Banner.Homepage {...HOMEPAGE_BANNER} />
 
             <section className="relative z-10 bg-porto-light py-15">
                 <Cards.Offset

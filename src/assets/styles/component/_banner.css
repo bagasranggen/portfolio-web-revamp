@@ -1,5 +1,5 @@
 .banner-homepage {
-    @apply flex items-center h-screen bg-porto-primary;
+    @apply flex items-end lg:items-center min-h-screen lg:h-screen bg-porto-primary;
 
     & &__media:not([style]),
     & &__description:not([style]),
@@ -9,22 +9,18 @@
     }
 
     & &__media {
-        @apply block mb-16;
-
-        /*&:not([style]) {*/
-        /*}*/
+        @apply block lg:mb-16;
     }
 
     & &__heading {
-        @apply -mx-1 text-[15.5rem] font-[200] tracking-[1.4rem] leading-[14.5rem];
-
-        /*span[data-char]:not([style*='opacity']) {*/
-        /*    @apply opacity-0;*/
-        /*}*/
+        @apply -mx-0.5 lg:-mx-1 font-[200] tracking-[1.4rem];
+        @apply text-[8rem] lg:text-[15.5rem];
+        @apply leading-[8.5rem] lg:leading-[14.5rem];
     }
 
     & &__label {
-        @apply uppercase text-md tracking-[1.5rem] font-medium;
+        @apply max-lg:mt-6;
+        @apply uppercase text-md tracking-[.75rem] lg:tracking-[1.5rem] font-medium;
     }
 
     & &__description {
