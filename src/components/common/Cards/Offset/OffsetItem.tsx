@@ -67,11 +67,16 @@ const OffsetItem = ({ link, description, count, cardTallestHeight, media }: Offs
             <Container
                 ref={containerRef as Ref<HTMLDivElement>}
                 className="relative">
-                <Columns>
+                <Columns
+                    gutterY={{
+                        xs: 3,
+                        md: 0,
+                    }}>
                     <Columns.Column
-                        className="bg-porto-light"
+                        className="bg-porto-light max-md:order-last"
+                        md={6}
                         lg={4}
-                        offset={1}>
+                        offset={{ lg: 1 }}>
                         <div className="card__count">
                             <h3>{count}</h3>
 
@@ -83,7 +88,7 @@ const OffsetItem = ({ link, description, count, cardTallestHeight, media }: Offs
                         <Heading className="heading heading--title card__heading">Sooka Bakedgoods</Heading>
 
                         {description && description.length > 0 && (
-                            <div className="mt-5">
+                            <div className="mt-3 md:mt-5">
                                 {description.map((item: OffsetItemDescriptionTypes, i: number) => {
                                     return (
                                         <OffsetItemDescription
@@ -98,8 +103,9 @@ const OffsetItem = ({ link, description, count, cardTallestHeight, media }: Offs
                     </Columns.Column>
 
                     <Columns.Column
-                        lg={6}
-                        offset={1}>
+                        md={6}
+                        offset={{ lg: 1 }}
+                        className="max-md:order-first">
                         <OffsetItemMedia
                             containerWidth={containerWidth}
                             media={media}

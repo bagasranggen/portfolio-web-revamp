@@ -1,11 +1,11 @@
 .card {
     &.card--offset {
-        @apply pt-28;
+        @apply md:pt-28;
 
         .card__item {
             @apply block;
             @apply bg-porto-light;
-            @apply sticky top-[35rem];
+            @apply md:sticky md:top-[35rem];
 
             &:not(:last-child) {
                 @apply mb-8;
@@ -13,18 +13,20 @@
 
             &:nth-child(1) {
                 .container {
-                    @apply top-[-28rem];
+                    @apply md:top-[-28rem];
                 }
             }
 
             &:nth-child(2) {
                 .container {
-                    @apply top-[-10rem] -mt-10;
+                    @apply md:top-[-10rem] md:-mt-10;
                 }
             }
 
             .container {
-                margin-top: var(--card-offset-height-difference, 0);
+                @variant min-lg {
+                    margin-top: var(--card-offset-height-difference, 0);
+                }
             }
 
             @variant hover {
@@ -39,11 +41,11 @@
         }
 
         .card__heading {
-            @apply transition-colors mt-5;
+            @apply transition-colors mt-1 md:mt-5;
         }
 
         .card__count {
-            @apply flex justify-between pt-2 border-t border-r-porto-dark/40;
+            @apply flex justify-between md:pt-2 md:border-t border-r-porto-dark/40;
 
             h3 {
                 @apply text-[2rem];
@@ -56,7 +58,10 @@
             }
 
             h3 {
-                @apply uppercase font-medium tracking-[.5rem];
+                @apply uppercase;
+                @apply max-lg:text-[1.4rem];
+                @apply font-bold lg:font-medium;
+                @apply tracking-[.35rem] lg:tracking-[.5rem];
             }
         }
 
@@ -67,12 +72,12 @@
                 @apply overflow-hidden;
 
                 &[style*='width'] {
-                    @apply absolute top-0 left-0;
+                    @apply md:absolute md:top-0 md:left-0;
                 }
 
                 img {
                     @apply h-full object-cover;
-                    @apply transition-transform;
+                    @apply lg:transition-transform;
                 }
             }
         }
@@ -82,13 +87,15 @@
         .card__item {
             @apply block;
 
-            @variant hover {
-                .card__title {
-                    @apply text-porto-d-primary;
-                }
+            @variant min-lg {
+                @variant hover {
+                    .card__title {
+                        @apply text-porto-d-primary;
+                    }
 
-                .card__media img {
-                    @apply scale-[1.1];
+                    .card__media img {
+                        @apply scale-[1.1];
+                    }
                 }
             }
         }
@@ -104,7 +111,7 @@
 
                 img {
                     @apply h-full object-cover;
-                    @apply transition-transform;
+                    @apply lg:transition-transform;
                 }
             }
         }
