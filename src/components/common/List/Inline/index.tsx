@@ -19,7 +19,6 @@ const Inline = ({ className, items, ...props }: InlineTypes): React.ReactElement
             items={items?.map((item) => {
                 return {
                     ...item,
-                    className: 'list__item',
                 };
             })}
         />

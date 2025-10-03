@@ -1,7 +1,9 @@
 import { AnimationElementTypes } from '@/libs/@types';
-import { clearStyle, getAnimationElementOrder } from '@/libs/utils';
+import { getAnimationElementOrder } from '@/libs/utils';
 
-import { text, stagger, createTimeline, animate, onScroll, AnimationParams } from 'animejs';
+import { text, stagger, createTimeline, animate, onScroll } from 'animejs';
+
+import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
 export const BannerHomepage = ({ target }: AnimationElementTypes) => {
     const media = getAnimationElementOrder({ target, order: 1 });
@@ -21,26 +23,15 @@ export const BannerHomepage = ({ target }: AnimationElementTypes) => {
         charsLabel = chars;
     }
 
-    const staggerAnimation: AnimationParams = {
-        opacity: {
-            from: 0,
-            to: 1,
-            delay: stagger(20, { from: 'random' }),
-        },
-    };
-
     const tl = createTimeline({
-        defaults: { ease: 'inOut(3)', duration: 650 },
+        defaults: { ease: 'inOut(3)', duration: 450 },
     });
 
-    tl.add(media, {
-        opacity: { from: 0, to: 1 },
-        onComplete: () => clearStyle({ target: media, style: ['opacity'] }),
-    });
+    tl.add(media, fadeAnimation({ clearTarget: media, clearStyle: true }));
 
-    tl.add([chars, charsLabel], staggerAnimation, '<<+=200');
+    tl.add([chars, charsLabel], fadeAnimation({ opacityDelay: stagger(20, { from: 'random' }) }), '<<+=200');
 
-    if (description) tl.add(description, { opacity: { from: 0, to: 1 } }, '-=700');
+    if (description) tl.add(description, fadeAnimation({ clearTarget: description, clearStyle: true }), '-=700');
 
     // Scroll Animation
     animate(target, {

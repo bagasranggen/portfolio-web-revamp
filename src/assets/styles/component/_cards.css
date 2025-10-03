@@ -1,0 +1,119 @@
+.card {
+    &.card--offset {
+        @apply md:pt-28;
+
+        .card__item {
+            @apply block;
+            @apply bg-porto-light;
+            @apply md:sticky md:top-[35rem];
+
+            &:not(:last-child) {
+                @apply mb-8;
+            }
+
+            &:nth-child(1) {
+                .container {
+                    @apply md:top-[-28rem];
+                }
+            }
+
+            &:nth-child(2) {
+                .container {
+                    @apply md:top-[-10rem] md:-mt-10;
+                }
+            }
+
+            .container {
+                @variant min-lg {
+                    margin-top: var(--card-offset-height-difference, 0);
+                }
+            }
+
+            @variant hover {
+                .card__heading {
+                    @apply text-porto-d-primary;
+                }
+
+                .card__media img {
+                    @apply scale-[1.1];
+                }
+            }
+        }
+
+        .card__heading {
+            @apply transition-colors mt-1 md:mt-5;
+        }
+
+        .card__count {
+            @apply flex justify-between md:pt-2 md:border-t border-r-porto-dark/40;
+
+            h3 {
+                @apply text-[2rem];
+            }
+        }
+
+        .card__description {
+            &:not(:first-child) {
+                @apply mt-3;
+            }
+
+            h3 {
+                @apply uppercase;
+                @apply max-lg:text-[1.4rem];
+                @apply font-bold lg:font-medium;
+                @apply tracking-[.35rem] lg:tracking-[.5rem];
+            }
+        }
+
+        .card__media {
+            @apply h-full relative;
+
+            picture {
+                @apply overflow-hidden;
+
+                &[style*='width'] {
+                    @apply md:absolute md:top-0 md:left-0;
+                }
+
+                img {
+                    @apply h-full object-cover;
+                    @apply lg:transition-transform;
+                }
+            }
+        }
+    }
+
+    &.card--block {
+        .card__item {
+            @apply block;
+
+            @variant min-lg {
+                @variant hover {
+                    .card__title {
+                        @apply text-porto-d-primary;
+                    }
+
+                    .card__media img {
+                        @apply scale-[1.1];
+                    }
+                }
+            }
+        }
+
+        .card__title {
+            @apply uppercase text-md font-medium tracking-[.35rem];
+            @apply transition-colors;
+        }
+
+        .card__media {
+            picture {
+                @apply block overflow-hidden;
+
+                img {
+                    @apply h-full object-cover;
+                    @apply lg:transition-transform;
+                }
+            }
+        }
+    }
+}

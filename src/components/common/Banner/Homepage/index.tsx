@@ -6,18 +6,20 @@ import Columns from '@/components/common/Columns';
 import Picture, { BaseTypes } from '@/components/common/Picture';
 import Animation from '@/components/common/Animation';
 
-export type HomepageBannerTypes = PropsWithChildren<{
+export type HomepageTypes = PropsWithChildren<{
     media?: BaseTypes['items'];
     description?: React.ReactNode;
     label?: HeadingBaseTypes['children'];
 }>;
 
-const HomepageBanner = ({ media, description, label, children }: HomepageBannerTypes): React.ReactElement => {
+const Homepage = ({ media, description, label, children }: HomepageTypes): React.ReactElement => {
     return (
         <Animation type="banner-homepage">
             <section className="banner-homepage">
                 <Container className="pt-8 pb-10">
-                    <Columns className="items-end">
+                    <Columns
+                        className="items-end"
+                        gutterY={3}>
                         <Columns.Column
                             lg={6}
                             offset={{ lg: 1 }}>
@@ -31,7 +33,8 @@ const HomepageBanner = ({ media, description, label, children }: HomepageBannerT
 
                         <Columns.Column
                             lg={4}
-                            offset={1}>
+                            offset={{ lg: 1 }}
+                            className="max-lg:hidden">
                             {description && (
                                 <Animation order={4}>
                                     <div className="banner-homepage__description mb-8">{description}</div>
@@ -40,6 +43,7 @@ const HomepageBanner = ({ media, description, label, children }: HomepageBannerT
                         </Columns.Column>
                     </Columns>
 
+                    {/*<div>*/}
                     {label && (
                         <Animation order={3}>
                             <Heading
@@ -57,10 +61,11 @@ const HomepageBanner = ({ media, description, label, children }: HomepageBannerT
                             {children}
                         </Heading>
                     </Animation>
+                    {/*</div>*/}
                 </Container>
             </section>
         </Animation>
     );
 };
 
-export default HomepageBanner;
+export default Homepage;

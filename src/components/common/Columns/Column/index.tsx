@@ -4,13 +4,13 @@ import { ArrayStringTypes, BreakpointsTypes, CreateArrayWithLengthX, NumericRang
 import { joinArrayString } from '@/libs/utils';
 import { createBreakpointClass } from '@/libs/factory';
 
+export type ColumnItemTypes = NumericRange<CreateArrayWithLengthX<1>, 12> | 'auto';
+
 export type ColumnTypes = {
     offset?:
         | Partial<Record<BreakpointsTypes, NumericRange<CreateArrayWithLengthX<1>, 12>>>
         | NumericRange<CreateArrayWithLengthX<1>, 12>;
-} & (Partial<Record<BreakpointsTypes, NumericRange<CreateArrayWithLengthX<1>, 12>>> &
-    React.HTMLAttributes<HTMLElement> &
-    PropsWithChildren);
+} & (Partial<Record<BreakpointsTypes, ColumnItemTypes>> & React.HTMLAttributes<HTMLElement> & PropsWithChildren);
 
 const Column = ({
     className,
@@ -24,7 +24,7 @@ const Column = ({
     xxl,
     ...props
 }: ColumnTypes): React.ReactElement => {
-    const sizesArr = Object.entries({ xs, sm, md, lg, xl, xxl });
+    const sizesArr = Object.entries({ xs, sm, md, lg, xl, xxl }).filter(([key, value]) => !!value);
     const utilityColumnClassName = 'column';
     const utilityColumnOffsetClassName = 'column-offset';
 

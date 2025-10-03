@@ -1,0 +1,20 @@
+.btn {
+    &.btn--block {
+        @apply border border-porto-dark px-3.5 py-1 uppercase font-medium text-md tracking-[.45rem];
+        @apply transition-colors;
+
+        &.btn--light {
+            @variant hover {
+                @apply bg-porto-dark text-porto-light;
+            }
+        }
+
+        &.btn--dark {
+            @apply bg-porto-dark text-porto-light;
+
+            @variant hover {
+                @apply bg-porto-light text-porto-dark;
+            }
+        }
+    }
+}

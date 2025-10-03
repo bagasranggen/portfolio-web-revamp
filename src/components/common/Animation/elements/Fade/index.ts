@@ -1,20 +1,11 @@
 import { AnimationElementTypes } from '@/libs/@types';
-import { clearStyle } from '@/libs/utils';
 
 import { animate } from 'animejs';
 
+import { fadeAnimation } from '@/components/common/Animation/elements/Fade/fadeAnimation';
+
 export const Fade = ({ target }: AnimationElementTypes) => {
-    animate(target, {
-        opacity: {
-            from: 0,
-            to: 1,
-            ease: 'inOutQuad',
-        },
-        y: {
-            from: 30,
-            to: 0,
-            // ease: 'inOutQuad',
-        },
-        onComplete: () => clearStyle({ target, style: ['opacity', 'transform'] }),
-    });
+    animate(target, fadeAnimation({ clearTarget: target, clearStyle: true, y: 30 }));
 };
+
+export { fadeAnimation };

@@ -1,20 +1,85 @@
+@utility list-inline-spacing-* {
+    --list-inline-spacing: --spacing(--value(integer));
+}
+
 @layer components {
     .list {
         &.list--inline {
-            @apply flex;
+            @apply flex flex-wrap;
 
             .list__item {
-                @apply text-[2.5rem] font-light tracking-[1rem] uppercase;
-
                 &:not(:last-child) {
-                    @apply me-3;
+                    margin-right: var(--list-inline-spacing, 1rem);
 
                     &:after {
-                        @apply ms-3;
-
                         content: '|';
+                        margin-left: var(--list-inline-spacing, 1rem);
                     }
                 }
+            }
+        }
+
+        &.list--social {
+            @apply uppercase;
+
+            a {
+                @apply lg:transition-colors lg:hover:text-porto-d-primary;
+            }
+        }
+
+        &.list--career {
+            a {
+                @variant min-lg {
+                    .list__title {
+                        @apply transition-colors;
+                    }
+
+                    @variant hover {
+                        .list__title {
+                            @apply text-porto-d-primary;
+                        }
+                    }
+                }
+            }
+
+            .list__item {
+                &:not(:first-child) {
+                    @apply mt-4;
+                }
+
+                @variant min-lg {
+                    &:nth-child(even) {
+                        margin-left: var(--column-width-1);
+                    }
+
+                    &:nth-child(odd) {
+                        margin-right: var(--column-width-1);
+                    }
+                }
+            }
+
+            .list__heading {
+                @apply flex flex-wrap md:items-center uppercase font-semibold max-md:flex-col;
+            }
+
+            .list__title-count {
+                @apply text-md;
+            }
+
+            .list__title {
+                @apply ms-1.5 tracking-[.75rem];
+            }
+
+            .list__line {
+                @apply max-md:hidden grow-1 h-[.2rem] bg-porto-dark/30 mx-1.5;
+            }
+
+            .list__year {
+                @apply text-[1.6rem] tracking-[.5rem];
+            }
+
+            .list__description {
+                @apply mt-1.5 lg:border-b-[.2rem] border-b-porto-dark/30 pb-2.5;
             }
         }
     }

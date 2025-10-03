@@ -11,7 +11,7 @@ export const GUTTER_HANDLE: Partial<Record<GutterTypes, string>> = {
 
 export type GutterTypes = 'gutter' | 'gutterX' | 'gutterY';
 
-export type BaseGutterTypes = NumericRange<CreateArrayWithLengthX<1>, 10>;
+export type BaseGutterTypes = NumericRange<CreateArrayWithLengthX<0>, 10>;
 
 export type BaseTypes = PropsWithChildren<
     Partial<Record<GutterTypes, Partial<Record<BreakpointsTypes, BaseGutterTypes> | BaseGutterTypes>>> &

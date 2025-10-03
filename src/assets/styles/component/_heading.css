@@ -1,0 +1,6 @@
+.heading {
+    &.heading--title {
+        @apply uppercase font-semibold;
+        @apply text-md lg:text-5xl leading-[3rem] lg:leading-[4rem] tracking-[.35rem] lg:tracking-[.65rem];
+    }
+}
