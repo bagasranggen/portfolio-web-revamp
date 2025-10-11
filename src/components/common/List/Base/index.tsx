@@ -38,11 +38,13 @@ const Base = ({
                 let Wrapper: ExoticComponent<FragmentProps> | Component<AnimationTypes> = Fragment;
                 if (hasAnimation) Wrapper = Animation;
 
-                let wrapperProps = { key: i };
+                let wrapperProps = {};
                 if (hasAnimation) wrapperProps = Object.assign(wrapperProps, { type: 'fade-in' });
 
                 return (
-                    <Wrapper {...wrapperProps}>
+                    <Wrapper
+                        key={i}
+                        {...wrapperProps}>
                         <li
                             {...props}
                             className={liClass}>

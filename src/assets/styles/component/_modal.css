@@ -1,0 +1,5 @@
+.modal {
+    &.modal--navigation {
+        @apply max-w-full! min-h-full rounded-none;
+    }
+}

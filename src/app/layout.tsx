@@ -6,6 +6,7 @@ import '@/assets/styles/globals.css';
 import { LIST_SOCIAL } from '@/libs/mock';
 
 import Footer from '@/components/layout/Footer';
+import Navigation from '@/components/layout/Navigation';
 
 const murecho = localFont({
     src: [
@@ -59,6 +60,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={murecho.variable}>
+                <Navigation />
+
                 {children}
 
                 <Footer social={LIST_SOCIAL} />
