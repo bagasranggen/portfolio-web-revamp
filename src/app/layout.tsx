@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 
 import '@/assets/styles/globals.css';
 
-import { LIST_SOCIAL } from '@/libs/mock';
+import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL } from '@/libs/mock';
 
 import Footer from '@/components/layout/Footer';
 import Navigation from '@/components/layout/Navigation';
@@ -60,7 +60,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     return (
         <html lang="en">
             <body className={murecho.variable}>
-                <Navigation />
+                <Navigation
+                    media={LIST_MEDIA}
+                    items={LIST_NAVIGATION}
+                />
 
                 {children}
 

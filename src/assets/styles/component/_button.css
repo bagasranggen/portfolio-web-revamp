@@ -1,7 +1,15 @@
 .btn {
     &.btn--block {
-        @apply border border-porto-dark px-3.5 py-1 uppercase font-medium text-md tracking-[.45rem];
+        @apply border border-porto-dark uppercase font-medium tracking-[.45rem];
         @apply transition-colors;
+
+        &.btn--sm {
+            @apply px-2 py-0.5 text-sm;
+        }
+
+        &.btn--md {
+            @apply px-3.5 py-1 text-md;
+        }
 
         &.btn--light {
             @variant hover {

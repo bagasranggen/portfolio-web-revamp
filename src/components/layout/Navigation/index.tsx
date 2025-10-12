@@ -1,80 +1,99 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { Suspense, useState } from 'react';
+
+import { ArrayStringTypes } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
+import { NavigationEvents } from '@/libs/hook';
+
 import Button from '@/components/common/Button';
-import Animation from '@/components/common/Animation';
 import Container from '@/components/common/Container';
 import Columns from '@/components/common/Columns';
-import AboutProfile from '@/components/pages/AboutIndex/AboutProfile';
-import AboutCareer from '@/components/pages/AboutIndex/AboutCareer';
-import { LIST_CAREER } from '@/libs/mock';
 
-import {
-    Dialog,
-    DialogClose,
-    DialogContent,
-    DialogDescription,
-    DialogFooter,
-    DialogHeader,
-    DialogTitle,
-    DialogTrigger,
-} from '@/components/shadcn/Dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/shadcn/Dialog';
+import Picture, { BaseTypes } from '@/components/common/Picture';
+import List from '@/components/common/List';
+import Link, { LinkTypes } from '@/components/common/Link';
 
-export type NavigationTypes = {};
+export type NavigationItemTypes = Pick<LinkTypes, 'href' | 'target' | 'children'>;
 
-const Navigation = ({}: NavigationTypes): React.ReactElement => {
+export type NavigationTypes = {
+    media?: BaseTypes['items'];
+    items?: NavigationItemTypes[];
+};
+
+const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
 
     return (
         <>
-            <Button
-                as="button"
-                onClick={() => {
-                    console.log('click');
-                    setOpen(true);
-                }}>
-                Menu
-            </Button>
+            <Suspense fallback={null}>
+                <NavigationEvents
+                    endHandler={() => {
+                        if (open) setOpen(false);
+                    }}
+                />
+            </Suspense>
+
+            <div className="fixed w-full top-3 left-0 z-99">
+                <Container className="text-end">
+                    <Button.Block
+                        as="button"
+                        type="button"
+                        size="sm"
+                        className="backdrop-blur-xs"
+                        onClick={() => {
+                            setOpen(true);
+                        }}>
+                        Menu
+                    </Button.Block>
+                </Container>
+            </div>
 
             <Dialog
                 open={open}
                 onOpenChange={setOpen}>
-                <form>
-                    {/*<DialogTrigger asChild>*/}
+                <DialogContent
+                    className="modal modal--navigation"
+                    showCloseButton={false}>
+                    <DialogHeader className="sr-only">
+                        <DialogTitle>Navigation Menu</DialogTitle>
+                        <DialogDescription>Navigation Menu</DialogDescription>
+                    </DialogHeader>
 
-                    {/*    /!*<Button variant="outline">Open Dialog</Button>*!/*/}
-                    {/*</DialogTrigger>*/}
-                    <DialogContent className="modal modal--navigation">
-                        <DialogHeader>
-                            <DialogTitle>Edit profile</DialogTitle>
-                            <DialogDescription>
-                                Make changes to your profile here. Click save when you&apos;re done.
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className="grid gap-4">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consequuntur ea laboriosam
-                            minima, molestias necessitatibus neque odit perspiciatis quas reiciendis saepe, tenetur
-                            voluptatem voluptatibus! Ab error necessitatibus obcaecati perspiciatis velit?
-                            {/*<div className="grid gap-3">*/}
-                            {/*    <Label htmlFor="name-1">Name</Label>*/}
-                            {/*    <Input id="name-1" name="name" defaultValue="Pedro Duarte" />*/}
-                            {/*</div>*/}
-                            {/*<div className="grid gap-3">*/}
-                            {/*    <Label htmlFor="username-1">Username</Label>*/}
-                            {/*    <Input id="username-1" name="username" defaultValue="@peduarte" />*/}
-                            {/*</div>*/}
-                        </div>
-                        <DialogFooter>
-                            <DialogClose asChild>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias asperiores deleniti
-                                dignissimos earum, ex in inventore natus quisquam quod quos rerum soluta voluptate!
-                                Consequatur distinctio fuga in magni minima modi?
-                                {/*<Button variant="outline">Cancel</Button>*/}
-                            </DialogClose>
-                            {/*<Button type="submit">Save changes</Button>*/}
-                        </DialogFooter>
-                    </DialogContent>
-                </form>
+                    <div className="flex items-center">
+                        <Columns
+                            className="w-full items-center"
+                            gutterX={0}>
+                            <Columns.Column md={4}>
+                                <Picture items={media} />
+                            </Columns.Column>
+
+                            <Columns.Column
+                                md={6}
+                                offset={{
+                                    md: 2,
+                                }}>
+                                {items && items.length > 0 && (
+                                    <div className="py-5">
+                                        <List
+                                            items={items.map((item: NavigationItemTypes, i: number) => {
+                                                let liClass: ArrayStringTypes = ['text-[3rem] tracking-[.45rem]'];
+                                                if (i !== 0) liClass.push('mt-3');
+                                                liClass = joinArrayString(liClass);
+
+                                                return {
+                                                    className: liClass,
+                                                    children: <Link href={item.href}>{item.children}</Link>,
+                                                };
+                                            })}
+                                        />
+                                    </div>
+                                )}
+                            </Columns.Column>
+                        </Columns>
+                    </div>
+                </DialogContent>
             </Dialog>
         </>
     );

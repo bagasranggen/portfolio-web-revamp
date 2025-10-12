@@ -6,7 +6,7 @@ import Link, { LinkTypes } from '@/components/common/Link';
 
 export type BaseAnchorTypes = { as?: 'anchor' } & LinkTypes;
 
-export type BaseButtonTypes = { as?: 'button' } & React.HTMLAttributes<HTMLButtonElement>;
+export type BaseButtonTypes = { as?: 'button' } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export type BaseDivTypes = { as?: Extract<ElementTagsTypes, 'div' | 'span'> } & React.HTMLAttributes<HTMLDivElement>;
 
