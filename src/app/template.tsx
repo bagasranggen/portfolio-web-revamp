@@ -8,7 +8,7 @@ export default function Template({ children }: { children: React.ReactNode }) {
     return (
         <ProgressProvider
             height="2px"
-            color="#747d8c"
+            color="var(--color-porto-d-primary)"
             options={{ showSpinner: false }}
             shallowRouting>
             {children}
