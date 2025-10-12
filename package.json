@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@bprogress/next": "^3.2.12",
     "@radix-ui/react-dialog": "^1.1.15",
     "animejs": "^4.1.4",
     "class-variance-authority": "^0.7.1",
