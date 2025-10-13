@@ -2,31 +2,36 @@
 
 import React, { useEffect, useRef } from 'react';
 
+import { AnimationBaseTypes } from '@/libs/@types';
+
 import { createScope, Scope } from 'animejs';
 
-import { ANIMATION_ATTRIBUTE, ANIMATION_HANDLES } from '@/components/common/Animation/handles';
+import { ANIMATION_ATTRIBUTE } from '@/components/common/Animation/handles';
 import { ANIMATION_DATA_HANDLES } from '@/components/common/Animation/handlesData';
 
 export type AnimationTypes = {
-    type?: (typeof ANIMATION_HANDLES)[keyof typeof ANIMATION_HANDLES];
     order?: number;
     trigger?: number;
     children: React.ReactElement;
-};
+} & AnimationBaseTypes;
 
-const Animation = ({ type, order, trigger, children }: AnimationTypes): React.ReactElement => {
+const Animation = ({ type, order, trigger, children, ...props }: AnimationTypes): React.ReactElement => {
     const root = useRef(null);
     const scope = useRef<Scope | null>(null);
 
-    let props = { ref: root };
+    let elementProps = { ref: root };
 
     if (type) {
-        props = Object.assign(props, { [ANIMATION_ATTRIBUTE.TYPE]: type });
+        elementProps = Object.assign(elementProps, { [ANIMATION_ATTRIBUTE.TYPE]: type });
     }
 
     if (!type && order) {
-        props = Object.assign(props, { [ANIMATION_ATTRIBUTE.ORDER]: order });
+        elementProps = Object.assign(elementProps, { [ANIMATION_ATTRIBUTE.ORDER]: order });
     }
+
+    let options = undefined;
+
+    if ('options' in props && props?.options) options = Object.assign(options ?? {}, props.options);
 
     useEffect(() => {
         const target = root.current;
@@ -40,7 +45,7 @@ const Animation = ({ type, order, trigger, children }: AnimationTypes): React.Re
         scope.current = createScope({ root }).add((self) => {
             let animation = ANIMATION_DATA_HANDLES?.[animationType as keyof typeof ANIMATION_DATA_HANDLES] ?? undefined;
 
-            if (animation) animation({ target });
+            if (animation) animation({ target, ...(options ? options : {}) });
         });
 
         return () => {
@@ -48,7 +53,7 @@ const Animation = ({ type, order, trigger, children }: AnimationTypes): React.Re
         };
     }, [type, trigger, order]);
 
-    return React.cloneElement(children, props);
+    return React.cloneElement(children, elementProps);
 };
 
 export default Animation;
