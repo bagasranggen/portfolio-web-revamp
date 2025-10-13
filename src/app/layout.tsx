@@ -5,6 +5,8 @@ import '@/assets/styles/globals.css';
 
 import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL } from '@/libs/mock';
 
+import ContextProvider from '@/store/context';
+
 import Footer from '@/components/layout/Footer';
 import Navigation from '@/components/layout/Navigation';
 
@@ -58,17 +60,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
-            <body className={murecho.variable}>
-                <Navigation
-                    media={LIST_MEDIA}
-                    items={LIST_NAVIGATION}
-                />
+        <ContextProvider>
+            <html lang="en">
+                <body className={murecho.variable}>
+                    <Navigation
+                        media={LIST_MEDIA}
+                        items={LIST_NAVIGATION}
+                    />
 
-                {children}
+                    {children}
 
-                <Footer social={LIST_SOCIAL} />
-            </body>
-        </html>
+                    <Footer social={LIST_SOCIAL} />
+                </body>
+            </html>
+        </ContextProvider>
     );
 }
