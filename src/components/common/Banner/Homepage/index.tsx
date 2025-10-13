@@ -16,7 +16,7 @@ const Homepage = ({ media, description, label, children }: HomepageTypes): React
     return (
         <Animation type="banner-homepage">
             <section className="banner-homepage">
-                <Container className="pt-8 pb-10">
+                <Container className="pt-5 pb-10">
                     <Columns
                         className="items-end"
                         gutterY={3}>
