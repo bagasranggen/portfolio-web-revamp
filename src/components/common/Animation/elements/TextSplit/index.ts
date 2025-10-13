@@ -1,12 +1,18 @@
 import { AnimationElementTypes } from '@/libs/@types';
-import { animate, stagger, text } from 'animejs';
+
+import { createTimeline, stagger, text } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const TextSplit = ({ target }: AnimationElementTypes) => {
+export type TextSplitTypes = {
+    text?: string;
+    targetFadeAnimation?: boolean;
+} & AnimationElementTypes;
+
+export const TextSplit = ({ target, text: textProps, targetFadeAnimation }: TextSplitTypes) => {
     let isNew = undefined;
-    if (target.innerText.toLowerCase() !== target.title.toLowerCase()) {
-        isNew = target.title.toUpperCase();
+    if (textProps && target.innerText.toLowerCase() !== textProps.toLowerCase()) {
+        isNew = textProps;
     }
 
     const split = text.split(target, { chars: true });
@@ -15,10 +21,17 @@ export const TextSplit = ({ target }: AnimationElementTypes) => {
 
     split.refresh();
 
-    animate(
+    const tl = createTimeline({});
+
+    if (targetFadeAnimation) {
+        tl.add(target, fadeAnimation({ clearTarget: target, clearStyle: true }));
+    }
+
+    tl.add(
         split.chars,
         fadeAnimation({
             opacityDelay: stagger(60, { from: 'random' }),
-        })
+        }),
+        targetFadeAnimation ? '<<+=200' : undefined
     );
 };
