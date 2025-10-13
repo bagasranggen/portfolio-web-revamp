@@ -2,19 +2,22 @@
 
 import React, { Suspense, useEffect, useState } from 'react';
 
+import { useGlobalStateContext, useLayoutStateContext } from '@/store/context';
+
 import { ArrayStringTypes } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { NavigationEvents } from '@/libs/hook';
 
+import { useMeasure } from 'react-use';
+
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/shadcn/Dialog';
+import Animation from '@/components/common/Animation';
 import Button from '@/components/common/Button';
 import Container from '@/components/common/Container';
 import Columns from '@/components/common/Columns';
-
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/shadcn/Dialog';
 import Picture, { BaseTypes } from '@/components/common/Picture';
 import List from '@/components/common/List';
 import Link, { LinkTypes } from '@/components/common/Link';
-import Animation from '@/components/common/Animation';
 
 export type NavigationItemTypes = Pick<LinkTypes, 'href' | 'target' | 'children'>;
 
@@ -24,12 +27,22 @@ export type NavigationTypes = {
 };
 
 const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement => {
+    const { isDev } = useGlobalStateContext();
+    const { setHeaderHeight } = useLayoutStateContext();
+    const [headerRef, { height }] = useMeasure();
+
     const [open, setOpen] = useState<boolean>(false);
     const [trigger, setTrigger] = useState<number>(0);
 
     useEffect(() => {
         setTrigger((prevState) => prevState + 1);
     }, [open]);
+
+    useEffect(() => {
+        if (!height || height === 0) return;
+
+        setHeaderHeight(height);
+    }, [height]);
 
     return (
         <>
@@ -41,20 +54,23 @@ const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement 
                 />
             </Suspense>
 
-            <div className="fixed w-full top-0 left-0 z-99 pointer-events-none">
+            <div
+                ref={headerRef as any}
+                className="fixed w-full top-0 left-0 z-99 pointer-events-none">
                 <Container className="text-end py-3">
                     <Animation
                         type="text-split"
-                        trigger={trigger}>
+                        trigger={trigger}
+                        options={{
+                            text: !open ? 'Menu' : 'Close',
+                            targetFadeAnimation: isDev ? trigger === 1 : trigger === 0,
+                        }}>
                         <Button.Block
                             as="button"
                             type="button"
                             size="sm"
                             className="backdrop-blur-xs pointer-events-auto min-w-[11rem]"
-                            title={!open ? 'Menu' : 'Close'}
-                            onClick={() => {
-                                setOpen(true);
-                            }}>
+                            onClick={() => setOpen(true)}>
                             {!open ? 'Menu' : 'Close'}
                         </Button.Block>
                     </Animation>
@@ -64,9 +80,7 @@ const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement 
             <Dialog
                 open={open}
                 onOpenChange={() => {
-                    setTimeout(() => {
-                        setOpen(false);
-                    }, 30);
+                    setTimeout(() => setOpen(false), 30);
                 }}>
                 <DialogContent
                     className="modal modal--navigation"
@@ -80,12 +94,16 @@ const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement 
                         <Columns
                             className="w-full items-center"
                             gutterX={0}>
-                            <Columns.Column md={4}>
+                            <Columns.Column
+                                md={4}
+                                offset={{
+                                    md: 1,
+                                }}>
                                 <Picture items={media} />
                             </Columns.Column>
 
                             <Columns.Column
-                                md={6}
+                                md={5}
                                 offset={{
                                     md: 2,
                                 }}>
