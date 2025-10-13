@@ -1,7 +1,8 @@
 'use client';
 
-import React, { createContext, useEffect, useState } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
+import React, { createContext, PropsWithChildren, Suspense, useState } from 'react';
+
+import { NavigationEvents } from '@/libs/hook';
 
 export type HistoryState = {
     routeLength: number;
@@ -15,33 +16,35 @@ export const HistoryStateContext = createContext<HistoryState>({
     routePrevious: null,
 });
 
-export const HistoryStateContextProvider = ({ children }: { children: React.ReactNode }) => {
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-
+export const HistoryStateContextProvider = ({ children }: PropsWithChildren) => {
     const [routeLength, setRouteLength] = useState<HistoryState['routeLength']>(0);
     const [routeCurrent, setRouteCurrent] = useState<HistoryState['routeCurrent']>(null);
     const [routePrevious, setRoutePrevious] = useState<HistoryState['routePrevious']>(null);
 
-    useEffect(() => {
-        let url = pathname;
-        if (searchParams.size > 0) url += `?${searchParams}`;
+    const defaultContext = { routeLength, routeCurrent, routePrevious };
 
-        setRoutePrevious(routeCurrent);
-        setRouteCurrent(url);
+    return (
+        <>
+            <Suspense fallback={null}>
+                <NavigationEvents
+                    endHandler={(navigation) => {
+                        let url = navigation?.pathname;
+                        if (navigation?.searchParams && navigation?.searchParams.size > 0) {
+                            url += `?${navigation.searchParams}`;
+                        }
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [pathname, searchParams]);
+                        setRoutePrevious(routeCurrent);
+                        if (url) setRouteCurrent(url);
+                    }}
+                />
+                <NavigationEvents
+                    endHandler={() => {
+                        setRouteLength((prevState) => prevState + 1);
+                    }}
+                />
+            </Suspense>
 
-    useEffect(() => {
-        setRouteLength((prevState) => prevState + 1);
-    }, [pathname]);
-
-    const defaultContext = {
-        routeLength,
-        routeCurrent,
-        routePrevious,
-    };
-
-    return <HistoryStateContext.Provider value={defaultContext}>{children}</HistoryStateContext.Provider>;
+            <HistoryStateContext.Provider value={defaultContext}>{children}</HistoryStateContext.Provider>
+        </>
+    );
 };
