@@ -9,4 +9,5 @@ export const ANIMATION_HANDLES = {
     MARQUEE: 'marquee',
     BANNER_HOMEPAGE: 'banner-homepage',
     BANNER_TEXT: 'banner-text',
+    TEXT_SPLIT: 'text-split',
 } as const;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { Suspense, useState } from 'react';
+import React, { Suspense, useEffect, useState } from 'react';
 
 import { ArrayStringTypes } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
@@ -14,6 +14,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import Picture, { BaseTypes } from '@/components/common/Picture';
 import List from '@/components/common/List';
 import Link, { LinkTypes } from '@/components/common/Link';
+import Animation from '@/components/common/Animation';
 
 export type NavigationItemTypes = Pick<LinkTypes, 'href' | 'target' | 'children'>;
 
@@ -24,6 +25,11 @@ export type NavigationTypes = {
 
 const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement => {
     const [open, setOpen] = useState<boolean>(false);
+    const [trigger, setTrigger] = useState<number>(0);
+
+    useEffect(() => {
+        setTrigger((prevState) => prevState + 1);
+    }, [open]);
 
     return (
         <>
@@ -35,24 +41,33 @@ const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement 
                 />
             </Suspense>
 
-            <div className="fixed w-full top-3 left-0 z-99">
-                <Container className="text-end">
-                    <Button.Block
-                        as="button"
-                        type="button"
-                        size="sm"
-                        className="backdrop-blur-xs"
-                        onClick={() => {
-                            setOpen(true);
-                        }}>
-                        Menu
-                    </Button.Block>
+            <div className="fixed w-full top-0 left-0 z-99 pointer-events-none">
+                <Container className="text-end py-3">
+                    <Animation
+                        type="text-split"
+                        trigger={trigger}>
+                        <Button.Block
+                            as="button"
+                            type="button"
+                            size="sm"
+                            className="backdrop-blur-xs pointer-events-auto min-w-[11rem]"
+                            title={!open ? 'Menu' : 'Close'}
+                            onClick={() => {
+                                setOpen(true);
+                            }}>
+                            {!open ? 'Menu' : 'Close'}
+                        </Button.Block>
+                    </Animation>
                 </Container>
             </div>
 
             <Dialog
                 open={open}
-                onOpenChange={setOpen}>
+                onOpenChange={() => {
+                    setTimeout(() => {
+                        setOpen(false);
+                    }, 30);
+                }}>
                 <DialogContent
                     className="modal modal--navigation"
                     showCloseButton={false}>
