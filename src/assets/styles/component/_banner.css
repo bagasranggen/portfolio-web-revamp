@@ -1,11 +1,15 @@
 .banner-homepage {
     @apply flex items-end lg:items-center min-h-screen lg:h-screen bg-porto-primary;
 
-    & &__media:not([style]),
+    /*& &__media:not([style]),*/
     & &__description:not([style]),
     & &__heading span[data-char]:not([style*='opacity']),
     & &__label span[data-char]:not([style*='opacity']) {
         @apply opacity-0;
+    }
+
+    & &__media:not([style]) {
+        clip-path: inset(0% 75% 0% 25%);
     }
 
     & &__media {

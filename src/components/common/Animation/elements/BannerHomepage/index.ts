@@ -27,7 +27,10 @@ export const BannerHomepage = ({ target }: AnimationElementTypes) => {
         defaults: { ease: 'inOut(3)', duration: 450 },
     });
 
-    tl.add(media, fadeAnimation({ clearTarget: media, clearStyle: true }));
+    tl.add(media, {
+        keyframes: [{ clipPath: 'inset(0% 75% 0% 25%)' }, { clipPath: 'inset(0% 0% 0% 0%)' }],
+        duration: 1200,
+    });
 
     tl.add([chars, charsLabel], fadeAnimation({ opacityDelay: stagger(20, { from: 'random' }) }), '<<+=200');
 
