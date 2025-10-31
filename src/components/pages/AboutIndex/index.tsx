@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 
-import { LIST_CAREER, LIST_SOCIAL, TEXT_BANNER } from '@/libs/mock';
+import { LIST_CAREER, TEXT_BANNER } from '@/libs/mock';
 
 import Banner from '@/components/common/Banner';
 import Container from '@/components/common/Container';

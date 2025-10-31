@@ -2,6 +2,8 @@ import { SocialTypes } from '@/components/common/List';
 import { AboutCareerItemTypes } from '@/components/pages/AboutIndex/AboutCareerItem';
 
 import parse from 'html-react-parser';
+import { NavigationItemTypes, NavigationTypes } from '@/components/layout/Navigation';
+import { createPicsumImage } from '@/libs/factory';
 
 export const LIST_SOCIAL: SocialTypes['items'] = [
     {
@@ -59,4 +61,23 @@ export const LIST_CAREER: AboutCareerItemTypes[] = [
             `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque commodi debitis deleniti error hic inventore ipsam, libero nisi nobis nulla quas quibusdam, similique soluta tempore, ut voluptatem voluptates? Dolores, nam.</p>`
         ),
     },
+];
+
+export const LIST_NAVIGATION: NavigationItemTypes[] = [
+    {
+        href: '/',
+        children: 'Home',
+    },
+    {
+        href: '/works',
+        children: 'Works',
+    },
+    {
+        href: '/about',
+        children: 'About',
+    },
+];
+
+export const LIST_MEDIA: NavigationTypes['media'] = [
+    createPicsumImage({ id: 88, width: 500, height: 667, media: 576 }),
 ];

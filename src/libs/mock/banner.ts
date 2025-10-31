@@ -6,8 +6,8 @@ import { HomepageTypes, TextTypes } from '@/components/common/Banner';
 
 export const HOMEPAGE_BANNER: HomepageTypes = {
     media: [
-        createPicsumImage({ id: 432, width: 800, height: 605, hasRetina: true, media: 992 }),
-        createPicsumImage({ id: 432, width: 450, height: 600 }),
+        createPicsumImage({ id: 88, width: 800, height: 605, hasRetina: true, media: 992 }),
+        createPicsumImage({ id: 88, width: 450, height: 600 }),
     ],
     description: parse(
         `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. In pretium eleifend eros hendrerit commodo. Sed diam magna, egestas a rhoncus non.</p><p>Quisque consectetur non dolor et egestas. Donec et sagittis risus, sed hendrerit nibh</p>`

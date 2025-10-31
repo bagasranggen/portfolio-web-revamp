@@ -3,9 +3,12 @@ import localFont from 'next/font/local';
 
 import '@/assets/styles/globals.css';
 
-import { LIST_SOCIAL } from '@/libs/mock';
+import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL } from '@/libs/mock';
+
+import ContextProvider from '@/store/context';
 
 import Footer from '@/components/layout/Footer';
+import Navigation from '@/components/layout/Navigation';
 
 const murecho = localFont({
     src: [
@@ -57,12 +60,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
     return (
-        <html lang="en">
-            <body className={murecho.variable}>
-                {children}
+        <ContextProvider>
+            <html lang="en">
+                <body className={murecho.variable}>
+                    <Navigation
+                        media={LIST_MEDIA}
+                        items={LIST_NAVIGATION}
+                    />
 
-                <Footer social={LIST_SOCIAL} />
-            </body>
-        </html>
+                    {children}
+
+                    <Footer social={LIST_SOCIAL} />
+                </body>
+            </html>
+        </ContextProvider>
     );
 }
