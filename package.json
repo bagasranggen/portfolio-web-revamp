@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint"
   },
+  "sideEffects": false,
   "dependencies": {
     "@bprogress/next": "^3.2.12",
     "@radix-ui/react-dialog": "^1.1.15",
