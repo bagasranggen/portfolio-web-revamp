@@ -1,20 +1,20 @@
 import React, { PropsWithChildren } from 'react';
 
-import Inline, { InlineTypes } from '@/components/common/List/Inline';
-import Link, { LinkTypes } from '@/components/common/Link';
-import { ArrayStringTypes } from '@/libs/@types';
+import Inline, { InlineProps } from '@/components/common/List/Inline';
+import Link, { LinkProps } from '@/components/common/Link';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-export type SocialItemTypes = PropsWithChildren<{
-    link?: LinkTypes;
+export type SocialItemProps = PropsWithChildren<{
+    link?: LinkProps;
 }>;
 
-export type SocialTypes = {
-    items: SocialItemTypes[];
-} & InlineTypes;
+export type SocialProps = {
+    items: SocialItemProps[];
+} & InlineProps;
 
-const Social = ({ items: itemsProps, className, ...props }: SocialTypes): React.ReactElement => {
-    const items: InlineTypes['items'] = [];
+const Social = ({ items: itemsProps, className, ...props }: SocialProps): React.ReactElement => {
+    const items: InlineProps['items'] = [];
 
     if (itemsProps && itemsProps.length > 0) {
         itemsProps.forEach(({ children, link }) => {
@@ -27,7 +27,7 @@ const Social = ({ items: itemsProps, className, ...props }: SocialTypes): React.
         });
     }
 
-    let listClass: ArrayStringTypes = ['list--social'];
+    let listClass: ArrayStringProps = ['list--social'];
     if (className) listClass.push(className);
     listClass = joinArrayString(listClass);
 

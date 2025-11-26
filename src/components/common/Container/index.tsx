@@ -1,16 +1,16 @@
 import React, { forwardRef, PropsWithChildren } from 'react';
 
-import { ArrayStringTypes, ElementTagsTypes } from '@/libs/@types';
+import { ArrayStringProps, ElementTagsProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-export type ContainerTypes = {
-    as?: Extract<ElementTagsTypes, 'section' | 'div'>;
+export type ContainerProps = {
+    as?: Extract<ElementTagsProps, 'section' | 'div'>;
     fluid?: boolean;
 } & (PropsWithChildren & React.HTMLAttributes<HTMLElement>);
 
-const Container = forwardRef<HTMLDivElement, ContainerTypes>(
+const Container = forwardRef<HTMLDivElement, ContainerProps>(
     ({ as: Wrapper = 'div', className, children, fluid, ...props }, ref): React.ReactElement => {
-        let containerClass: ArrayStringTypes = [];
+        let containerClass: ArrayStringProps = [];
         containerClass.push(fluid ? 'container-fluid' : 'container');
         if (className) containerClass.push(className);
         containerClass = joinArrayString(containerClass);

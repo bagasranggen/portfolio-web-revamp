@@ -1,11 +1,11 @@
 import { createArrayFromNumber, createPicsumImage } from '@/libs/factory';
 
-import { BlockTypes, OffsetTypes } from '@/components/common/Cards';
-import { OffsetItemDescriptionTypes } from '@/components/common/Cards/Offset/OffsetItemDescription';
+import { BlockProps, OffsetProps } from '@/components/common/Cards';
+import { OffsetItemDescriptionProps } from '@/components/common/Cards/Offset/OffsetItemDescription';
 import parse from 'html-react-parser';
 
-export const CARDS_OFFSET: OffsetTypes['items'] = createArrayFromNumber(3).map((_, i) => {
-    const description: OffsetItemDescriptionTypes[] = [
+export const CARDS_OFFSET: OffsetProps['items'] = createArrayFromNumber(3).map((_, i) => {
+    const description: OffsetItemDescriptionProps[] = [
         {
             title: 'Description',
             children:
@@ -30,7 +30,7 @@ export const CARDS_OFFSET: OffsetTypes['items'] = createArrayFromNumber(3).map((
     };
 });
 
-export const CARDS_BLOCK: BlockTypes['items'] = createArrayFromNumber(5).map(() => {
+export const CARDS_BLOCK: BlockProps['items'] = createArrayFromNumber(5).map(() => {
     return {
         link: {
             href: '#',

@@ -1,17 +1,17 @@
 import React, { ExoticComponent, Fragment, FragmentProps } from 'react';
 
-import Heading, { BaseTypes } from '@/components/common/Heading';
-import Link, { LinkTypes } from '@/components/common/Link';
+import Heading, { BaseProps } from '@/components/common/Heading';
+import Link, { LinkProps } from '@/components/common/Link';
 
-export type AboutCareerItemTypes = {
-    link?: LinkTypes;
-    number: BaseTypes['children'];
-    title: BaseTypes['children'];
+export type AboutCareerItemProps = {
+    link?: LinkProps;
+    number: BaseProps['children'];
+    title: BaseProps['children'];
     year: string;
     description?: React.ReactNode;
 };
 
-const AboutCareerItem = ({ link, number, title, year, description }: AboutCareerItemTypes): React.ReactElement => {
+const AboutCareerItem = ({ link, number, title, year, description }: AboutCareerItemProps): React.ReactElement => {
     let Wrapper: ExoticComponent<FragmentProps> | any = Fragment;
     let wrapperProps = {};
 

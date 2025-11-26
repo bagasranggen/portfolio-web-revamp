@@ -3,22 +3,22 @@ import { ImageProps } from 'next/image';
 
 import BaseItemImg from '@/components/common/Picture/Base/BaseItemImg';
 import BaseItemSource from '@/components/common/Picture/Base/BaseItemSource';
-import { ArrayStringTypes } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-export type BaseItemTypes = {
+export type BaseItemProps = {
     media?: number;
     srcRetina?: string;
     type?: string;
 } & ImageProps;
 
-export type BaseTypes = {
-    items?: BaseItemTypes[];
+export type BaseProps = {
+    items?: BaseItemProps[];
 } & React.HTMLAttributes<HTMLPictureElement>;
 
-const Base = forwardRef<HTMLPictureElement, BaseTypes>(
+const Base = forwardRef<HTMLPictureElement, BaseProps>(
     ({ items = [], className, ...props }, ref): React.ReactElement | null => {
-        let pictureClass: ArrayStringTypes = [];
+        let pictureClass: ArrayStringProps = [];
         if (className) pictureClass.push(className);
         pictureClass = joinArrayString(pictureClass);
 

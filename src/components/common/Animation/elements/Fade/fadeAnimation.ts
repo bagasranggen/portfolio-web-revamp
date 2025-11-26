@@ -1,33 +1,38 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 import { clearStyle } from '@/libs/utils';
 
 import { AnimationParams, TweenParamValue } from 'animejs';
 
-export type FadeAnimationTypes = {
+export type FadeAnimationProps = {
+    x?: number;
     y?: number;
     opacityDelay?: TweenParamValue | undefined;
-    clearTarget?: AnimationElementTypes['target'];
+    clearTarget?: AnimationElementProps['target'];
     clearStyle?: boolean;
 } & Pick<AnimationParams, 'autoplay'>;
 
 export const fadeAnimation = ({
+    x,
     y,
     opacityDelay,
     clearTarget,
     clearStyle: clearStyleProps,
     autoplay,
-}: FadeAnimationTypes): AnimationParams => {
+}: FadeAnimationProps): AnimationParams => {
     const clearCssStyle: string[] = ['opacity'];
-    if (y) clearCssStyle.push('transform');
+    if (x || y) clearCssStyle.push('transform');
 
     let settings = {};
 
     if (y) {
-        settings = Object.assign(y, {
-            y: {
-                from: y,
-                to: 0,
-            },
+        settings = Object.assign(settings, {
+            y: { from: y, to: 0 },
+        });
+    }
+
+    if (x) {
+        settings = Object.assign(settings, {
+            x: { from: x, to: 0 },
         });
     }
 

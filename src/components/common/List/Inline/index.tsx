@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { ArrayStringTypes } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import Base, { BaseTypes } from '@/components/common/List';
+import Base, { BaseProps } from '@/components/common/List';
 
-export type InlineTypes = BaseTypes;
+export type InlineProps = BaseProps;
 
-const Inline = ({ className, items, ...props }: InlineTypes): React.ReactElement => {
-    let listCLass: ArrayStringTypes = ['list--inline'];
+const Inline = ({ className, items, ...props }: InlineProps): React.ReactElement => {
+    let listCLass: ArrayStringProps = ['list--inline'];
     if (className) listCLass.push(className);
     listCLass = joinArrayString(listCLass);
 

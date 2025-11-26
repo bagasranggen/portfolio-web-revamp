@@ -1,16 +1,16 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayStringTypes, BreakpointsTypes, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
+import { ArrayStringProps, BreakpointsProps, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createBreakpointClass } from '@/libs/factory';
 
-export type ColumnItemTypes = NumericRange<CreateArrayWithLengthX<1>, 12> | 'auto';
+export type ColumnItemProps = NumericRange<CreateArrayWithLengthX<1>, 12> | 'auto';
 
-export type ColumnTypes = {
+export type ColumnProps = {
     offset?:
-        | Partial<Record<BreakpointsTypes, NumericRange<CreateArrayWithLengthX<1>, 12>>>
+        | Partial<Record<BreakpointsProps, NumericRange<CreateArrayWithLengthX<1>, 12>>>
         | NumericRange<CreateArrayWithLengthX<1>, 12>;
-} & (Partial<Record<BreakpointsTypes, ColumnItemTypes>> & React.HTMLAttributes<HTMLElement> & PropsWithChildren);
+} & (Partial<Record<BreakpointsProps, ColumnItemProps>> & React.HTMLAttributes<HTMLElement> & PropsWithChildren);
 
 const Column = ({
     className,
@@ -23,12 +23,12 @@ const Column = ({
     xl,
     xxl,
     ...props
-}: ColumnTypes): React.ReactElement => {
+}: ColumnProps): React.ReactElement => {
     const sizesArr = Object.entries({ xs, sm, md, lg, xl, xxl }).filter(([key, value]) => !!value);
     const utilityColumnClassName = 'column';
     const utilityColumnOffsetClassName = 'column-offset';
 
-    let columnClass: ArrayStringTypes = [];
+    let columnClass: ArrayStringProps = [];
 
     if (sizesArr.length === 0) columnClass.push(utilityColumnClassName);
     if (sizesArr.length > 0) {
@@ -36,7 +36,7 @@ const Column = ({
             if (value && typeof columnClass !== 'string') {
                 columnClass.push(
                     createBreakpointClass({
-                        breakpoint: key as BreakpointsTypes,
+                        breakpoint: key as BreakpointsProps,
                         className: utilityColumnClassName,
                         value,
                     })
@@ -58,7 +58,7 @@ const Column = ({
                     if (value && typeof columnClass !== 'string') {
                         columnClass.push(
                             createBreakpointClass({
-                                breakpoint: key as BreakpointsTypes,
+                                breakpoint: key as BreakpointsProps,
                                 className: utilityColumnOffsetClassName,
                                 value,
                             })

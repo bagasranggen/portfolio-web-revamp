@@ -1,19 +1,19 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 import { getAnimationElementOrder } from '@/libs/utils';
 
-import { createTimeline, stagger, text } from 'animejs';
+import { createTimeline, stagger, splitText } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const BannerText = ({ target }: AnimationElementTypes) => {
+export const BannerText = ({ target }: AnimationElementProps) => {
     const heading = getAnimationElementOrder({ target, order: 1 });
     const title = getAnimationElementOrder({ target, order: 2 });
     const description = getAnimationElementOrder({ target, order: 3 });
 
     if (!heading || !title) return;
 
-    const { chars: charsHeading } = text.split(heading, { chars: true });
-    const { chars: charsTitle } = text.split(title, { chars: true });
+    const { chars: charsHeading } = splitText(heading, { chars: true });
+    const { chars: charsTitle } = splitText(title, { chars: true });
 
     const tl = createTimeline({
         defaults: { ease: 'inOut(3)', duration: 650 },

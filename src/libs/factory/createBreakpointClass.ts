@@ -1,16 +1,16 @@
-import { ArrayStringTypes, BreakpointsTypes, ClassnameTypes } from '@/libs/@types';
+import { ArrayStringProps, BreakpointsProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-export const BREAKPOINT_HANDLE: Partial<Record<BreakpointsTypes, string>> = {
+export const BREAKPOINT_HANDLE: Partial<Record<BreakpointsProps, string>> = {
     xxl: '2xl',
 } as const;
 
-export type CreateBreakpointClassTypes = {
-    breakpoint?: BreakpointsTypes;
+export type CreateBreakpointClassProps = {
+    breakpoint?: BreakpointsProps;
     value: string | number;
-} & Required<ClassnameTypes>;
+} & Required<ClassnameProps>;
 
-export const createBreakpointClass = ({ breakpoint, className, value }: CreateBreakpointClassTypes) => {
+export const createBreakpointClass = ({ breakpoint, className, value }: CreateBreakpointClassProps) => {
     let breakpointHandle: string | undefined = undefined;
     if (breakpoint && breakpoint !== 'xs') {
         breakpointHandle = breakpoint;
@@ -18,7 +18,7 @@ export const createBreakpointClass = ({ breakpoint, className, value }: CreateBr
         if (BREAKPOINT_HANDLE?.[breakpoint]) breakpointHandle = BREAKPOINT_HANDLE[breakpoint];
     }
 
-    let breakpointClass: ArrayStringTypes = [];
+    let breakpointClass: ArrayStringProps = [];
     if (breakpointHandle) breakpointClass.push(`${breakpointHandle}:`);
     breakpointClass.push(className);
     breakpointClass.push(`-${value}`);

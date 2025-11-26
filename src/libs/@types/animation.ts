@@ -1,21 +1,23 @@
 import { ANIMATION_HANDLES } from '@/components/common/Animation/handles';
 
-import { TextSplitTypes } from '@/components/common/Animation/elements/TextSplit';
+import { TextSplitProps } from '@/components/common/Animation/elements/TextSplit';
+import { FadeInProps } from '@/components/common/Animation/elements/FadeIn';
 
-export type AnimationElementTypes = {
+export type AnimationElementProps = {
     target: HTMLElement;
 };
 
-export type AnimationOptionsType<Type, Options> = {
+export type AnimationOptionsProps<Type, Options> = {
     type?: Type;
     options?: Options;
 };
 
-export type AnimationBaseTypes =
+export type AnimationBaseProps =
     | {
           type?: Exclude<
               (typeof ANIMATION_HANDLES)[keyof typeof ANIMATION_HANDLES],
-              typeof ANIMATION_HANDLES.TEXT_SPLIT
+              typeof ANIMATION_HANDLES.TEXT_SPLIT | typeof ANIMATION_HANDLES.FADE_IN
           >;
       }
-    | AnimationOptionsType<typeof ANIMATION_HANDLES.TEXT_SPLIT, Omit<TextSplitTypes, 'target'>>;
+    | AnimationOptionsProps<typeof ANIMATION_HANDLES.TEXT_SPLIT, Omit<TextSplitProps, 'target'>>
+    | AnimationOptionsProps<typeof ANIMATION_HANDLES.FADE_IN, Omit<FadeInProps, 'target'>>;

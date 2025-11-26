@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { ArrayStringTypes } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import { BaseItemTypes } from '@/components/common/Picture/Base';
+import { BaseItemProps } from '@/components/common/Picture/Base';
 
-const BaseItemImg = (item: BaseItemTypes): React.ReactElement => {
+const BaseItemImg = (item: BaseItemProps): React.ReactElement => {
     const { className, srcRetina, ...rest } = item;
 
-    let imageClass: ArrayStringTypes = [];
+    let imageClass: ArrayStringProps = [];
     if (className) imageClass.push(className);
     imageClass = joinArrayString(imageClass);
 

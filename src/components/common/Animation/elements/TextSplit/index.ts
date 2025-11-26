@@ -1,21 +1,21 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 
-import { createTimeline, stagger, text } from 'animejs';
+import { createTimeline, stagger, splitText } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export type TextSplitTypes = {
+export type TextSplitProps = {
     text?: string;
     targetFadeAnimation?: boolean;
-} & AnimationElementTypes;
+} & AnimationElementProps;
 
-export const TextSplit = ({ target, text: textProps, targetFadeAnimation }: TextSplitTypes) => {
+export const TextSplit = ({ target, text: textProps, targetFadeAnimation }: TextSplitProps) => {
     let isNew = undefined;
     if (textProps && target.innerText.toLowerCase() !== textProps.toLowerCase()) {
         isNew = textProps;
     }
 
-    const split = text.split(target, { chars: true });
+    const split = splitText(target, { chars: true });
 
     if (isNew) split.html = isNew;
 

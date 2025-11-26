@@ -1,15 +1,15 @@
 import { Component, RefComponent } from '@/libs/@types';
 
-import Base, { BaseTypes } from '@/components/common/Button/Base';
-import Block, { BlockTypes } from '@/components/common/Button/Block';
+import Base, { BaseProps } from '@/components/common/Button/Base';
+import Block, { BlockProps } from '@/components/common/Button/Block';
 
 export type * from '@/components/common/Button/Base';
 export type * from '@/components/common/Button/Block';
 
 export type ButtonComposition = {
-    Block: Component<BlockTypes>;
+    Block: Component<BlockProps>;
 };
 
-export default Object.assign<RefComponent<BaseTypes, HTMLAnchorElement | HTMLDivElement>, ButtonComposition>(Base, {
+export default Object.assign<RefComponent<BaseProps, HTMLAnchorElement | HTMLDivElement>, ButtonComposition>(Base, {
     Block,
 });

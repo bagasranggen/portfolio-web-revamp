@@ -1,11 +1,11 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 import { getAnimationElementOrder } from '@/libs/utils';
 
-import { text, stagger, createTimeline, animate, onScroll } from 'animejs';
+import { splitText, stagger, createTimeline, animate, onScroll } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const BannerHomepage = ({ target }: AnimationElementTypes) => {
+export const BannerHomepage = ({ target }: AnimationElementProps) => {
     const media = getAnimationElementOrder({ target, order: 1 });
     const heading = getAnimationElementOrder({ target, order: 2 });
     const label = getAnimationElementOrder({ target, order: 3 });
@@ -13,12 +13,12 @@ export const BannerHomepage = ({ target }: AnimationElementTypes) => {
 
     if (!heading || !media) return;
 
-    const { chars } = text.split(heading, { chars: true });
+    const { chars } = splitText(heading, { chars: true });
 
     let charsLabel = undefined;
 
     if (label) {
-        const { chars } = text.split(label, { chars: true });
+        const { chars } = splitText(label, { chars: true });
 
         charsLabel = chars;
     }

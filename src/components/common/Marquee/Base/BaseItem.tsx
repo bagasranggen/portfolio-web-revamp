@@ -1,8 +1,8 @@
 import React, { forwardRef, PropsWithChildren } from 'react';
 
-export type BaseItemTypes = PropsWithChildren;
+export type BaseItemProps = PropsWithChildren;
 
-const BaseItem = forwardRef<HTMLDivElement, BaseItemTypes>(({ children }, ref) => {
+const BaseItem = forwardRef<HTMLDivElement, BaseItemProps>(({ children }, ref) => {
     return (
         <div
             ref={ref}
