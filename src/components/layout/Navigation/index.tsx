@@ -4,27 +4,16 @@ import React, { Suspense, useEffect, useState } from 'react';
 
 import { useGlobalStateContext, useLayoutStateContext } from '@/store/context';
 
-import { ArrayStringProps } from '@/libs/@types';
-import { joinArrayString } from '@/libs/utils';
 import { NavigationEvents } from '@/libs/hook';
 
 import { useMeasure } from 'react-use';
 
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/shadcn/Dialog';
-import Animation from '@/components/common/Animation';
 import Button from '@/components/common/Button';
 import Container from '@/components/common/Container';
-import Columns from '@/components/common/Columns';
-import Picture, { BaseProps } from '@/components/common/Picture';
-import List from '@/components/common/List';
-import Link, { LinkProps } from '@/components/common/Link';
+import Animation from '@/components/common/Animation';
+import NavigationDialog, { NavigationDialogProps } from '@/components/layout/Navigation/NavigationDialog';
 
-export type NavigationItemProps = Pick<LinkProps, 'href' | 'target' | 'children'>;
-
-export type NavigationProps = {
-    media?: BaseProps['items'];
-    items?: NavigationItemProps[];
-};
+export type NavigationProps = Pick<NavigationDialogProps, 'media' | 'items'>;
 
 const Navigation = ({ items = [], media }: NavigationProps): React.ReactElement => {
     const { isDev } = useGlobalStateContext();
@@ -77,57 +66,14 @@ const Navigation = ({ items = [], media }: NavigationProps): React.ReactElement 
                 </Container>
             </div>
 
-            <Dialog
+            <NavigationDialog
+                media={media}
+                items={items}
                 open={open}
                 onOpenChange={() => {
                     setTimeout(() => setOpen(false), 30);
-                }}>
-                <DialogContent
-                    className="modal modal--navigation"
-                    showCloseButton={false}>
-                    <DialogHeader className="sr-only">
-                        <DialogTitle>Navigation Menu</DialogTitle>
-                        <DialogDescription>Navigation Menu</DialogDescription>
-                    </DialogHeader>
-
-                    <div className="flex items-center">
-                        <Columns
-                            className="w-full items-center"
-                            gutterX={0}>
-                            <Columns.Column
-                                md={4}
-                                offset={{
-                                    md: 1,
-                                }}>
-                                <Picture items={media} />
-                            </Columns.Column>
-
-                            <Columns.Column
-                                md={5}
-                                offset={{
-                                    md: 2,
-                                }}>
-                                {items && items.length > 0 && (
-                                    <div className="py-5">
-                                        <List
-                                            items={items.map((item: NavigationItemProps, i: number) => {
-                                                let liClass: ArrayStringProps = ['text-[3rem] tracking-[.45rem]'];
-                                                if (i !== 0) liClass.push('mt-3');
-                                                liClass = joinArrayString(liClass);
-
-                                                return {
-                                                    className: liClass,
-                                                    children: <Link href={item.href}>{item.children}</Link>,
-                                                };
-                                            })}
-                                        />
-                                    </div>
-                                )}
-                            </Columns.Column>
-                        </Columns>
-                    </div>
-                </DialogContent>
-            </Dialog>
+                }}
+            />
         </>
     );
 };

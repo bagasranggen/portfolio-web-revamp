@@ -6,6 +6,8 @@ import { XIcon } from 'lucide-react';
 
 import { cn } from '@/libs/utils';
 
+type DialogProps = DialogPrimitive.DialogProps;
+
 function Dialog({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
     return (
         <DialogPrimitive.Root
@@ -129,6 +131,7 @@ function DialogDescription({ className, ...props }: React.ComponentProps<typeof 
 
 export {
     Dialog,
+    type DialogProps,
     DialogClose,
     DialogContent,
     DialogDescription,
