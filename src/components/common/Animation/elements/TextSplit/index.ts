@@ -1,6 +1,6 @@
 import { AnimationElementProps } from '@/libs/@types';
 
-import { createTimeline, stagger, text } from 'animejs';
+import { createTimeline, stagger, splitText } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
@@ -15,7 +15,7 @@ export const TextSplit = ({ target, text: textProps, targetFadeAnimation }: Text
         isNew = textProps;
     }
 
-    const split = text.split(target, { chars: true });
+    const split = splitText(target, { chars: true });
 
     if (isNew) split.html = isNew;
 
