@@ -2,7 +2,7 @@ import { SocialProps } from '@/components/common/List';
 import { AboutCareerItemProps } from '@/components/pages/AboutIndex/AboutCareerItem';
 
 import parse from 'html-react-parser';
-import { NavigationItemProps, NavigationProps } from '@/components/layout/Navigation';
+import { NavigationDialogItemProps, NavigationProps } from '@/components/layout/Navigation';
 import { createPicsumImage } from '@/libs/factory';
 
 export const LIST_SOCIAL: SocialProps['items'] = [
@@ -63,7 +63,7 @@ export const LIST_CAREER: AboutCareerItemProps[] = [
     },
 ];
 
-export const LIST_NAVIGATION: NavigationItemProps[] = [
+export const LIST_NAVIGATION: NavigationDialogItemProps[] = [
     {
         href: '/',
         children: 'Home',

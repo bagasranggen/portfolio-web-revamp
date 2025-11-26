@@ -11,7 +11,10 @@ import { useMeasure } from 'react-use';
 import Button from '@/components/common/Button';
 import Container from '@/components/common/Container';
 import Animation from '@/components/common/Animation';
-import NavigationDialog, { NavigationDialogProps } from '@/components/layout/Navigation/NavigationDialog';
+import NavigationDialog, {
+    NavigationDialogProps,
+    NavigationDialogItemProps,
+} from '@/components/layout/Navigation/NavigationDialog';
 
 export type NavigationProps = Pick<NavigationDialogProps, 'media' | 'items'>;
 
@@ -79,3 +82,4 @@ const Navigation = ({ items = [], media }: NavigationProps): React.ReactElement 
 };
 
 export default Navigation;
+export { type NavigationDialogProps, type NavigationDialogItemProps };
