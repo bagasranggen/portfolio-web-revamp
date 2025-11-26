@@ -1,19 +1,25 @@
 import { AnimationElementProps } from '@/libs/@types';
 
-import { animate, onScroll } from 'animejs';
+import { animate, onScroll, ScrollObserverParams } from 'animejs';
 
-import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
+import { fadeAnimation, FadeAnimationProps } from '@/components/common/Animation/elements/Fade';
 
-export const FadeIn = ({ target }: AnimationElementProps) => {
+export type FadeInProps = AnimationElementProps &
+    Pick<FadeAnimationProps, 'opacityDelay' | 'x' | 'y'> &
+    Pick<ScrollObserverParams, 'debug'>;
+
+export const FadeIn = ({ target, x, y, opacityDelay, debug }: FadeInProps) => {
     animate(
         target,
         fadeAnimation({
             clearTarget: target,
             clearStyle: true,
-            y: 30,
+            opacityDelay: opacityDelay,
+            y: y ?? 30,
+            x,
             autoplay: onScroll({
                 target,
-                // debug: true,
+                debug,
             }),
         })
     );

@@ -1,6 +1,7 @@
 import { ANIMATION_HANDLES } from '@/components/common/Animation/handles';
 
 import { TextSplitProps } from '@/components/common/Animation/elements/TextSplit';
+import { FadeInProps } from '@/components/common/Animation/elements/FadeIn';
 
 export type AnimationElementProps = {
     target: HTMLElement;
@@ -15,7 +16,8 @@ export type AnimationBaseProps =
     | {
           type?: Exclude<
               (typeof ANIMATION_HANDLES)[keyof typeof ANIMATION_HANDLES],
-              typeof ANIMATION_HANDLES.TEXT_SPLIT
+              typeof ANIMATION_HANDLES.TEXT_SPLIT | typeof ANIMATION_HANDLES.FADE_IN
           >;
       }
-    | AnimationOptionsProps<typeof ANIMATION_HANDLES.TEXT_SPLIT, Omit<TextSplitProps, 'target'>>;
+    | AnimationOptionsProps<typeof ANIMATION_HANDLES.TEXT_SPLIT, Omit<TextSplitProps, 'target'>>
+    | AnimationOptionsProps<typeof ANIMATION_HANDLES.FADE_IN, Omit<FadeInProps, 'target'>>;
