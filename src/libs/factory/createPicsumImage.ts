@@ -1,4 +1,4 @@
-export type CreatePicsumImageTypes = {
+export type CreatePicsumImageProps = {
     id?: number;
     width?: number;
     height?: number;
@@ -6,7 +6,7 @@ export type CreatePicsumImageTypes = {
     media?: number;
 };
 
-export const createPicsumImage = ({ id = 237, width, height, hasRetina, media }: CreatePicsumImageTypes) => {
+export const createPicsumImage = ({ id = 237, width, height, hasRetina, media }: CreatePicsumImageProps) => {
     let dimension = { width, height };
     if (hasRetina && width && height) dimension = { width: width * 2, height: height * 2 };
 

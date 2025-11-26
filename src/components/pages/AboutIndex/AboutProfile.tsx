@@ -8,9 +8,9 @@ import Columns from '@/components/common/Columns';
 import Picture from '@/components/common/Picture';
 import List from '@/components/common/List';
 
-export type AboutProfileTypes = {};
+export type AboutProfileProps = {};
 
-const AboutProfile = ({}: AboutProfileTypes): React.ReactElement => {
+const AboutProfile = ({}: AboutProfileProps): React.ReactElement => {
     return (
         <>
             <Heading

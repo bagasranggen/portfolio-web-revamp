@@ -1,10 +1,10 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 
 import { animate, onScroll } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const FadeIn = ({ target }: AnimationElementTypes) => {
+export const FadeIn = ({ target }: AnimationElementProps) => {
     animate(
         target,
         fadeAnimation({

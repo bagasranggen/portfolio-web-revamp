@@ -1,27 +1,27 @@
 import React, { PropsWithChildren } from 'react';
 
-import { ArrayStringTypes, BreakpointsTypes, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
+import { ArrayStringProps, BreakpointsProps, CreateArrayWithLengthX, NumericRange } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createBreakpointClass } from '@/libs/factory';
 
-export const GUTTER_HANDLE: Partial<Record<GutterTypes, string>> = {
+export const GUTTER_HANDLE: Partial<Record<GutterProps, string>> = {
     gutterX: 'gutter-x',
     gutterY: 'gutter-y',
 } as const;
 
-export type GutterTypes = 'gutter' | 'gutterX' | 'gutterY';
+export type GutterProps = 'gutter' | 'gutterX' | 'gutterY';
 
-export type BaseGutterTypes = NumericRange<CreateArrayWithLengthX<0>, 10>;
+export type BaseGutterProps = NumericRange<CreateArrayWithLengthX<0>, 10>;
 
-export type BaseTypes = PropsWithChildren<
-    Partial<Record<GutterTypes, Partial<Record<BreakpointsTypes, BaseGutterTypes> | BaseGutterTypes>>> &
+export type BaseProps = PropsWithChildren<
+    Partial<Record<GutterProps, Partial<Record<BreakpointsProps, BaseGutterProps> | BaseGutterProps>>> &
         React.HTMLAttributes<HTMLElement>
 >;
 
-const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseTypes): React.ReactElement => {
+const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseProps): React.ReactElement => {
     const guttersArr = Object.entries({ gutter, gutterX, gutterY });
 
-    let rowClass: ArrayStringTypes = ['row'];
+    let rowClass: ArrayStringProps = ['row'];
 
     if (guttersArr.length > 0) {
         guttersArr.forEach(([type, typeValue]) => {
@@ -49,7 +49,7 @@ const Base = ({ className, gutter, gutterX, gutterY, children, ...props }: BaseT
                         if (typeof rowClass !== 'string') {
                             rowClass.push(
                                 createBreakpointClass({
-                                    breakpoint: key as BreakpointsTypes,
+                                    breakpoint: key as BreakpointsProps,
                                     className: handleClassName,
                                     value,
                                 })

@@ -1,12 +1,12 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 
 import { ANIMATION_ATTRIBUTE } from '@/components/common/Animation/handles';
 
-export type GetAnimationElementOrderTypes = {
+export type GetAnimationElementOrderProps = {
     order: number;
-} & Pick<AnimationElementTypes, 'target'>;
+} & Pick<AnimationElementProps, 'target'>;
 
-export const getAnimationElementOrder = ({ target, order }: GetAnimationElementOrderTypes) => {
+export const getAnimationElementOrder = ({ target, order }: GetAnimationElementOrderProps) => {
     let element = undefined;
 
     if (target && order) {

@@ -1,22 +1,22 @@
 import React from 'react';
 
 import Base from '@/components/common/Cards/Base';
-import Columns, { ColumnTypes } from '@/components/common/Columns';
-import BlockItem, { BlockItemTypes } from '@/components/common/Cards/Block/BlockItem';
+import Columns, { ColumnProps } from '@/components/common/Columns';
+import BlockItem, { BlockItemProps } from '@/components/common/Cards/Block/BlockItem';
 
-export type BlockTypes = {
-    items: BlockItemTypes[];
+export type BlockProps = {
+    items: BlockItemProps[];
 };
 
-const Block = ({ items: itemsProps }: BlockTypes): React.ReactElement => {
+const Block = ({ items: itemsProps }: BlockProps): React.ReactElement => {
     const items: any[] = [];
     if (itemsProps && itemsProps.length > 0) {
-        itemsProps.forEach((item: BlockItemTypes, i: number) => {
+        itemsProps.forEach((item: BlockItemProps, i: number) => {
             const hasOffset = i % 4 !== 0;
 
-            let offset: ColumnTypes['offset'] = undefined;
+            let offset: ColumnProps['offset'] = undefined;
             if (hasOffset) {
-                offset = Object.assign(offset ?? {}, { lg: 1 }) as ColumnTypes['offset'];
+                offset = Object.assign(offset ?? {}, { lg: 1 }) as ColumnProps['offset'];
             }
 
             items.push({

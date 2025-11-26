@@ -4,7 +4,7 @@ import React, { Suspense, useEffect, useState } from 'react';
 
 import { useGlobalStateContext, useLayoutStateContext } from '@/store/context';
 
-import { ArrayStringTypes } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { NavigationEvents } from '@/libs/hook';
 
@@ -15,18 +15,18 @@ import Animation from '@/components/common/Animation';
 import Button from '@/components/common/Button';
 import Container from '@/components/common/Container';
 import Columns from '@/components/common/Columns';
-import Picture, { BaseTypes } from '@/components/common/Picture';
+import Picture, { BaseProps } from '@/components/common/Picture';
 import List from '@/components/common/List';
-import Link, { LinkTypes } from '@/components/common/Link';
+import Link, { LinkProps } from '@/components/common/Link';
 
-export type NavigationItemTypes = Pick<LinkTypes, 'href' | 'target' | 'children'>;
+export type NavigationItemProps = Pick<LinkProps, 'href' | 'target' | 'children'>;
 
-export type NavigationTypes = {
-    media?: BaseTypes['items'];
-    items?: NavigationItemTypes[];
+export type NavigationProps = {
+    media?: BaseProps['items'];
+    items?: NavigationItemProps[];
 };
 
-const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement => {
+const Navigation = ({ items = [], media }: NavigationProps): React.ReactElement => {
     const { isDev } = useGlobalStateContext();
     const { setHeaderHeight } = useLayoutStateContext();
     const [headerRef, { height }] = useMeasure();
@@ -110,8 +110,8 @@ const Navigation = ({ items = [], media }: NavigationTypes): React.ReactElement 
                                 {items && items.length > 0 && (
                                     <div className="py-5">
                                         <List
-                                            items={items.map((item: NavigationItemTypes, i: number) => {
-                                                let liClass: ArrayStringTypes = ['text-[3rem] tracking-[.45rem]'];
+                                            items={items.map((item: NavigationItemProps, i: number) => {
+                                                let liClass: ArrayStringProps = ['text-[3rem] tracking-[.45rem]'];
                                                 if (i !== 0) liClass.push('mt-3');
                                                 liClass = joinArrayString(liClass);
 

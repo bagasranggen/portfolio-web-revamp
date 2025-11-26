@@ -1,29 +1,29 @@
 import React, { ExoticComponent, Fragment, FragmentProps } from 'react';
 
-import { Component, ElementTagsTypes, RefComponent } from '@/libs/@types';
+import { Component, ElementTagsProps, RefComponent } from '@/libs/@types';
 
-import Container, { ContainerTypes } from '@/components/common/Container';
+import Container, { ContainerProps } from '@/components/common/Container';
 
-export type BaseItemTypes = {
+export type BaseItemProps = {
     children: React.ReactElement;
 } & React.HTMLAttributes<HTMLElement>;
 
-export type BaseContainerTypes = {
+export type BaseContainerProps = {
     ref?: React.RefObject<HTMLDivElement>;
     withContainer?: boolean;
-} & ContainerTypes;
+} & ContainerProps;
 
-export type BaseTypes = {
-    wrapper?: ContainerTypes;
-    container?: BaseContainerTypes | boolean;
-    items?: BaseItemTypes[];
+export type BaseProps = {
+    wrapper?: ContainerProps;
+    container?: BaseContainerProps | boolean;
+    items?: BaseItemProps[];
 };
 
-const Base = ({ wrapper, container, items = [] }: BaseTypes): React.ReactElement | null => {
+const Base = ({ wrapper, container, items = [] }: BaseProps): React.ReactElement | null => {
     let ContainerElement:
         | ExoticComponent<FragmentProps>
-        | RefComponent<ContainerTypes, HTMLDivElement>
-        | ContainerTypes['as'] = Fragment;
+        | RefComponent<ContainerProps, HTMLDivElement>
+        | ContainerProps['as'] = Fragment;
     let containerProps: any = {};
 
     if (container) {
@@ -44,7 +44,7 @@ const Base = ({ wrapper, container, items = [] }: BaseTypes): React.ReactElement
         }
     }
 
-    let WrapperElement: ExoticComponent<FragmentProps> | ElementTagsTypes = Fragment;
+    let WrapperElement: ExoticComponent<FragmentProps> | ElementTagsProps = Fragment;
     let wrapperProps: any = {};
 
     if (wrapper) {

@@ -7,9 +7,9 @@ import Container from '@/components/common/Container';
 import Banner from '@/components/common/Banner';
 import Button from '@/components/common/Button';
 
-export type HomepageIndexTypes = {};
+export type HomepageIndexProps = {};
 
-const HomepageIndex = ({}: HomepageIndexTypes): React.ReactElement => {
+const HomepageIndex = ({}: HomepageIndexProps): React.ReactElement => {
     return (
         <>
             <Banner.Homepage {...HOMEPAGE_BANNER} />

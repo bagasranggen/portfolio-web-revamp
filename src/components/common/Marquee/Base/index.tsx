@@ -2,7 +2,7 @@
 
 import React, { PropsWithChildren, Ref } from 'react';
 
-import { ArrayStringTypes, ClassnameTypes } from '@/libs/@types';
+import { ArrayStringProps, ClassnameProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 import { createArrayFromNumber } from '@/libs/factory';
 
@@ -11,16 +11,16 @@ import { useWindowSize, useMeasure } from 'react-use';
 import Animation from '@/components/common/Animation';
 import BaseItem from '@/components/common/Marquee/Base/BaseItem';
 
-export type BaseTypes = PropsWithChildren & ClassnameTypes;
+export type BaseProps = PropsWithChildren & ClassnameProps;
 
-const Base = ({ className, children }: BaseTypes): React.ReactElement => {
+const Base = ({ className, children }: BaseProps): React.ReactElement => {
     const { width: windowWidth } = useWindowSize();
     const [textRef, { width: textWidth }] = useMeasure();
 
     let repeat = 0;
     if (windowWidth > 0 && textWidth > 0) repeat = Math.ceil((windowWidth * 2) / textWidth);
 
-    let marqueeClass: ArrayStringTypes = ['marquee'];
+    let marqueeClass: ArrayStringProps = ['marquee'];
     if (className) marqueeClass.push(className);
     marqueeClass = joinArrayString(marqueeClass);
 

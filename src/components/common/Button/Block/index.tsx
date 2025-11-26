@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { ArrayStringTypes } from '@/libs/@types';
+import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import Base, { BaseTypes } from '@/components/common/Button';
+import Base, { BaseProps } from '@/components/common/Button';
 
-export type BlockTypes = {
+export type BlockProps = {
     variant?: 'block';
     color?: 'dark' | 'light';
     size?: 'sm' | 'md';
-} & BaseTypes;
+} & BaseProps;
 
 const Block = ({
     variant = 'block',
@@ -17,8 +17,8 @@ const Block = ({
     size = 'md',
     className,
     ...props
-}: BlockTypes): React.ReactElement => {
-    let buttonClass: ArrayStringTypes = ['btn'];
+}: BlockProps): React.ReactElement => {
+    let buttonClass: ArrayStringProps = ['btn'];
     if (variant === 'block') buttonClass.push('btn--block');
     if (color === 'dark') buttonClass.push('btn--dark');
     if (color === 'light') buttonClass.push('btn--light');

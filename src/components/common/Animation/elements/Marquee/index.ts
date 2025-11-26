@@ -1,9 +1,9 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 import { getElementDimension } from '@/libs/utils';
 
 import { animate, onScroll } from 'animejs';
 
-export const Marquee = ({ target }: AnimationElementTypes) => {
+export const Marquee = ({ target }: AnimationElementProps) => {
     const wrapper = target.querySelector('.marquee__wrapper');
     const items = target.querySelectorAll('.marquee__item');
     const itemsHalf = items ? Math.ceil(items.length / 2) : 0;

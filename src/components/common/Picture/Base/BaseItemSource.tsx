@@ -1,6 +1,6 @@
-import { BaseItemTypes } from '@/components/common/Picture/Base/index';
+import { BaseItemProps } from '@/components/common/Picture/Base/index';
 
-const BaseItemSource = (item: BaseItemTypes) => {
+const BaseItemSource = (item: BaseItemProps) => {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { media, className, src, srcRetina, alt, ...restImage } = item;
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
-export type ArrowTypes = {};
+export type ArrowProps = {};
 
-const Arrow = ({}: ArrowTypes): React.ReactElement => {
+const Arrow = ({}: ArrowProps): React.ReactElement => {
     return (
         <svg
             width="27"

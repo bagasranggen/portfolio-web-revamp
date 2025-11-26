@@ -1,24 +1,24 @@
 import React, { forwardRef } from 'react';
 
-import { ElementTagsTypes } from '@/libs/@types';
+import { ElementTagsProps } from '@/libs/@types';
 
-import Link, { LinkTypes } from '@/components/common/Link';
+import Link, { LinkProps } from '@/components/common/Link';
 
-export type BaseAnchorTypes = { as?: 'anchor' } & LinkTypes;
+export type BaseAnchorProps = { as?: 'anchor' } & LinkProps;
 
-export type BaseButtonTypes = { as?: 'button' } & React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type BaseButtonProps = { as?: 'button' } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-export type BaseDivTypes = { as?: Extract<ElementTagsTypes, 'div' | 'span'> } & React.HTMLAttributes<HTMLDivElement>;
+export type BaseDivProps = { as?: Extract<ElementTagsProps, 'div' | 'span'> } & React.HTMLAttributes<HTMLDivElement>;
 
-export type BaseTypes = BaseAnchorTypes | BaseButtonTypes | BaseDivTypes;
+export type BaseProps = BaseAnchorProps | BaseButtonProps | BaseDivProps;
 
-const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, BaseTypes>(
+const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, BaseProps>(
     ({ as, children, ...props }, ref) => {
         if (as === 'anchor') {
             return (
                 <Link
                     ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-                    {...(props as LinkTypes)}>
+                    {...(props as LinkProps)}>
                     {children}
                 </Link>
             );
@@ -28,7 +28,7 @@ const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, 
             return (
                 <button
                     ref={ref as React.ForwardedRef<HTMLButtonElement>}
-                    {...(props as Omit<BaseButtonTypes, 'as'>)}>
+                    {...(props as Omit<BaseButtonProps, 'as'>)}>
                     {children}
                 </button>
             );

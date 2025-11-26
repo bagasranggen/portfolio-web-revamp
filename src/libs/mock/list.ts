@@ -1,11 +1,11 @@
-import { SocialTypes } from '@/components/common/List';
-import { AboutCareerItemTypes } from '@/components/pages/AboutIndex/AboutCareerItem';
+import { SocialProps } from '@/components/common/List';
+import { AboutCareerItemProps } from '@/components/pages/AboutIndex/AboutCareerItem';
 
 import parse from 'html-react-parser';
-import { NavigationItemTypes, NavigationTypes } from '@/components/layout/Navigation';
+import { NavigationItemProps, NavigationProps } from '@/components/layout/Navigation';
 import { createPicsumImage } from '@/libs/factory';
 
-export const LIST_SOCIAL: SocialTypes['items'] = [
+export const LIST_SOCIAL: SocialProps['items'] = [
     {
         link: {
             href: 'mailto:bagas.ranggen@gmail.com',
@@ -26,7 +26,7 @@ export const LIST_SOCIAL: SocialTypes['items'] = [
     },
 ];
 
-export const LIST_CAREER: AboutCareerItemTypes[] = [
+export const LIST_CAREER: AboutCareerItemProps[] = [
     {
         link: {
             href: 'https://www.thepixelage.com',
@@ -63,7 +63,7 @@ export const LIST_CAREER: AboutCareerItemTypes[] = [
     },
 ];
 
-export const LIST_NAVIGATION: NavigationItemTypes[] = [
+export const LIST_NAVIGATION: NavigationItemProps[] = [
     {
         href: '/',
         children: 'Home',
@@ -78,6 +78,6 @@ export const LIST_NAVIGATION: NavigationItemTypes[] = [
     },
 ];
 
-export const LIST_MEDIA: NavigationTypes['media'] = [
+export const LIST_MEDIA: NavigationProps['media'] = [
     createPicsumImage({ id: 88, width: 500, height: 667, media: 576 }),
 ];

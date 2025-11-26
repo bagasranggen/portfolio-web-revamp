@@ -1,11 +1,11 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 import { getAnimationElementOrder } from '@/libs/utils';
 
 import { createTimeline, stagger, text } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const BannerText = ({ target }: AnimationElementTypes) => {
+export const BannerText = ({ target }: AnimationElementProps) => {
     const heading = getAnimationElementOrder({ target, order: 1 });
     const title = getAnimationElementOrder({ target, order: 2 });
     const description = getAnimationElementOrder({ target, order: 3 });

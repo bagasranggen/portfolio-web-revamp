@@ -4,20 +4,20 @@ import React, { RefObject, useEffect, useRef, useState } from 'react';
 
 import { useWindowSize } from 'react-use';
 
-import Base, { BaseItemTypes, BaseTypes } from '@/components/common/Cards/Base';
-import OffsetItem, { OffsetItemTypes } from '@/components/common/Cards/Offset/OffsetItem';
+import Base, { BaseItemProps, BaseProps } from '@/components/common/Cards/Base';
+import OffsetItem, { OffsetItemProps } from '@/components/common/Cards/Offset/OffsetItem';
 
-export type OffsetTypes = {
-    items: OffsetItemTypes[];
-} & Pick<BaseTypes, 'wrapper'>;
+export type OffsetProps = {
+    items: OffsetItemProps[];
+} & Pick<BaseProps, 'wrapper'>;
 
-const Offset = ({ wrapper, items: itemsProps }: OffsetTypes): React.ReactElement => {
+const Offset = ({ wrapper, items: itemsProps }: OffsetProps): React.ReactElement => {
     const { width } = useWindowSize();
 
     const containerRef = useRef<HTMLDivElement | null>(null);
     const [tallestCard, setTallestCard] = useState<number>(0);
 
-    const items: BaseItemTypes[] = [];
+    const items: BaseItemProps[] = [];
 
     if (itemsProps && itemsProps.length > 0) {
         itemsProps.forEach((item, i, arr) => {

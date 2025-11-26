@@ -6,14 +6,14 @@ import { useHistoryStateContext } from '@/store/context';
 
 import Container from '@/components/common/Container';
 import Marquee from '@/components/common/Marquee';
-import List, { SocialTypes } from '@/components/common/List';
+import List, { SocialProps } from '@/components/common/List';
 import Animation from '@/components/common/Animation';
 
-export type FooterTypes = {
-    social?: SocialTypes['items'];
+export type FooterProps = {
+    social?: SocialProps['items'];
 };
 
-const Footer = ({ social = [] }: FooterTypes): React.ReactElement => {
+const Footer = ({ social = [] }: FooterProps): React.ReactElement => {
     const year = new Date().getFullYear();
     const { routeLength } = useHistoryStateContext();
 

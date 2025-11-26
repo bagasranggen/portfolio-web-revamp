@@ -11,9 +11,9 @@ import Animation from '@/components/common/Animation';
 import AboutProfile from '@/components/pages/AboutIndex/AboutProfile';
 import AboutCareer from '@/components/pages/AboutIndex/AboutCareer';
 
-export type AboutIndexTypes = {};
+export type AboutIndexProps = {};
 
-const AboutIndex = ({}: AboutIndexTypes): React.ReactElement => {
+const AboutIndex = ({}: AboutIndexProps): React.ReactElement => {
     return (
         <>
             <Banner.Text {...TEXT_BANNER}>About</Banner.Text>

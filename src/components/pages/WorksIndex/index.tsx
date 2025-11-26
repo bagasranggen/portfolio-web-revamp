@@ -6,9 +6,9 @@ import Banner from '@/components/common/Banner';
 import Cards from '@/components/common/Cards';
 import Container from '@/components/common/Container';
 
-export type WorksIndexTypes = {};
+export type WorksIndexProps = {};
 
-const WorksIndex = ({}: WorksIndexTypes): React.ReactElement => {
+const WorksIndex = ({}: WorksIndexProps): React.ReactElement => {
     return (
         <>
             <Banner.Text {...TEXT_BANNER} />

@@ -2,20 +2,20 @@
 
 import React, { useEffect, useRef } from 'react';
 
-import { AnimationBaseTypes } from '@/libs/@types';
+import { AnimationBaseProps } from '@/libs/@types';
 
 import { createScope, Scope } from 'animejs';
 
 import { ANIMATION_ATTRIBUTE } from '@/components/common/Animation/handles';
 import { ANIMATION_DATA_HANDLES } from '@/components/common/Animation/handlesData';
 
-export type AnimationTypes = {
+export type AnimationProps = {
     order?: number;
     trigger?: number;
     children: React.ReactElement;
-} & AnimationBaseTypes;
+} & AnimationBaseProps;
 
-const Animation = ({ type, order, trigger, children, ...props }: AnimationTypes): React.ReactElement => {
+const Animation = ({ type, order, trigger, children, ...props }: AnimationProps): React.ReactElement => {
     const root = useRef(null);
     const scope = useRef<Scope | null>(null);
 

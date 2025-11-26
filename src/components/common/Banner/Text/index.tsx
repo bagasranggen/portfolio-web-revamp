@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Columns from '@/components/common/Columns';
-import Heading, { BaseTypes } from '@/components/common/Heading';
+import Heading, { BaseProps } from '@/components/common/Heading';
 import Container from '@/components/common/Container';
 import Animation from '@/components/common/Animation';
 
-export type TextTypes = {
-    title: BaseTypes['children'];
+export type TextProps = {
+    title: BaseProps['children'];
     description?: React.ReactNode;
-} & Pick<BaseTypes, 'children'>;
+} & Pick<BaseProps, 'children'>;
 
-const Text = ({ title, description, children }: TextTypes): React.ReactElement => {
+const Text = ({ title, description, children }: TextProps): React.ReactElement => {
     return (
         <Animation type="banner-text">
             <Container

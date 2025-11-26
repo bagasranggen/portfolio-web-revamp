@@ -2,9 +2,9 @@ import { createPicsumImage } from '@/libs/factory';
 
 import parse from 'html-react-parser';
 
-import { HomepageTypes, TextTypes } from '@/components/common/Banner';
+import { HomepageProps, TextProps } from '@/components/common/Banner';
 
-export const HOMEPAGE_BANNER: HomepageTypes = {
+export const HOMEPAGE_BANNER: HomepageProps = {
     media: [
         createPicsumImage({ id: 88, width: 800, height: 605, hasRetina: true, media: 992 }),
         createPicsumImage({ id: 88, width: 450, height: 600 }),
@@ -16,7 +16,7 @@ export const HOMEPAGE_BANNER: HomepageTypes = {
     children: 'Bagas Ranggen',
 };
 
-export const TEXT_BANNER: TextTypes = {
+export const TEXT_BANNER: TextProps = {
     title: 'Lorem ipsum dolor sit amet, consectetur.',
     description: parse(
         `<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita illum labore odio officiis reprehenderit. Ad amet animi aut consequuntur delectus dicta iste laboriosam molestias nesciunt quaerat reiciendis sequi, similique sunt.</p>`

@@ -1,18 +1,18 @@
 import React, { PropsWithChildren } from 'react';
 
 import Container from '@/components/common/Container';
-import Heading, { BaseTypes as HeadingBaseTypes } from '@/components/common/Heading';
+import Heading, { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
-import Picture, { BaseTypes } from '@/components/common/Picture';
+import Picture, { BaseProps } from '@/components/common/Picture';
 import Animation from '@/components/common/Animation';
 
-export type HomepageTypes = PropsWithChildren<{
-    media?: BaseTypes['items'];
+export type HomepageProps = PropsWithChildren<{
+    media?: BaseProps['items'];
     description?: React.ReactNode;
-    label?: HeadingBaseTypes['children'];
+    label?: HeadingBaseProps['children'];
 }>;
 
-const Homepage = ({ media, description, label, children }: HomepageTypes): React.ReactElement => {
+const Homepage = ({ media, description, label, children }: HomepageProps): React.ReactElement => {
     return (
         <Animation type="banner-homepage">
             <section className="banner-homepage">
