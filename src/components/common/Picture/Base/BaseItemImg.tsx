@@ -1,29 +1,41 @@
 import React from 'react';
+import { getImageProps } from 'next/image';
 
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
 import { BaseItemProps } from '@/components/common/Picture/Base';
 
-const BaseItemImg = (item: BaseItemProps): React.ReactElement => {
-    const { className, srcRetina, ...rest } = item;
-
+const BaseItemImg = ({ className: classNameProps, ...item }: BaseItemProps): React.ReactElement => {
     let imageClass: ArrayStringProps = [];
-    if (className) imageClass.push(className);
+    if (classNameProps) imageClass.push(classNameProps);
     imageClass = joinArrayString(imageClass);
 
-    const props: any = {
-        ...rest,
-        ...(srcRetina ? { srcSet: `${srcRetina} 2x` } : {}),
+    const {
+        props: { src, srcSet, width, height, alt, className, loading },
+    } = getImageProps({
+        src: item?.src,
         className: imageClass,
+        width: item?.width,
+        height: item?.height,
+        loading: item?.loading,
+        alt: item?.alt,
+    });
+
+    const imgProps: React.DetailedHTMLProps<React.ImgHTMLAttributes<HTMLImageElement>, HTMLImageElement> = {
+        src,
+        srcSet,
+        width,
+        height,
+        loading,
+        ...(className ? { className } : {}),
     };
 
     return (
-        /* eslint-disable @next/next/no-img-element */
-        /* eslint-disable jsx-a11y/alt-text */
-        <img {...(props as any)} />
-        /* eslint-disable @next/next/no-img-element */
-        /* eslint-disable jsx-a11y/alt-text */
+        <img
+            {...imgProps}
+            alt={alt}
+        />
     );
 };
 

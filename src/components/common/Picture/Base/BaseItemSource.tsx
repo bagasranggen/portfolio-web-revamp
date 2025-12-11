@@ -1,19 +1,36 @@
-import { BaseItemProps } from '@/components/common/Picture/Base/index';
+import React from 'react';
+import { getImageProps, ImageProps } from 'next/image';
 
-const BaseItemSource = (item: BaseItemProps) => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { media, className, src, srcRetina, alt, ...restImage } = item;
+import { joinArrayString } from '@/libs/utils';
 
-    let srcSet = src;
-    if (srcRetina) srcSet += ` 1x, ${srcRetina} 2x`;
+import { BaseItemProps } from '@/components/common/Picture/Base';
 
-    const props = {
+const BaseItemSource = ({ media: mediaProps, ...item }: BaseItemProps) => {
+    let media: string | undefined = undefined;
+    if (mediaProps) media = `(min-width: ${mediaProps}px)`;
+
+    let sizesProps: ImageProps['sizes'] = undefined;
+    if (media && item?.sizes) sizesProps = joinArrayString([media, item.sizes], ' ');
+
+    const {
+        props: { srcSet, width, height, sizes },
+    } = getImageProps({
+        src: item?.src,
+        width: item?.width,
+        height: item?.height,
+        alt: item?.alt,
+        sizes: sizesProps,
+    });
+
+    const props: React.SourceHTMLAttributes<HTMLSourceElement> = {
         srcSet,
-        ...restImage,
-        ...(media ? { media: `(min-width: ${media}px)` } : {}),
+        width,
+        height,
+        sizes,
+        media,
     };
 
-    return <source {...(props as any)} />;
+    return <source {...props} />;
 };
 
 export default BaseItemSource;

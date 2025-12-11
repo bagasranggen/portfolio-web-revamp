@@ -7,7 +7,6 @@ import Base, { BaseProps } from '@/components/common/Button';
 
 export type BlockProps = {
     variant?: 'block';
-    color?: 'dark' | 'light';
     size?: 'sm' | 'md';
 } & BaseProps;
 
@@ -18,10 +17,8 @@ const Block = ({
     className,
     ...props
 }: BlockProps): React.ReactElement => {
-    let buttonClass: ArrayStringProps = ['btn'];
+    let buttonClass: ArrayStringProps = [];
     if (variant === 'block') buttonClass.push('btn--block');
-    if (color === 'dark') buttonClass.push('btn--dark');
-    if (color === 'light') buttonClass.push('btn--light');
     if (size === 'sm') buttonClass.push('btn--sm');
     if (size === 'md') buttonClass.push('btn--md');
     if (className) buttonClass.push(className);
