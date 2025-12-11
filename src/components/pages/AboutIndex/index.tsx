@@ -19,11 +19,11 @@ const AboutIndex = ({}: AboutIndexProps): React.ReactElement => {
             <Banner.Text {...TEXT_BANNER}>About</Banner.Text>
 
             <Animation type="fade-in">
-                <Container
-                    as="section"
-                    className="mt-10">
+                <Container as="section">
                     <Columns className="justify-center">
-                        <Columns.Column lg={10}>
+                        <Columns.Column
+                            lg={10}
+                            xxl={8}>
                             <AboutProfile />
                         </Columns.Column>
                     </Columns>
