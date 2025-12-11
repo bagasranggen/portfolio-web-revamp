@@ -76,7 +76,7 @@ const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialog
                                                         }}>
                                                         <Button
                                                             as="anchor"
-                                                            className="btn block"
+                                                            color="dark"
                                                             href={item.href}>
                                                             {item.children}
                                                         </Button>
