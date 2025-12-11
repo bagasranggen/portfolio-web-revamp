@@ -57,3 +57,5 @@ const Animation = ({ type, order, trigger, children, ...props }: AnimationProps)
 };
 
 export default Animation;
+
+export type * from './types';
