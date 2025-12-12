@@ -1,5 +1,18 @@
+[data-animation-type='fade'],
 [data-animation-type='fade-in'] {
     &:not([style]) {
+        @apply opacity-0;
+    }
+}
+
+[data-animation-type='text-split'] {
+    [data-char]:not([style*='opacity: 1']) {
+        @apply opacity-0;
+    }
+}
+
+[data-animation-type='banner-text'] {
+    .animation--init {
         @apply opacity-0;
     }
 }
