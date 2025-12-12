@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { createPicsumImage } from '@/libs/factory';
-
 import Picture, { BaseProps as BasePictureProps } from '@/components/common/Picture';
 import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Heading, { BaseProps } from '@/components/common/Heading';
@@ -19,6 +17,7 @@ const BlockItem = ({ link, title, description, media }: BlockItemProps): React.R
     return (
         <Animation type="fade-in">
             <Button
+                cleanClassName
                 as={link ? 'anchor' : undefined}
                 className="card__item"
                 {...(link as Omit<BaseAnchorProps, 'as'>)}>
