@@ -27,6 +27,7 @@ const Block = ({
     return (
         <Base
             className={buttonClass}
+            color={color}
             {...props}
         />
     );

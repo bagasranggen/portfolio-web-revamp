@@ -59,6 +59,7 @@ const OffsetItem = ({ link, description, count, cardTallestHeight, media }: Offs
 
     return (
         <Button
+            cleanClassName
             ref={cardItemRef}
             as={link ? 'anchor' : undefined}
             className="card__item"
