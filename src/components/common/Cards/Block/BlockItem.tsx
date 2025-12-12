@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { createPicsumImage } from '@/libs/factory';
-
 import Picture, { BaseProps as BasePictureProps } from '@/components/common/Picture';
 import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Heading, { BaseProps } from '@/components/common/Heading';
