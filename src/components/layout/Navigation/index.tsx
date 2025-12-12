@@ -64,6 +64,7 @@ const Navigation = ({ items = [], media, button }: NavigationProps): React.React
                                         ? (button.open as TextSplitProps['text'])
                                         : (button.close as TextSplitProps['text']),
                                     targetFadeAnimation: isDev ? trigger === 1 : trigger === 0,
+                                    staggerSpeed: 50,
                                 }}>
                                 <Button.Block
                                     as="button"
