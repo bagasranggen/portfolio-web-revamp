@@ -49,24 +49,28 @@ const Navigation = ({ items = [], media }: NavigationProps): React.ReactElement 
             <div
                 ref={headerRef as any}
                 className="fixed w-full top-0 left-0 z-99 pointer-events-none">
-                <Container className="text-end py-3">
-                    <Animation
-                        type="text-split"
-                        trigger={trigger}
-                        options={{
-                            text: !open ? 'Menu' : 'Close',
-                            targetFadeAnimation: isDev ? trigger === 1 : trigger === 0,
-                        }}>
-                        <Button.Block
-                            as="button"
-                            type="button"
-                            size="sm"
-                            className="backdrop-blur-xs pointer-events-auto min-w-[11rem]"
-                            onClick={() => setOpen(true)}>
-                            {!open ? 'Menu' : 'Close'}
-                        </Button.Block>
-                    </Animation>
-                </Container>
+                <Animation
+                    type="fade"
+                    options={{ y: 0 }}>
+                    <Container className="text-end py-3">
+                        <Animation
+                            type="text-split"
+                            trigger={trigger}
+                            options={{
+                                text: !open ? 'Menu' : 'Close',
+                                targetFadeAnimation: isDev ? trigger === 1 : trigger === 0,
+                            }}>
+                            <Button.Block
+                                as="button"
+                                type="button"
+                                size="sm"
+                                className="backdrop-blur-xs pointer-events-auto min-w-[11rem]"
+                                onClick={() => setOpen(true)}>
+                                {!open ? 'Menu' : 'Close'}
+                            </Button.Block>
+                        </Animation>
+                    </Container>
+                </Animation>
             </div>
 
             <NavigationDialog
