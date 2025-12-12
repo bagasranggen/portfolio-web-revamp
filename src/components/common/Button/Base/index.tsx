@@ -7,6 +7,7 @@ import Link, { LinkProps } from '@/components/common/Link';
 
 export type BaseCommonProps = {
     color?: 'dark' | 'light';
+    cleanClassName?: boolean;
 };
 
 export type BaseAnchorProps = { as?: 'anchor' } & LinkProps & BaseCommonProps;
@@ -19,8 +20,9 @@ export type BaseDivProps = { as?: Extract<ElementTagsProps, 'div' | 'span'> } & 
 export type BaseProps = BaseAnchorProps | BaseButtonProps | BaseDivProps;
 
 const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, BaseProps>(
-    ({ as, children, className, color, ...props }, ref) => {
-        let btnClass: ArrayStringProps = ['btn'];
+    ({ as, children, className, color, cleanClassName, ...props }, ref) => {
+        let btnClass: ArrayStringProps = [];
+        if (!cleanClassName) btnClass.push('btn');
         if (color === 'dark') btnClass.push('btn--dark');
         if (color === 'light') btnClass.push('btn--light');
         if (className) btnClass.push(className);

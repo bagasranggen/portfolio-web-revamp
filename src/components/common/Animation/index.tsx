@@ -2,7 +2,8 @@
 
 import React, { useEffect, useRef } from 'react';
 
-import { AnimationBaseProps } from '@/libs/@types';
+import { AnimationBaseProps, ArrayStringProps, ClassnameProps } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
 
 import { createScope, Scope } from 'animejs';
 
@@ -13,11 +14,18 @@ export type AnimationProps = {
     order?: number;
     trigger?: number;
     children: React.ReactElement;
-} & AnimationBaseProps;
+} & (AnimationBaseProps & ClassnameProps);
 
-const Animation = ({ type, order, trigger, children, ...props }: AnimationProps): React.ReactElement => {
+const Animation = ({ type, order, trigger, children, className, ...props }: AnimationProps): React.ReactElement => {
     const root = useRef(null);
     const scope = useRef<Scope | null>(null);
+
+    const childrenClassName = (children?.props as any)?.className;
+
+    let animationClass: ArrayStringProps = [];
+    if (childrenClassName) animationClass.push(childrenClassName);
+    if (className) animationClass.push(className);
+    animationClass = joinArrayString(animationClass);
 
     let elementProps = { ref: root };
 
@@ -27,6 +35,10 @@ const Animation = ({ type, order, trigger, children, ...props }: AnimationProps)
 
     if (!type && order) {
         elementProps = Object.assign(elementProps, { [ANIMATION_ATTRIBUTE.ORDER]: order });
+    }
+
+    if (animationClass) {
+        elementProps = Object.assign(elementProps, { className: animationClass });
     }
 
     let options = undefined;
