@@ -59,6 +59,7 @@ const Navigation = ({ items = [], media }: NavigationProps): React.ReactElement 
                             options={{
                                 text: !open ? 'Menu' : 'Close',
                                 targetFadeAnimation: isDev ? trigger === 1 : trigger === 0,
+                                staggerSpeed: 50,
                             }}>
                             <Button.Block
                                 as="button"
