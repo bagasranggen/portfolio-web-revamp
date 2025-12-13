@@ -1,10 +1,13 @@
 'use client';
 
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import { useGlobalStateContext, useLayoutStateContext } from '@/store/context';
 
+import { ArrayStringProps, LocaleProps } from '@/libs/@types';
 import { NavigationEvents } from '@/libs/hook';
+import { joinArrayString } from '@/libs/utils';
 
 import { useMeasure } from 'react-use';
 
@@ -18,15 +21,50 @@ import NavigationDialog, {
 
 export type NavigationProps = {
     button: Record<'open' | 'close', BaseProps['children'] | TextSplitProps['text']>;
+    activeLocale?: LocaleProps;
+    locales?: LocaleProps[];
 } & Pick<NavigationDialogProps, 'media' | 'items'>;
 
-const Navigation = ({ items = [], media, button }: NavigationProps): React.ReactElement => {
+const Navigation = ({ items = [], media, button, activeLocale, locales }: NavigationProps): React.ReactElement => {
     const { isDev } = useGlobalStateContext();
     const { setHeaderHeight } = useLayoutStateContext();
     const [headerRef, { height }] = useMeasure();
+    const pathname = usePathname();
 
     const [open, setOpen] = useState<boolean>(false);
     const [trigger, setTrigger] = useState<number>(0);
+
+    const langItems: NavigationDialogProps['langItems'] = useMemo(() => {
+        const data: NavigationDialogProps['langItems'] = [];
+
+        if (locales && locales.length > 0) {
+            locales.forEach((item) => {
+                const active = item === activeLocale;
+
+                let href = '#';
+                if (!active) href = pathname.replace(`/${activeLocale}`, `/${item}`);
+
+                let btnClass: ArrayStringProps = ['text-[1.5rem] tracking-[.45rem]'];
+                if (active) btnClass.push('font-bold');
+                btnClass = joinArrayString(btnClass);
+
+                data.push({
+                    className: 'mb-[0.25rem]',
+                    children: (
+                        <Button
+                            as="anchor"
+                            color="dark"
+                            className={btnClass}
+                            href={href}>
+                            {item.toUpperCase()}
+                        </Button>
+                    ),
+                });
+            });
+        }
+
+        return data;
+    }, [activeLocale, locales, pathname]);
 
     useEffect(() => {
         setTrigger((prevState) => prevState + 1);
@@ -87,6 +125,7 @@ const Navigation = ({ items = [], media, button }: NavigationProps): React.React
                 onOpenChange={() => {
                     setTimeout(() => setOpen(false), 30);
                 }}
+                langItems={langItems}
             />
         </>
     );

@@ -5,6 +5,7 @@ import localFont from 'next/font/local';
 import '@/assets/styles/globals.css';
 
 import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL, LOCALES } from '@/libs/mock';
+import { LocaleProps } from '@/libs/@types';
 import { getDictionary } from '@/libs/utils';
 
 import ContextProvider from '@/store/context';
@@ -74,12 +75,12 @@ export async function generateStaticParams() {
 }
 
 export default async function RootLayout({ children, params }: LayoutProps<'/[lang]'>) {
-    const lang = (await params).lang;
+    const lang = (await params).lang as LocaleProps;
     const dic = await getDictionary(lang);
 
     return (
         <ContextProvider>
-            <html lang={(await params).lang}>
+            <html lang={lang}>
                 <body className={murecho.variable}>
                     <Navigation
                         media={LIST_MEDIA}
@@ -88,6 +89,8 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
                             open: dic.navigation.button.open,
                             close: dic.navigation.button.close,
                         }}
+                        activeLocale={lang}
+                        locales={LOCALES}
                     />
 
                     {children}
