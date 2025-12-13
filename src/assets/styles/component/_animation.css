@@ -11,6 +11,7 @@
     }
 }
 
+[data-animation-type='banner-homepage'],
 [data-animation-type='banner-text'] {
     .animation--init {
         @apply opacity-0;
