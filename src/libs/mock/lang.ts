@@ -1,6 +1,6 @@
 export const LOCALES_HANDLES = {
     EN: 'en',
-    JP: 'jp',
+    JP: 'ja',
 } as const;
 
 export const LOCALES = Object.values(LOCALES_HANDLES);
