@@ -4,9 +4,9 @@ import { animate } from 'animejs';
 
 import { fadeAnimation, FadeAnimationProps } from '@/components/common/Animation/elements/Fade/fadeAnimation';
 
-export type FadeProps = AnimationElementProps & Pick<FadeAnimationProps, 'y' | 'opacityDuration'>;
+export type FadeProps = AnimationElementProps & Pick<FadeAnimationProps, 'y' | 'opacityDuration' | 'opacityDelay'>;
 
-export const Fade = ({ target, y = 30, opacityDuration }: FadeProps) => {
+export const Fade = ({ target, y = 30, opacityDuration, opacityDelay }: FadeProps) => {
     animate(
         target,
         fadeAnimation({
@@ -14,6 +14,7 @@ export const Fade = ({ target, y = 30, opacityDuration }: FadeProps) => {
             clearStyle: true,
             y,
             opacityDuration,
+            opacityDelay,
         })
     );
 };
