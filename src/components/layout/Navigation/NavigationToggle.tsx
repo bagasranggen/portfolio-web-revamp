@@ -12,13 +12,15 @@ import NavigationSlideList, { NavigationSlideListProps } from '@/components/layo
 
 export type NavigationToggleProps = {
     langItems?: NavigationSlideListProps['items'];
+    themeItems?: NavigationSlideListProps['items'];
 };
 
-const NavigationToggle = ({ langItems }: NavigationToggleProps): React.ReactElement | null => {
+const NavigationToggle = ({ langItems, themeItems }: NavigationToggleProps): React.ReactElement | null => {
     const { isMultiLanguage, isThemeToggle } = useGlobalStateContext();
 
     if (!isMultiLanguage && !isThemeToggle) return null;
     if (isMultiLanguage && (!langItems || langItems.length === 0)) return null;
+    if (isThemeToggle && (!themeItems || themeItems.length === 0)) return null;
 
     return (
         <div className="absolute top-[8rem] w-full">
@@ -46,7 +48,7 @@ const NavigationToggle = ({ langItems }: NavigationToggleProps): React.ReactElem
                         }}>
                         <NavigationSlideList
                             className="mt-1"
-                            items={[{ children: 'DARK' }, { children: 'LIGHT' }]}>
+                            items={themeItems}>
                             <SwatchBookIcon />
                         </NavigationSlideList>
                     </Animation>

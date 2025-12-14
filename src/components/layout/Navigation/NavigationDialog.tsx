@@ -23,12 +23,13 @@ export type NavigationDialogItemProps = Pick<BaseAnchorProps, 'href' | 'target' 
 export type NavigationDialogProps = {
     media?: BaseProps['items'];
     items?: NavigationDialogItemProps[];
-} & (Pick<DialogProps, 'open' | 'onOpenChange'> & Pick<NavigationToggleProps, 'langItems'>);
+} & (Pick<DialogProps, 'open' | 'onOpenChange'> & Pick<NavigationToggleProps, 'langItems' | 'themeItems'>);
 
 const NavigationDialog = ({
     media,
     items,
     langItems,
+    themeItems,
     open,
     onOpenChange,
 }: NavigationDialogProps): React.ReactElement => {
@@ -44,7 +45,10 @@ const NavigationDialog = ({
                     <DialogDescription>Navigation Menu</DialogDescription>
                 </DialogHeader>
 
-                <NavigationToggle langItems={langItems} />
+                <NavigationToggle
+                    langItems={langItems}
+                    themeItems={themeItems}
+                />
 
                 <div className="flex items-center">
                     <Columns

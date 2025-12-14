@@ -3,9 +3,9 @@
 import React, { Suspense, useEffect, useMemo, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
-import { useGlobalStateContext, useLayoutStateContext } from '@/store/context';
+import { useGlobalStateContext, useLayoutStateContext, useThemeStateContext } from '@/store/context';
 
-import { LocaleProps } from '@/libs/@types';
+import { LocaleProps, ThemesProps } from '@/libs/@types';
 import { NavigationEvents } from '@/libs/hook';
 
 import { useMeasure } from 'react-use';
@@ -22,10 +22,19 @@ export type NavigationProps = {
     button: Record<'open' | 'close', BaseProps['children'] | TextSplitProps['text']>;
     activeLocale?: LocaleProps;
     locales?: LocaleProps[];
+    themes?: ThemesProps[];
 } & Pick<NavigationDialogProps, 'media' | 'items'>;
 
-const Navigation = ({ items = [], media, button, activeLocale, locales }: NavigationProps): React.ReactElement => {
+const Navigation = ({
+    items = [],
+    media,
+    button,
+    activeLocale,
+    locales,
+    themes,
+}: NavigationProps): React.ReactElement => {
     const { isDev } = useGlobalStateContext();
+    const { theme, setTheme } = useThemeStateContext();
     const { setHeaderHeight } = useLayoutStateContext();
     const [headerRef, { height }] = useMeasure();
     const pathname = usePathname();
@@ -59,6 +68,30 @@ const Navigation = ({ items = [], media, button, activeLocale, locales }: Naviga
 
         return data;
     }, [activeLocale, locales, pathname]);
+
+    const themeItems: NavigationDialogProps['themeItems'] = useMemo(() => {
+        const data: NavigationDialogProps['themeItems'] = [];
+
+        if (themes && themes.length > 0) {
+            themes.forEach((item) => {
+                const active = item === theme;
+
+                data.push({
+                    ...(active ? { className: 'active' } : {}),
+                    children: (
+                        <Button
+                            as="button"
+                            color="dark"
+                            onClick={() => setTheme(item)}>
+                            {item.toUpperCase()}
+                        </Button>
+                    ),
+                });
+            });
+        }
+
+        return data;
+    }, [themes, theme]);
 
     useEffect(() => {
         setTrigger((prevState) => prevState + 1);
@@ -120,6 +153,7 @@ const Navigation = ({ items = [], media, button, activeLocale, locales }: Naviga
                     setTimeout(() => setOpen(false), 30);
                 }}
                 langItems={langItems}
+                themeItems={themeItems}
             />
         </>
     );

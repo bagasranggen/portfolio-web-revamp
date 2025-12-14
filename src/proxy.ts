@@ -1,18 +1,22 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { LOCALES, LOCALES_DEFAULT } from '@/libs/mock';
+import { LOCALES, LOCALES_DEFAULT, THEMES_COOKIE_KEY } from '@/libs/mock';
 
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
+    const response = NextResponse.next();
 
     const pathnameHasLocale = LOCALES.some((item) => pathname.startsWith(`/${item}/`) || pathname === `/${item}`);
 
-    if (pathnameHasLocale) return;
+    if (!pathnameHasLocale) {
+        request.nextUrl.pathname = `/${LOCALES_DEFAULT}${pathname}`;
+        return NextResponse.redirect(request.nextUrl);
+    }
 
-    request.nextUrl.pathname = `/${LOCALES_DEFAULT}${pathname}`;
+    const theme = request.cookies.get(THEMES_COOKIE_KEY)?.value || 'light';
 
-    console.log({ from: 'proxy', pathname });
+    response.headers.set(THEMES_COOKIE_KEY, theme);
 
-    return NextResponse.redirect(request.nextUrl);
+    return response;
 }
 
 export const config = {

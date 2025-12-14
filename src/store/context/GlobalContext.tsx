@@ -17,7 +17,7 @@ export const GlobalStateContext = createContext<GlobalState>({
 export const GlobalStateContextProvider = ({ children }: PropsWithChildren) => {
     const isDev = process.env.NODE_ENV === 'development';
     const isMultiLanguage = process.env.NEXT_PUBLIC_FF_MULTI_LANGUAGE === '1';
-    const isThemeToggle = false;
+    const isThemeToggle = process.env.NEXT_PUBLIC_FF_THEME_TOGGLE === '1';
 
     const defaultContext = { isDev, isMultiLanguage, isThemeToggle };
 
