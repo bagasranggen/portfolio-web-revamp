@@ -82,7 +82,10 @@ const Navigation = ({
                         <Button
                             as="button"
                             color="dark"
-                            onClick={() => setTheme(item)}>
+                            onClick={() => {
+                                setOpen(false);
+                                setTheme(item);
+                            }}>
                             {item.toUpperCase()}
                         </Button>
                     ),
