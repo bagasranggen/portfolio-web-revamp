@@ -5,9 +5,8 @@ import { usePathname } from 'next/navigation';
 
 import { useGlobalStateContext, useLayoutStateContext } from '@/store/context';
 
-import { ArrayStringProps, LocaleProps } from '@/libs/@types';
+import { LocaleProps } from '@/libs/@types';
 import { NavigationEvents } from '@/libs/hook';
-import { joinArrayString } from '@/libs/utils';
 
 import { useMeasure } from 'react-use';
 
@@ -44,17 +43,12 @@ const Navigation = ({ items = [], media, button, activeLocale, locales }: Naviga
                 let href = '#';
                 if (!active) href = pathname.replace(`/${activeLocale}`, `/${item}`);
 
-                let btnClass: ArrayStringProps = ['text-[1.5rem] tracking-[.45rem]'];
-                if (active) btnClass.push('font-bold');
-                btnClass = joinArrayString(btnClass);
-
                 data.push({
-                    className: 'mb-[0.25rem]',
+                    ...(active ? { className: 'active' } : {}),
                     children: (
                         <Button
                             as="anchor"
                             color="dark"
-                            className={btnClass}
                             href={href}>
                             {item.toUpperCase()}
                         </Button>
