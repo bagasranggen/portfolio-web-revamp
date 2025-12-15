@@ -6,12 +6,13 @@ const IS_MULTI_LANGUAGE = process.env.NEXT_PUBLIC_FF_MULTI_LANGUAGE === '1';
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const response = NextResponse.next();
+    const nextUrl = request.nextUrl;
 
     const pathnameHasLocale = LOCALES.some((item) => pathname.startsWith(`/${item}/`) || pathname === `/${item}`);
 
     if (IS_MULTI_LANGUAGE && !pathnameHasLocale) {
-        request.nextUrl.pathname = `/${LOCALES_DEFAULT}${pathname}`;
-        return NextResponse.redirect(request.nextUrl);
+        nextUrl.pathname = `/${LOCALES_DEFAULT}${pathname}`;
+        return NextResponse.redirect(nextUrl);
     }
 
     const theme = request.cookies.get(THEMES_COOKIE_KEY)?.value || 'light';
