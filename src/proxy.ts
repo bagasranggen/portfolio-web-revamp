@@ -1,13 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { LOCALES, LOCALES_DEFAULT, THEMES_COOKIE_KEY } from '@/libs/mock';
 
+const IS_MULTI_LANGUAGE = process.env.NEXT_PUBLIC_FF_MULTI_LANGUAGE === '1';
+
 export function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
     const response = NextResponse.next();
 
     const pathnameHasLocale = LOCALES.some((item) => pathname.startsWith(`/${item}/`) || pathname === `/${item}`);
 
-    if (!pathnameHasLocale) {
+    if (IS_MULTI_LANGUAGE && !pathnameHasLocale) {
         request.nextUrl.pathname = `/${LOCALES_DEFAULT}${pathname}`;
         return NextResponse.redirect(request.nextUrl);
     }
