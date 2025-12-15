@@ -16,15 +16,23 @@ import Columns from '@/components/common/Columns';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import List from '@/components/common/List';
 import Button, { BaseAnchorProps } from '@/components/common/Button';
+import NavigationToggle, { NavigationToggleProps } from '@/components/layout/Navigation/NavigationToggle';
 
 export type NavigationDialogItemProps = Pick<BaseAnchorProps, 'href' | 'target' | 'children'>;
 
 export type NavigationDialogProps = {
     media?: BaseProps['items'];
     items?: NavigationDialogItemProps[];
-} & Pick<DialogProps, 'open' | 'onOpenChange'>;
+} & (Pick<DialogProps, 'open' | 'onOpenChange'> & Pick<NavigationToggleProps, 'langItems' | 'themeItems'>);
 
-const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialogProps): React.ReactElement => {
+const NavigationDialog = ({
+    media,
+    items,
+    langItems,
+    themeItems,
+    open,
+    onOpenChange,
+}: NavigationDialogProps): React.ReactElement => {
     return (
         <Dialog
             open={open}
@@ -36,6 +44,11 @@ const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialog
                     <DialogTitle>Navigation Menu</DialogTitle>
                     <DialogDescription>Navigation Menu</DialogDescription>
                 </DialogHeader>
+
+                <NavigationToggle
+                    langItems={langItems}
+                    themeItems={themeItems}
+                />
 
                 <div className="flex items-center">
                     <Columns
