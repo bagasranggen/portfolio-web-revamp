@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import { useGlobalStateContext, useLayoutStateContext, useThemeStateContext } from '@/store/context';
 
 import { LocaleProps, ThemesProps } from '@/libs/@types';
-import { NavigationEvents } from '@/libs/hook';
+import { KeyboardEvents, NavigationEvents } from '@/libs/hook';
 
 import { useMeasure } from 'react-use';
 
@@ -114,6 +114,12 @@ const Navigation = ({
                         if (open) setOpen(false);
                     }}
                 />
+
+                <KeyboardEvents
+                    onKeyUp={({ key }) => {
+                        if (key === 'Escape' && open) setOpen(false);
+                    }}
+                />
             </Suspense>
 
             <div
@@ -139,7 +145,7 @@ const Navigation = ({
                                     type="button"
                                     size="sm"
                                     className="backdrop-blur-xs pointer-events-auto min-w-[11rem]"
-                                    onClick={() => setOpen(true)}>
+                                    onClick={() => setOpen((prevState) => !prevState)}>
                                     {!open ? button.open : button.close}
                                 </Button.Block>
                             </Animation>
@@ -152,9 +158,6 @@ const Navigation = ({
                 media={media}
                 items={items}
                 open={open}
-                onOpenChange={() => {
-                    setTimeout(() => setOpen(false), 30);
-                }}
                 langItems={langItems}
                 themeItems={themeItems}
             />
