@@ -22,16 +22,19 @@ const NavigationToggle = ({ langItems, themeItems }: NavigationToggleProps): Rea
     if (isMultiLanguage && (!langItems || langItems.length === 0)) return null;
     if (isThemeToggle && (!themeItems || themeItems.length === 0)) return null;
 
+    const commonAnimationOptions = {
+        y: 0,
+        x: -30,
+        opacityDuration: 650,
+    };
+
     return (
         <div className="absolute top-[8rem] w-full">
             <Container className="text-end">
                 {isMultiLanguage && (
                     <Animation
                         type="fade"
-                        options={{
-                            y: 10,
-                            opacityDuration: 650,
-                        }}>
+                        options={commonAnimationOptions}>
                         <NavigationSlideList items={langItems}>
                             <Globe />
                         </NavigationSlideList>
@@ -42,8 +45,7 @@ const NavigationToggle = ({ langItems, themeItems }: NavigationToggleProps): Rea
                     <Animation
                         type="fade"
                         options={{
-                            y: 10,
-                            opacityDuration: 650,
+                            ...commonAnimationOptions,
                             ...(isMultiLanguage ? { opacityDelay: 250 } : {}),
                         }}>
                         <NavigationSlideList

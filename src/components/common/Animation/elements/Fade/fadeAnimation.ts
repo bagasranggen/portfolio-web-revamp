@@ -27,17 +27,20 @@ export const fadeAnimation = ({
     let duration = {};
     if (opacityDuration) duration = Object.assign(duration, { duration: opacityDuration });
 
+    let delay = {};
+    if (opacityDelay) delay = Object.assign(delay, { delay: opacityDelay });
+
     let settings = {};
 
     if (y) {
         settings = Object.assign(settings, {
-            y: { from: y, to: 0, ...duration },
+            y: { from: y, to: 0, ...duration, ...delay },
         });
     }
 
     if (x) {
         settings = Object.assign(settings, {
-            x: { from: x, to: 0, ...duration },
+            x: { from: x, to: 0, ...duration, ...delay },
         });
     }
 
@@ -51,7 +54,7 @@ export const fadeAnimation = ({
             from: 0,
             to: 1,
             ...duration,
-            ...(opacityDelay ? { delay: opacityDelay } : {}),
+            ...delay,
         },
         ...settings,
         onComplete: () => {

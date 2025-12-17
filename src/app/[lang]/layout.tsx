@@ -89,7 +89,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
                 <body className={murecho.variable}>
                     <Navigation
                         media={LIST_MEDIA}
-                        items={LIST_NAVIGATION}
+                        items={LIST_NAVIGATION[lang]}
                         button={{
                             open: dic.navigation.button.open,
                             close: dic.navigation.button.close,
