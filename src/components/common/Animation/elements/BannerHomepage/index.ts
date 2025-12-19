@@ -1,11 +1,13 @@
 import { AnimationElementProps } from '@/libs/@types';
 import { getAnimationElementOrder } from '@/libs/utils';
 
-import { splitText, stagger, createTimeline, animate, onScroll } from 'animejs';
+import { splitText, stagger, createTimeline, animate, onScroll, AnimationParams } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const BannerHomepage = ({ target }: AnimationElementProps) => {
+export type BannerHomepageProps = AnimationElementProps & Pick<AnimationParams, 'id'>;
+
+export const BannerHomepage = ({ target, id }: BannerHomepageProps) => {
     const animationInitClassName = 'animation--init';
     const media = getAnimationElementOrder({ target, order: 1 });
     const heading = getAnimationElementOrder({ target, order: 2 });
@@ -29,6 +31,7 @@ export const BannerHomepage = ({ target }: AnimationElementProps) => {
     }
 
     const tl = createTimeline({
+        ...(id ? { id } : {}),
         defaults: { ease: 'inOut(3)', duration: 450 },
     });
 
@@ -59,4 +62,6 @@ export const BannerHomepage = ({ target }: AnimationElementProps) => {
             // debug: true,
         }),
     });
+
+    return tl;
 };

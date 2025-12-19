@@ -14,7 +14,7 @@ export const Marquee = ({ target }: AnimationElementProps) => {
 
     let speed = (textOuterWidth / 2) * 2 * (10 * itemsHalf);
 
-    animate(wrapper, {
+    return animate(wrapper, {
         x: {
             from: 0,
             to: textOuterWidth * itemsHalf * -1,
