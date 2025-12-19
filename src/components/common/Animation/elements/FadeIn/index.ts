@@ -22,7 +22,7 @@ export const FadeIn = ({
 }: FadeInProps) => {
     let opacityDelay = opacityDelayProps ?? undefined;
     if (sync?.opacityDelay && typeof sync.opacityDelay === 'number') {
-        opacityDelay = sync.opacityDelay;
+        opacityDelay = (opacityDelay ? (opacityDelay as number) : 0) + sync.opacityDelay;
 
         if (sync?.opacityDelayOffset && typeof sync.opacityDelayOffset === 'number') {
             opacityDelay -= sync.opacityDelayOffset;

@@ -23,8 +23,10 @@ const WorksIndex = ({}: WorksIndexProps): React.ReactElement => {
                     <Cards.Block
                         items={CARDS_BLOCK}
                         animation={{
-                            target: 'banner-text',
-                            opacityDelayOffset: 1000,
+                            sync: {
+                                target: 'banner-text',
+                                opacityDelayOffset: 1000,
+                            },
                         }}
                     />
                 </Container>
