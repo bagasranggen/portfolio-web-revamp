@@ -8,7 +8,7 @@
 
 @plugin 'tailwindcss-animate';
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);
@@ -50,7 +50,8 @@
 
 :root {
     --radius: 0.625rem;
-    --background: oklch(1 0 0);
+    /*--background: oklch(1 0 0);*/
+    --background: var(--color-porto-light);
     --foreground: oklch(0.145 0 0);
     --card: oklch(1 0 0);
     --card-foreground: oklch(0.145 0 0);
@@ -83,8 +84,14 @@
     --sidebar-ring: oklch(0.708 0 0);
 }
 
-.dark {
-    --background: oklch(0.145 0 0);
+[data-theme='dark'] {
+    /* CUSTOM COLOR */
+    --color-porto-dark: #f5f6fa;
+    --color-porto-light: #2d3436;
+    --color-porto-primary: #201916;
+    --color-porto-d-primary: #8b8273;
+
+    /*--background: oklch(0.145 0 0);*/
     --foreground: oklch(0.985 0 0);
     --card: oklch(0.205 0 0);
     --card-foreground: oklch(0.985 0 0);
@@ -120,8 +127,5 @@
 @layer base {
     * {
         @apply border-border outline-ring/50;
-    }
-    body {
-        @apply bg-background text-foreground;
     }
 }

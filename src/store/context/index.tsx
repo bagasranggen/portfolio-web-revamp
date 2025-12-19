@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import { GlobalStateContextProvider } from '@/store/context/GlobalContext';
 import { HistoryStateContextProvider } from '@/store/context/HistoryContext';
 import { LayoutStateContextProvider } from '@/store/context/LayoutContext';
+import { ThemeStateContextProvider, ThemeStateContextProviderProps } from '@/store/context/ThemeContext';
 
-const ContextProvider = ({ children }: { children: React.ReactNode }): React.ReactElement => (
+export type ContextProviderProps = PropsWithChildren & Pick<ThemeStateContextProviderProps, 'theme'>;
+
+const ContextProvider = ({ children, theme }: ContextProviderProps): React.ReactElement => (
     <GlobalStateContextProvider>
         <HistoryStateContextProvider>
-            <LayoutStateContextProvider>{children}</LayoutStateContextProvider>
+            <LayoutStateContextProvider>
+                <ThemeStateContextProvider theme={theme}>{children}</ThemeStateContextProvider>
+            </LayoutStateContextProvider>
         </HistoryStateContextProvider>
     </GlobalStateContextProvider>
 );
