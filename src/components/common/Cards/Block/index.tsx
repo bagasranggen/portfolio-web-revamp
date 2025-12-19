@@ -5,10 +5,10 @@ import Columns, { ColumnProps } from '@/components/common/Columns';
 import BlockItem, { BlockItemProps } from '@/components/common/Cards/Block/BlockItem';
 
 export type BlockProps = {
-    items: BlockItemProps[];
-};
+    items: Omit<BlockItemProps, 'animation'>[];
+} & Pick<BlockItemProps, 'animation'>;
 
-const Block = ({ items: itemsProps }: BlockProps): React.ReactElement => {
+const Block = ({ items: itemsProps, animation }: BlockProps): React.ReactElement => {
     const items: any[] = [];
     if (itemsProps && itemsProps.length > 0) {
         itemsProps.forEach((item: BlockItemProps, i: number) => {
@@ -25,7 +25,10 @@ const Block = ({ items: itemsProps }: BlockProps): React.ReactElement => {
                         offset={offset}
                         md={6}
                         lg={5}>
-                        <BlockItem {...item} />
+                        <BlockItem
+                            {...item}
+                            animation={animation}
+                        />
                     </Columns.Column>
                 ),
             });

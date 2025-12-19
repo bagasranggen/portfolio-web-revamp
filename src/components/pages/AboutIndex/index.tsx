@@ -16,9 +16,22 @@ export type AboutIndexProps = {};
 const AboutIndex = ({}: AboutIndexProps): React.ReactElement => {
     return (
         <>
-            <Banner.Text {...TEXT_BANNER}>About</Banner.Text>
+            <Banner.Text
+                animation={{
+                    id: 'banner-text',
+                }}
+                {...TEXT_BANNER}>
+                About
+            </Banner.Text>
 
-            <Animation type="fade-in">
+            <Animation
+                type="fade-in"
+                options={{
+                    sync: {
+                        target: 'banner-text',
+                        opacityDelayOffset: 1000,
+                    },
+                }}>
                 <Container as="section">
                     <Columns className="justify-center">
                         <Columns.Column

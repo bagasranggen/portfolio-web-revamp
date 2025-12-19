@@ -10,9 +10,10 @@ export type FadeAnimationProps = {
     opacityDuration?: TweenParamValue | undefined;
     clearTarget?: AnimationElementProps['target'];
     clearStyle?: boolean;
-} & Pick<AnimationParams, 'autoplay'>;
+} & Pick<AnimationParams, 'autoplay' | 'id'>;
 
 export const fadeAnimation = ({
+    id,
     x,
     y,
     opacityDelay,
@@ -31,6 +32,10 @@ export const fadeAnimation = ({
     if (opacityDelay) delay = Object.assign(delay, { delay: opacityDelay });
 
     let settings = {};
+
+    if (id) {
+        settings = Object.assign(settings, { id });
+    }
 
     if (y) {
         settings = Object.assign(settings, {

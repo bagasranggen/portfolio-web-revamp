@@ -35,4 +35,6 @@ export const TextSplit = ({ target, text: textProps, targetFadeAnimation, stagge
         }),
         targetFadeAnimation ? '<<+=200' : undefined
     );
+
+    return tl;
 };

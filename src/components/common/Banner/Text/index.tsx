@@ -3,18 +3,21 @@ import React from 'react';
 import Columns from '@/components/common/Columns';
 import Heading, { BaseProps } from '@/components/common/Heading';
 import Container from '@/components/common/Container';
-import Animation from '@/components/common/Animation';
+import Animation, { BannerTextProps } from '@/components/common/Animation';
 
 export type TextProps = {
     title: BaseProps['children'];
     description?: React.ReactNode;
+    animation?: Pick<BannerTextProps, 'id'>;
 } & Pick<BaseProps, 'children'>;
 
-const Text = ({ title, description, children }: TextProps): React.ReactElement => {
+const Text = ({ animation, title, description, children }: TextProps): React.ReactElement => {
     const animationClassInit = 'animation--init';
 
     return (
-        <Animation type="banner-text">
+        <Animation
+            type="banner-text"
+            options={animation}>
             <Container
                 as="section"
                 className="banner--text">
