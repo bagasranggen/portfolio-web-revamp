@@ -12,6 +12,7 @@ const Block = ({ items: itemsProps, animation }: BlockProps): React.ReactElement
     const items: any[] = [];
     if (itemsProps && itemsProps.length > 0) {
         itemsProps.forEach((item: BlockItemProps, i: number) => {
+            const isOdd = i % 2 === 0;
             const hasOffset = i % 4 !== 0;
 
             let offset: ColumnProps['offset'] = undefined;
@@ -27,7 +28,10 @@ const Block = ({ items: itemsProps, animation }: BlockProps): React.ReactElement
                         lg={5}>
                         <BlockItem
                             {...item}
-                            animation={animation}
+                            animation={{
+                                // ...(!isOdd ? { opacityDelay: 300 } : {}),
+                                ...animation,
+                            }}
                         />
                     </Columns.Column>
                 ),
