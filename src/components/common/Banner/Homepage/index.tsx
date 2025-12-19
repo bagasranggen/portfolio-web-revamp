@@ -1,18 +1,20 @@
 import React, { PropsWithChildren } from 'react';
 
 import Container from '@/components/common/Container';
-import Heading, { BaseTypes as HeadingBaseTypes } from '@/components/common/Heading';
+import Heading, { BaseProps as HeadingBaseProps } from '@/components/common/Heading';
 import Columns from '@/components/common/Columns';
-import Picture, { BaseTypes } from '@/components/common/Picture';
+import Picture, { BaseProps } from '@/components/common/Picture';
 import Animation from '@/components/common/Animation';
 
-export type HomepageTypes = PropsWithChildren<{
-    media?: BaseTypes['items'];
+export type HomepageProps = PropsWithChildren<{
+    media?: BaseProps['items'];
     description?: React.ReactNode;
-    label?: HeadingBaseTypes['children'];
+    label?: HeadingBaseProps['children'];
 }>;
 
-const Homepage = ({ media, description, label, children }: HomepageTypes): React.ReactElement => {
+const Homepage = ({ media, description, label, children }: HomepageProps): React.ReactElement => {
+    const animationClassInit = 'animation--init';
+
     return (
         <Animation type="banner-homepage">
             <section className="banner-homepage">
@@ -36,16 +38,19 @@ const Homepage = ({ media, description, label, children }: HomepageTypes): React
                             offset={{ lg: 1 }}
                             className="max-lg:hidden">
                             {description && (
-                                <Animation order={4}>
+                                <Animation
+                                    order={4}
+                                    className={animationClassInit}>
                                     <div className="banner-homepage__description mb-8">{description}</div>
                                 </Animation>
                             )}
                         </Columns.Column>
                     </Columns>
 
-                    {/*<div>*/}
                     {label && (
-                        <Animation order={3}>
+                        <Animation
+                            order={3}
+                            className={animationClassInit}>
                             <Heading
                                 as="h2"
                                 className="banner-homepage__label">
@@ -54,14 +59,15 @@ const Homepage = ({ media, description, label, children }: HomepageTypes): React
                         </Animation>
                     )}
 
-                    <Animation order={2}>
+                    <Animation
+                        order={2}
+                        className={animationClassInit}>
                         <Heading
                             as="h1"
                             className="banner-homepage__heading">
                             {children}
                         </Heading>
                     </Animation>
-                    {/*</div>*/}
                 </Container>
             </section>
         </Animation>

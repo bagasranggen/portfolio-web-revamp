@@ -1,19 +1,47 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps, AnimationSyncProps } from '@/libs/@types';
 
-import { animate, onScroll } from 'animejs';
+import { animate, onScroll, ScrollObserverParams } from 'animejs';
 
-import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
+import { fadeAnimation, FadeAnimationProps } from '@/components/common/Animation/elements/Fade';
 
-export const FadeIn = ({ target }: AnimationElementTypes) => {
-    animate(
+export type FadeInProps = {
+    sync?: AnimationSyncProps;
+} & AnimationElementProps &
+    Pick<FadeAnimationProps, 'opacityDelay' | 'opacityDuration' | 'x' | 'y' | 'id'> &
+    Pick<ScrollObserverParams, 'debug'>;
+
+export const FadeIn = ({
+    target,
+    id,
+    x,
+    y,
+    opacityDelay: opacityDelayProps,
+    opacityDuration,
+    debug,
+    sync,
+}: FadeInProps) => {
+    let opacityDelay = opacityDelayProps ?? undefined;
+    if (sync?.opacityDelay && typeof sync.opacityDelay === 'number') {
+        opacityDelay = sync.opacityDelay;
+
+        if (sync?.opacityDelayOffset && typeof sync.opacityDelayOffset === 'number') {
+            opacityDelay -= sync.opacityDelayOffset;
+        }
+    }
+
+    return animate(
         target,
         fadeAnimation({
+            id,
             clearTarget: target,
             clearStyle: true,
-            y: 30,
+            opacityDelay,
+            opacityDuration,
+            y: y ?? 30,
+            x,
             autoplay: onScroll({
                 target,
-                // debug: true,
+                debug,
             }),
         })
     );

@@ -11,19 +11,32 @@ import Animation from '@/components/common/Animation';
 import AboutProfile from '@/components/pages/AboutIndex/AboutProfile';
 import AboutCareer from '@/components/pages/AboutIndex/AboutCareer';
 
-export type AboutIndexTypes = {};
+export type AboutIndexProps = {};
 
-const AboutIndex = ({}: AboutIndexTypes): React.ReactElement => {
+const AboutIndex = ({}: AboutIndexProps): React.ReactElement => {
     return (
         <>
-            <Banner.Text {...TEXT_BANNER}>About</Banner.Text>
+            <Banner.Text
+                animation={{
+                    id: 'banner-text',
+                }}
+                {...TEXT_BANNER}>
+                About
+            </Banner.Text>
 
-            <Animation type="fade-in">
-                <Container
-                    as="section"
-                    className="mt-10">
+            <Animation
+                type="fade-in"
+                options={{
+                    sync: {
+                        target: 'banner-text',
+                        opacityDelayOffset: 1000,
+                    },
+                }}>
+                <Container as="section">
                     <Columns className="justify-center">
-                        <Columns.Column lg={10}>
+                        <Columns.Column
+                            lg={10}
+                            xxl={8}>
                             <AboutProfile />
                         </Columns.Column>
                     </Columns>

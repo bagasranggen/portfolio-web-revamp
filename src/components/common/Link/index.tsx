@@ -1,9 +1,9 @@
 import React, { forwardRef } from 'react';
 import { default as NextLink, LinkProps as NextLinkProps } from 'next/link';
 
-export type LinkTypes = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof NextLinkProps> & NextLinkProps;
+export type LinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof NextLinkProps> & NextLinkProps;
 
-const Link = forwardRef<HTMLAnchorElement, LinkTypes>(({ children, ...rest }, ref) => {
+const Link = forwardRef<HTMLAnchorElement, LinkProps>(({ children, ...rest }, ref) => {
     // const pathname = usePathname();
 
     // const hrefReplacer = (href: NextLinkProps['href']) => {

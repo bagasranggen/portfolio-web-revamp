@@ -1,16 +1,16 @@
 import React from 'react';
 
 import Heading from '@/components/common/Heading';
-import List, { BaseTypes } from '@/components/common/List';
-import AboutCareerItem, { AboutCareerItemTypes } from '@/components/pages/AboutIndex/AboutCareerItem';
+import List, { BaseProps } from '@/components/common/List';
+import AboutCareerItem, { AboutCareerItemProps } from '@/components/pages/AboutIndex/AboutCareerItem';
 import Animation from '@/components/common/Animation';
 
-export type AboutCareerTypes = {
-    items?: AboutCareerItemTypes[];
+export type AboutCareerProps = {
+    items?: AboutCareerItemProps[];
 };
 
-const AboutCareer = ({ items: itemsProps }: AboutCareerTypes): React.ReactElement => {
-    const items: BaseTypes['items'] = [];
+const AboutCareer = ({ items: itemsProps }: AboutCareerProps): React.ReactElement => {
+    const items: BaseProps['items'] = [];
 
     if (itemsProps && itemsProps.length > 0) {
         itemsProps.forEach((item) => {

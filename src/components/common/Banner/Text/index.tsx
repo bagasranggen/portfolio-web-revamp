@@ -1,24 +1,31 @@
 import React from 'react';
 
 import Columns from '@/components/common/Columns';
-import Heading, { BaseTypes } from '@/components/common/Heading';
+import Heading, { BaseProps } from '@/components/common/Heading';
 import Container from '@/components/common/Container';
-import Animation from '@/components/common/Animation';
+import Animation, { BannerTextProps } from '@/components/common/Animation';
 
-export type TextTypes = {
-    title: BaseTypes['children'];
+export type TextProps = {
+    title: BaseProps['children'];
     description?: React.ReactNode;
-} & Pick<BaseTypes, 'children'>;
+    animation?: Pick<BannerTextProps, 'id'>;
+} & Pick<BaseProps, 'children'>;
 
-const Text = ({ title, description, children }: TextTypes): React.ReactElement => {
+const Text = ({ animation, title, description, children }: TextProps): React.ReactElement => {
+    const animationClassInit = 'animation--init';
+
     return (
-        <Animation type="banner-text">
+        <Animation
+            type="banner-text"
+            options={animation}>
             <Container
                 as="section"
                 className="banner--text">
                 <Columns className="justify-between">
                     <Columns.Column lg={2}>
-                        <Animation order={1}>
+                        <Animation
+                            order={1}
+                            className={animationClassInit}>
                             <Heading
                                 as="h1"
                                 className="banner__title">
@@ -28,7 +35,9 @@ const Text = ({ title, description, children }: TextTypes): React.ReactElement =
                     </Columns.Column>
 
                     <Columns.Column lg={7}>
-                        <Animation order={2}>
+                        <Animation
+                            order={2}
+                            className={animationClassInit}>
                             <Heading
                                 as="h2"
                                 className="heading heading--title banner__heading">
@@ -37,7 +46,9 @@ const Text = ({ title, description, children }: TextTypes): React.ReactElement =
                         </Animation>
 
                         {description && (
-                            <Animation order={3}>
+                            <Animation
+                                order={3}
+                                className={animationClassInit}>
                                 <div className="banner__description">{description}</div>
                             </Animation>
                         )}

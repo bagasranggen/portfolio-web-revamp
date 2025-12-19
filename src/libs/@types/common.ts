@@ -6,10 +6,10 @@ export type Component<Props> = {
 
 export type RefComponent<Props, Element> = React.ForwardRefExoticComponent<Props & React.RefAttributes<Element>>;
 
-export type ClassnameTypes = Pick<React.HTMLAttributes<HTMLElement>, 'className'>;
+export type ClassnameProps = Pick<React.HTMLAttributes<HTMLElement>, 'className'>;
 
-export type ArrayStringTypes = string | string[];
+export type ArrayStringProps = string | string[];
 
-export type ElementTagsTypes = keyof JSX.IntrinsicElements;
+export type ElementTagsProps = keyof JSX.IntrinsicElements;
 
-export type BreakpointsTypes = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+export type BreakpointsProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';

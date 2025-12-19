@@ -1,24 +1,39 @@
 import React, { forwardRef } from 'react';
 
-import { ElementTagsTypes } from '@/libs/@types';
+import { ArrayStringProps, ElementTagsProps } from '@/libs/@types';
+import { joinArrayString } from '@/libs/utils';
 
-import Link, { LinkTypes } from '@/components/common/Link';
+import Link, { LinkProps } from '@/components/common/Link';
 
-export type BaseAnchorTypes = { as?: 'anchor' } & LinkTypes;
+export type BaseCommonProps = {
+    color?: 'dark' | 'light';
+    cleanClassName?: boolean;
+};
 
-export type BaseButtonTypes = { as?: 'button' } & React.ButtonHTMLAttributes<HTMLButtonElement>;
+export type BaseAnchorProps = { as?: 'anchor' } & LinkProps & BaseCommonProps;
 
-export type BaseDivTypes = { as?: Extract<ElementTagsTypes, 'div' | 'span'> } & React.HTMLAttributes<HTMLDivElement>;
+export type BaseButtonProps = { as?: 'button' } & React.ButtonHTMLAttributes<HTMLButtonElement> & BaseCommonProps;
 
-export type BaseTypes = BaseAnchorTypes | BaseButtonTypes | BaseDivTypes;
+export type BaseDivProps = { as?: Extract<ElementTagsProps, 'div' | 'span'> } & React.HTMLAttributes<HTMLDivElement> &
+    BaseCommonProps;
 
-const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, BaseTypes>(
-    ({ as, children, ...props }, ref) => {
+export type BaseProps = BaseAnchorProps | BaseButtonProps | BaseDivProps;
+
+const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, BaseProps>(
+    ({ as, children, className, color, cleanClassName, ...props }, ref) => {
+        let btnClass: ArrayStringProps = [];
+        if (!cleanClassName) btnClass.push('btn');
+        if (color === 'dark') btnClass.push('btn--dark');
+        if (color === 'light') btnClass.push('btn--light');
+        if (className) btnClass.push(className);
+        btnClass = joinArrayString(btnClass);
+
         if (as === 'anchor') {
             return (
                 <Link
                     ref={ref as React.ForwardedRef<HTMLAnchorElement>}
-                    {...(props as LinkTypes)}>
+                    className={btnClass}
+                    {...(props as LinkProps)}>
                     {children}
                 </Link>
             );
@@ -28,7 +43,8 @@ const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, 
             return (
                 <button
                     ref={ref as React.ForwardedRef<HTMLButtonElement>}
-                    {...(props as Omit<BaseButtonTypes, 'as'>)}>
+                    className={btnClass}
+                    {...(props as Omit<BaseButtonProps, 'as'>)}>
                     {children}
                 </button>
             );
@@ -40,6 +56,7 @@ const Base = forwardRef<HTMLAnchorElement | HTMLButtonElement | HTMLDivElement, 
         return (
             <Wrapper
                 ref={ref as React.ForwardedRef<HTMLDivElement>}
+                className={btnClass}
                 {...props}>
                 {children}
             </Wrapper>

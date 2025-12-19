@@ -8,20 +8,20 @@ import Columns from '@/components/common/Columns';
 import Icon from '@/components/common/Icon';
 import Heading from '@/components/common/Heading';
 import Container from '@/components/common/Container';
-import Button, { BaseAnchorTypes } from '@/components/common/Button';
-import OffsetItemMedia, { OffsetItemMediaTypes } from '@/components/common/Cards/Offset/OffsetItemMedia';
+import Button, { BaseAnchorProps } from '@/components/common/Button';
+import OffsetItemMedia, { OffsetItemMediaProps } from '@/components/common/Cards/Offset/OffsetItemMedia';
 import OffsetItemDescription, {
-    OffsetItemDescriptionTypes,
+    OffsetItemDescriptionProps,
 } from '@/components/common/Cards/Offset/OffsetItemDescription';
 
-export type OffsetItemTypes = {
+export type OffsetItemProps = {
     cardTallestHeight?: number;
     count?: string;
-    description?: OffsetItemDescriptionTypes[];
-    link?: BaseAnchorTypes;
-} & Pick<OffsetItemMediaTypes, 'media'>;
+    description?: OffsetItemDescriptionProps[];
+    link?: BaseAnchorProps;
+} & Pick<OffsetItemMediaProps, 'media'>;
 
-const OffsetItem = ({ link, description, count, cardTallestHeight, media }: OffsetItemTypes): React.ReactElement => {
+const OffsetItem = ({ link, description, count, cardTallestHeight, media }: OffsetItemProps): React.ReactElement => {
     const cardItemRef = useRef(null);
     const [containerRef, { width: containerWidth, height: containerHeight }] = useMeasure();
 
@@ -59,10 +59,11 @@ const OffsetItem = ({ link, description, count, cardTallestHeight, media }: Offs
 
     return (
         <Button
+            cleanClassName
             ref={cardItemRef}
             as={link ? 'anchor' : undefined}
             className="card__item"
-            {...(link as BaseAnchorTypes)}
+            {...(link as BaseAnchorProps)}
             {...(style ? { style } : {})}>
             <Container
                 ref={containerRef as Ref<HTMLDivElement>}
@@ -89,7 +90,7 @@ const OffsetItem = ({ link, description, count, cardTallestHeight, media }: Offs
 
                         {description && description.length > 0 && (
                             <div className="mt-3 md:mt-5">
-                                {description.map((item: OffsetItemDescriptionTypes, i: number) => {
+                                {description.map((item: OffsetItemDescriptionProps, i: number) => {
                                     return (
                                         <OffsetItemDescription
                                             key={i}

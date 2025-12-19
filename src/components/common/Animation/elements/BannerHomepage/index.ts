@@ -1,11 +1,14 @@
-import { AnimationElementTypes } from '@/libs/@types';
+import { AnimationElementProps } from '@/libs/@types';
 import { getAnimationElementOrder } from '@/libs/utils';
 
-import { text, stagger, createTimeline, animate, onScroll } from 'animejs';
+import { splitText, stagger, createTimeline, animate, onScroll, AnimationParams } from 'animejs';
 
 import { fadeAnimation } from '@/components/common/Animation/elements/Fade';
 
-export const BannerHomepage = ({ target }: AnimationElementTypes) => {
+export type BannerHomepageProps = AnimationElementProps & Pick<AnimationParams, 'id'>;
+
+export const BannerHomepage = ({ target, id }: BannerHomepageProps) => {
+    const animationInitClassName = 'animation--init';
     const media = getAnimationElementOrder({ target, order: 1 });
     const heading = getAnimationElementOrder({ target, order: 2 });
     const label = getAnimationElementOrder({ target, order: 3 });
@@ -13,17 +16,22 @@ export const BannerHomepage = ({ target }: AnimationElementTypes) => {
 
     if (!heading || !media) return;
 
-    const { chars } = text.split(heading, { chars: true });
+    const { chars } = splitText(heading, { chars: true });
+
+    heading.classList.remove(animationInitClassName);
 
     let charsLabel = undefined;
 
     if (label) {
-        const { chars } = text.split(label, { chars: true });
+        const { chars } = splitText(label, { chars: true });
+
+        label.classList.remove(animationInitClassName);
 
         charsLabel = chars;
     }
 
     const tl = createTimeline({
+        ...(id ? { id } : {}),
         defaults: { ease: 'inOut(3)', duration: 450 },
     });
 
@@ -34,7 +42,11 @@ export const BannerHomepage = ({ target }: AnimationElementTypes) => {
 
     tl.add([chars, charsLabel], fadeAnimation({ opacityDelay: stagger(20, { from: 'random' }) }), '<<+=200');
 
-    if (description) tl.add(description, fadeAnimation({ clearTarget: description, clearStyle: true }), '-=700');
+    if (description) {
+        description.classList.remove(animationInitClassName);
+
+        tl.add(description, fadeAnimation({ clearTarget: description, clearStyle: true }), '-=700');
+    }
 
     // Scroll Animation
     animate(target, {
@@ -50,4 +62,6 @@ export const BannerHomepage = ({ target }: AnimationElementTypes) => {
             // debug: true,
         }),
     });
+
+    return tl;
 };

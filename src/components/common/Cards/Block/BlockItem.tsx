@@ -1,27 +1,29 @@
 import React from 'react';
 
-import { createPicsumImage } from '@/libs/factory';
-
-import Picture, { BaseTypes as BasePictureTypes } from '@/components/common/Picture';
-import Button, { BaseAnchorTypes } from '@/components/common/Button';
-import Heading, { BaseTypes } from '@/components/common/Heading';
+import Picture, { BaseProps as BasePictureProps } from '@/components/common/Picture';
+import Button, { BaseAnchorProps } from '@/components/common/Button';
+import Heading, { BaseProps } from '@/components/common/Heading';
 import Icon from '@/components/common/Icon';
-import Animation from '@/components/common/Animation';
+import Animation, { FadeInProps } from '@/components/common/Animation';
 
-export type BlockItemTypes = {
-    link?: Omit<BaseAnchorTypes, 'as'>;
-    title: BaseTypes['children'];
+export type BlockItemProps = {
+    link?: Omit<BaseAnchorProps, 'as'>;
+    title: BaseProps['children'];
     description?: React.ReactNode;
-    media?: BasePictureTypes['items'];
+    media?: BasePictureProps['items'];
+    animation?: FadeInProps['sync'];
 };
 
-const BlockItem = ({ link, title, description, media }: BlockItemTypes): React.ReactElement => {
+const BlockItem = ({ link, title, description, media, animation }: BlockItemProps): React.ReactElement => {
     return (
-        <Animation type="fade-in">
+        <Animation
+            type="fade-in"
+            options={{ sync: animation }}>
             <Button
+                cleanClassName
                 as={link ? 'anchor' : undefined}
                 className="card__item"
-                {...(link as Omit<BaseAnchorTypes, 'as'>)}>
+                {...(link as Omit<BaseAnchorProps, 'as'>)}>
                 {media && media.length > 0 && (
                     <div className="card__media">
                         <Picture items={media} />

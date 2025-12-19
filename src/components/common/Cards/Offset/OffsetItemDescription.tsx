@@ -1,12 +1,12 @@
 import React, { PropsWithChildren } from 'react';
 
-import Heading, { BaseTypes } from '@/components/common/Heading';
+import Heading, { BaseProps } from '@/components/common/Heading';
 
-export type OffsetItemDescriptionTypes = PropsWithChildren<{
-    title: BaseTypes['children'];
+export type OffsetItemDescriptionProps = PropsWithChildren<{
+    title: BaseProps['children'];
 }>;
 
-const OffsetItemDescription = ({ title, children }: OffsetItemDescriptionTypes): React.ReactElement => {
+const OffsetItemDescription = ({ title, children }: OffsetItemDescriptionProps): React.ReactElement => {
     return (
         <div className="card__description">
             <Heading as="h3">{title}</Heading>

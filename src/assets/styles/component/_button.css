@@ -1,4 +1,15 @@
 .btn {
+    &:not(.btn--block) {
+        @variant hover {
+            @apply md:transition-colors;
+            @apply md:text-porto-d-primary;
+        }
+    }
+       
+    &.btn--dark {
+        @apply lg:transition-colors lg:hover:text-porto-d-primary;
+    }
+
     &.btn--block {
         @apply border border-porto-dark uppercase font-medium tracking-[.45rem];
         @apply transition-colors;

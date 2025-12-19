@@ -1,11 +1,15 @@
-import { SocialTypes } from '@/components/common/List';
-import { AboutCareerItemTypes } from '@/components/pages/AboutIndex/AboutCareerItem';
+import { SocialProps } from '@/components/common/List';
+import { AboutCareerItemProps } from '@/components/pages/AboutIndex/AboutCareerItem';
 
 import parse from 'html-react-parser';
-import { NavigationItemTypes, NavigationTypes } from '@/components/layout/Navigation';
+import { NavigationDialogItemProps, NavigationProps } from '@/components/layout/Navigation';
 import { createPicsumImage } from '@/libs/factory';
+import { LocaleProps } from '@/libs/@types';
+import { LOCALES_HANDLES } from '@/libs/mock/lang';
 
-export const LIST_SOCIAL: SocialTypes['items'] = [
+const IS_MULTI_LANGUAGE = process.env.NEXT_PUBLIC_FF_MULTI_LANGUAGE === '1';
+
+export const LIST_SOCIAL: SocialProps['items'] = [
     {
         link: {
             href: 'mailto:bagas.ranggen@gmail.com',
@@ -26,7 +30,7 @@ export const LIST_SOCIAL: SocialTypes['items'] = [
     },
 ];
 
-export const LIST_CAREER: AboutCareerItemTypes[] = [
+export const LIST_CAREER: AboutCareerItemProps[] = [
     {
         link: {
             href: 'https://www.thepixelage.com',
@@ -63,21 +67,37 @@ export const LIST_CAREER: AboutCareerItemTypes[] = [
     },
 ];
 
-export const LIST_NAVIGATION: NavigationItemTypes[] = [
-    {
-        href: '/',
-        children: 'Home',
-    },
-    {
-        href: '/works',
-        children: 'Works',
-    },
-    {
-        href: '/about',
-        children: 'About',
-    },
-];
+export const LIST_NAVIGATION: Partial<Record<LocaleProps, NavigationDialogItemProps[]>> = {
+    [LOCALES_HANDLES.EN]: [
+        {
+            href: IS_MULTI_LANGUAGE ? `/${LOCALES_HANDLES.EN}` : '/',
+            children: 'Home',
+        },
+        {
+            href: IS_MULTI_LANGUAGE ? `/${LOCALES_HANDLES.EN}/works` : '/works',
+            children: 'Works',
+        },
+        {
+            href: IS_MULTI_LANGUAGE ? `/${LOCALES_HANDLES.EN}/about` : '/about',
+            children: 'About',
+        },
+    ],
+    [LOCALES_HANDLES.JP]: [
+        {
+            href: `/${LOCALES_HANDLES.JP}`,
+            children: '自宅',
+        },
+        {
+            href: `/${LOCALES_HANDLES.JP}/works`,
+            children: '作品',
+        },
+        {
+            href: `/${LOCALES_HANDLES.JP}/about`,
+            children: '約',
+        },
+    ],
+};
 
-export const LIST_MEDIA: NavigationTypes['media'] = [
+export const LIST_MEDIA: NavigationProps['media'] = [
     createPicsumImage({ id: 88, width: 500, height: 667, media: 576 }),
 ];

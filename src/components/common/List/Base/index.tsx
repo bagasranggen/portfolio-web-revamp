@@ -1,15 +1,15 @@
 import React, { ExoticComponent, Fragment, FragmentProps, PropsWithChildren } from 'react';
 
-import { ArrayStringTypes, Component, ElementTagsTypes } from '@/libs/@types';
+import { ArrayStringProps, Component, ElementTagsProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
 
-import Animation, { AnimationTypes } from '@/components/common/Animation';
+import Animation, { AnimationProps } from '@/components/common/Animation';
 
-export type BaseItemTypes = React.HTMLAttributes<HTMLLIElement> & PropsWithChildren;
+export type BaseItemProps = React.HTMLAttributes<HTMLLIElement> & PropsWithChildren;
 
-export type BaseTypes = {
-    as?: Extract<ElementTagsTypes, 'ol' | 'ul'>;
-    items?: BaseItemTypes[];
+export type BaseProps = {
+    as?: Extract<ElementTagsProps, 'ol' | 'ul'>;
+    items?: BaseItemProps[];
     hasAnimation?: boolean;
 } & React.HTMLAttributes<HTMLUListElement>;
 
@@ -19,8 +19,8 @@ const Base = ({
     className,
     hasAnimation,
     ...props
-}: BaseTypes): React.ReactElement | null => {
-    let listClass: ArrayStringTypes = ['list'];
+}: BaseProps): React.ReactElement | null => {
+    let listClass: ArrayStringProps = ['list'];
     if (className) listClass.push(className);
     listClass = joinArrayString(listClass);
 
@@ -30,12 +30,12 @@ const Base = ({
         <List
             className={listClass}
             {...props}>
-            {items.map(({ children, className, ...props }: BaseItemTypes, i: number) => {
-                let liClass: ArrayStringTypes = ['list__item'];
+            {items.map(({ children, className, ...props }: BaseItemProps, i: number) => {
+                let liClass: ArrayStringProps = ['list__item'];
                 if (className) liClass.push(className);
                 liClass = joinArrayString(liClass);
 
-                let Wrapper: ExoticComponent<FragmentProps> | Component<AnimationTypes> = Fragment;
+                let Wrapper: ExoticComponent<FragmentProps> | Component<AnimationProps> = Fragment;
                 if (hasAnimation) Wrapper = Animation;
 
                 let wrapperProps = {};
