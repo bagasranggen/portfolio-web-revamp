@@ -16,15 +16,28 @@ import Columns from '@/components/common/Columns';
 import Picture, { BaseProps } from '@/components/common/Picture';
 import List from '@/components/common/List';
 import Button, { BaseAnchorProps } from '@/components/common/Button';
+import NavigationToggle, { NavigationToggleProps } from '@/components/layout/Navigation/NavigationToggle';
 
 export type NavigationDialogItemProps = Pick<BaseAnchorProps, 'href' | 'target' | 'children'>;
 
 export type NavigationDialogProps = {
     media?: BaseProps['items'];
     items?: NavigationDialogItemProps[];
-} & Pick<DialogProps, 'open' | 'onOpenChange'>;
+} & (Pick<DialogProps, 'open' | 'onOpenChange'> & Pick<NavigationToggleProps, 'langItems' | 'themeItems'>);
 
-const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialogProps): React.ReactElement => {
+const NavigationDialog = ({
+    media,
+    items,
+    langItems,
+    themeItems,
+    open,
+    onOpenChange,
+}: NavigationDialogProps): React.ReactElement => {
+    const animationDuration = 200;
+
+    let fadeDuration = undefined;
+    if (items && items.length > 0) fadeDuration = animationDuration * items.length + animationDuration;
+
     return (
         <Dialog
             open={open}
@@ -37,6 +50,11 @@ const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialog
                     <DialogDescription>Navigation Menu</DialogDescription>
                 </DialogHeader>
 
+                <NavigationToggle
+                    langItems={langItems}
+                    themeItems={themeItems}
+                />
+
                 <div className="flex items-center">
                     <Columns
                         className="w-full items-center"
@@ -46,7 +64,11 @@ const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialog
                             offset={{
                                 md: 1,
                             }}>
-                            <Animation type="fade-in">
+                            <Animation
+                                type="fade-in"
+                                options={{
+                                    opacityDuration: fadeDuration,
+                                }}>
                                 <Picture items={media} />
                             </Animation>
                         </Columns.Column>
@@ -70,13 +92,14 @@ const NavigationDialog = ({ media, items, open, onOpenChange }: NavigationDialog
                                                     <Animation
                                                         type="fade-in"
                                                         options={{
-                                                            opacityDelay: (i + 1) * 200,
+                                                            opacityDelay: (i + 1) * animationDuration,
                                                             x: 60,
                                                             y: 0,
                                                         }}>
                                                         <Button
                                                             as="anchor"
                                                             color="dark"
+                                                            className="block"
                                                             href={item.href}>
                                                             {item.children}
                                                         </Button>
