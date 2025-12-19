@@ -11,14 +11,14 @@ export type BlockItemProps = {
     title: BaseProps['children'];
     description?: React.ReactNode;
     media?: BasePictureProps['items'];
-    animation?: FadeInProps['sync'];
+    animation?: Pick<FadeInProps, 'sync' | 'opacityDelay'>;
 };
 
 const BlockItem = ({ link, title, description, media, animation }: BlockItemProps): React.ReactElement => {
     return (
         <Animation
             type="fade-in"
-            options={{ sync: animation }}>
+            options={animation}>
             <Button
                 cleanClassName
                 as={link ? 'anchor' : undefined}
