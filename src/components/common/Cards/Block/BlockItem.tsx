@@ -4,18 +4,21 @@ import Picture, { BaseProps as BasePictureProps } from '@/components/common/Pict
 import Button, { BaseAnchorProps } from '@/components/common/Button';
 import Heading, { BaseProps } from '@/components/common/Heading';
 import Icon from '@/components/common/Icon';
-import Animation from '@/components/common/Animation';
+import Animation, { FadeInProps } from '@/components/common/Animation';
 
 export type BlockItemProps = {
     link?: Omit<BaseAnchorProps, 'as'>;
     title: BaseProps['children'];
     description?: React.ReactNode;
     media?: BasePictureProps['items'];
+    animation?: FadeInProps['sync'];
 };
 
-const BlockItem = ({ link, title, description, media }: BlockItemProps): React.ReactElement => {
+const BlockItem = ({ link, title, description, media, animation }: BlockItemProps): React.ReactElement => {
     return (
-        <Animation type="fade-in">
+        <Animation
+            type="fade-in"
+            options={{ sync: animation }}>
             <Button
                 cleanClassName
                 as={link ? 'anchor' : undefined}

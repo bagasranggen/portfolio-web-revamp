@@ -23,7 +23,7 @@ export const CARDS_OFFSET: OffsetProps['items'] = createArrayFromNumber(3).map((
     return {
         count: `0${i + 1}`,
         description,
-        media: [createPicsumImage({ id: 88, width: 1000, height: 750, hasRetina: true })],
+        media: [createPicsumImage({ id: 88, width: 1800, height: 1350 })],
         link: {
             href: `/portfolio/${i + 1}`,
         },

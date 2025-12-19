@@ -33,6 +33,11 @@ const NavigationDialog = ({
     open,
     onOpenChange,
 }: NavigationDialogProps): React.ReactElement => {
+    const animationDuration = 200;
+
+    let fadeDuration = undefined;
+    if (items && items.length > 0) fadeDuration = animationDuration * items.length + animationDuration;
+
     return (
         <Dialog
             open={open}
@@ -59,7 +64,11 @@ const NavigationDialog = ({
                             offset={{
                                 md: 1,
                             }}>
-                            <Animation type="fade-in">
+                            <Animation
+                                type="fade-in"
+                                options={{
+                                    opacityDuration: fadeDuration,
+                                }}>
                                 <Picture items={media} />
                             </Animation>
                         </Columns.Column>
@@ -83,13 +92,14 @@ const NavigationDialog = ({
                                                     <Animation
                                                         type="fade-in"
                                                         options={{
-                                                            opacityDelay: (i + 1) * 200,
+                                                            opacityDelay: (i + 1) * animationDuration,
                                                             x: 60,
                                                             y: 0,
                                                         }}>
                                                         <Button
                                                             as="anchor"
                                                             color="dark"
+                                                            className="block"
                                                             href={item.href}>
                                                             {item.children}
                                                         </Button>
