@@ -17,10 +17,12 @@ export const ThemeStateContext = createContext<ThemeState>({
     setTheme: () => {},
 });
 
-export type ThemeStateContextProviderProps = PropsWithChildren & Pick<ThemeState, 'theme'>;
+export type ThemeStateContextProviderProps = PropsWithChildren;
 
-export const ThemeStateContextProvider = ({ children, theme: themeProps }: ThemeStateContextProviderProps) => {
-    const [theme, setTheme] = useState<ThemeState['theme']>(themeProps ?? THEMES_HANDLES.LIGHT);
+export const ThemeStateContextProvider = ({ children }: ThemeStateContextProviderProps) => {
+    const cookieTheme = Cookies.get(THEMES_COOKIE_KEY) as ThemesProps | undefined;
+
+    const [theme, setTheme] = useState<ThemeState['theme']>(cookieTheme ?? THEMES_HANDLES.LIGHT);
 
     useEffect(() => {
         const html = document.documentElement;
