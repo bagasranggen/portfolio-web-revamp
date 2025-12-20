@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 
 export type KeyboardEventsProps = Partial<Record<'onKeyUp' | 'onKeyDown', (e: KeyboardEvent) => void>>;
