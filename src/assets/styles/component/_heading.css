@@ -3,4 +3,10 @@
         @apply uppercase font-semibold;
         @apply text-md lg:text-5xl leading-[3rem] lg:leading-[4rem] tracking-[.35rem] lg:tracking-[.65rem];
     }
+
+    &.heading--fluid {
+        @apply inline-block overflow-visible whitespace-pre;
+        @apply origin-top-left scale-[var(--scale)];
+        @apply mb-[var(--scale-height-diff)];
+    }
 }

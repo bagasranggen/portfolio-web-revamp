@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 
 import { ArrayStringProps, ElementTagsProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
@@ -8,17 +8,27 @@ export type BaseProps = {
     variant?: 'title';
 } & (React.HTMLAttributes<HTMLHeadingElement> & PropsWithChildren);
 
-const Base = ({ as: Heading = 'h2', className, variant, children, ...props }: BaseProps): React.ReactElement => {
-    let headingClass: ArrayStringProps = [];
-    if (variant) headingClass.push('heading');
-    if (variant === 'title') headingClass.push('heading--title');
-    if (className) headingClass.push(className);
-    headingClass = joinArrayString(headingClass);
+const Base = forwardRef<HTMLHeadingElement, BaseProps>(
+    ({ as: Heading = 'h2', className, variant, children, ...props }, ref) => {
+        let headingClass: ArrayStringProps = [];
+        if (variant) headingClass.push('heading');
+        if (variant === 'title') headingClass.push('heading--title');
+        if (className) headingClass.push(className);
+        headingClass = joinArrayString(headingClass);
 
-    let headingProps = props;
-    if (headingClass) headingProps = Object.assign(headingProps, { className: headingClass });
+        let headingProps = props;
+        if (headingClass) headingProps = Object.assign(headingProps, { className: headingClass });
 
-    return <Heading {...headingProps}>{children}</Heading>;
-};
+        return (
+            <Heading
+                ref={ref}
+                {...headingProps}>
+                {children}
+            </Heading>
+        );
+    }
+);
+
+Base.displayName = 'Base';
 
 export default Base;
