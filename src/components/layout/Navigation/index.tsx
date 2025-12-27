@@ -117,7 +117,7 @@ const Navigation = ({
 
                 <KeyboardEvents
                     onKeyUp={({ key }) => {
-                        if (key === 'Escape' && open) setOpen(false);
+                        if (key === 'Escape') setOpen(false);
                     }}
                 />
             </Suspense>

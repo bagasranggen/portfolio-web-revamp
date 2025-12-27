@@ -7,4 +7,6 @@ export const THEMES = Object.values(THEMES_HANDLES);
 
 export const THEMES_COOKIE_KEY = 'theme';
 
+export const THEMES_PROXY_KEY = 'x-theme';
+
 export const THEMES_ATTRIBUTE_KEY = 'data-theme';

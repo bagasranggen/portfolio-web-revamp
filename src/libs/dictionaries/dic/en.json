@@ -4,5 +4,9 @@
       "open": "Menu",
       "close": "Close"
     }
+  },
+  "notFound": {
+    "title": "Lost? So are we. Let’s start over.",
+    "button": "Start over"
   }
 }

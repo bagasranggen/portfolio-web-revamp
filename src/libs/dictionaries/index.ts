@@ -1,4 +1,4 @@
-import 'server-only';
+// import 'server-only';
 
 import { LOCALES_HANDLES } from '@/libs/mock';
 
