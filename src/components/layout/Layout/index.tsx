@@ -16,19 +16,17 @@ export type LayoutProps = {
 
 const Layout = ({ lang, theme, className, navigation, footer, children }: LayoutProps): React.ReactElement => {
     return (
-        <>
-            <html
-                lang={lang}
-                data-theme={theme}>
-                <body {...(className ? { className } : {})}>
-                    {navigation && <Navigation {...navigation} />}
+        <html
+            lang={lang}
+            data-theme={theme}>
+            <body {...(className ? { className } : {})}>
+                {navigation && <Navigation {...navigation} />}
 
-                    {children}
+                {children}
 
-                    {footer && <Footer {...footer} />}
-                </body>
-            </html>
-        </>
+                {footer && <Footer {...footer} />}
+            </body>
+        </html>
     );
 };
 
