@@ -1,4 +1,5 @@
 import React, { JSX } from 'react';
+import { LocaleProps } from '@/libs/@types/lang';
 
 export type Component<Props> = {
     (props: Props): React.ReactElement | null;

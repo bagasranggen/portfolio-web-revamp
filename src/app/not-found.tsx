@@ -1,22 +1,7 @@
-import { headers } from 'next/headers';
 import localFont from 'next/font/local';
 
-import ContextProvider from '@/store/context';
-
-import {
-    LIST_MEDIA,
-    LIST_NAVIGATION,
-    LIST_SOCIAL,
-    LOCALES,
-    LOCALES_PROXY_KEY,
-    THEMES,
-    THEMES_PROXY_KEY,
-} from '@/libs/mock';
-import { LocaleProps, ThemesProps } from '@/libs/@types';
-import { getDictionary } from '@/libs/utils';
-
-import Layout from '@/components/layout/Layout';
 import NotFoundIndex from '@/components/pages/NotFoundIndex';
+import { NotFoundData } from '@/components/pages/NotFoundIndex/data';
 
 const murecho = localFont({
     src: [
@@ -62,34 +47,7 @@ const murecho = localFont({
 });
 
 export default async function NotFound() {
-    const headersList = await headers();
+    const { entries } = await NotFoundData({ className: murecho.variable });
 
-    const theme = headersList.get(THEMES_PROXY_KEY) as ThemesProps;
-    const lang = headersList.get(LOCALES_PROXY_KEY) as LocaleProps;
-    const dic = await getDictionary(lang);
-
-    return (
-        <ContextProvider>
-            <Layout
-                lang={lang}
-                theme={theme}
-                className={murecho.variable}
-                navigation={{
-                    media: LIST_MEDIA,
-                    items: LIST_NAVIGATION[lang],
-                    button: {
-                        open: dic.navigation.button.open,
-                        close: dic.navigation.button.close,
-                    },
-                    activeLocale: lang,
-                    locales: LOCALES,
-                    themes: THEMES,
-                }}
-                footer={{
-                    social: LIST_SOCIAL,
-                }}>
-                <NotFoundIndex />
-            </Layout>
-        </ContextProvider>
-    );
+    return <NotFoundIndex entries={entries} />;
 }
