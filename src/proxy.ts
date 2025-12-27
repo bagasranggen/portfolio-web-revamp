@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 import { LOCALES, LOCALES_DEFAULT, LOCALES_PROXY_KEY, THEMES_COOKIE_KEY, THEMES_PROXY_KEY } from '@/libs/mock';
-import { cleanArrayString, getEnvFeature } from '@/libs/utils';
+import { cleanArrayString, getEnvFeature, joinArrayString } from '@/libs/utils';
 
 export function proxy(request: NextRequest) {
     const { isMultiLanguage } = getEnvFeature();
@@ -14,6 +14,14 @@ export function proxy(request: NextRequest) {
 
     if (isMultiLanguage && !pathnameHasLocale) {
         nextUrl.pathname = `/${LOCALES_DEFAULT}${pathname}`;
+        return NextResponse.redirect(nextUrl);
+    }
+
+    if (!isMultiLanguage && pathnameHasLocale) {
+        const pathnameArr = cleanArrayString(pathname.split('/'));
+        pathnameArr.shift();
+
+        nextUrl.pathname = joinArrayString(pathnameArr, '/');
         return NextResponse.redirect(nextUrl);
     }
 
