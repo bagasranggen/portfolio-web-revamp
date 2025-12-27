@@ -14,3 +14,17 @@ export type ArrayStringProps = string | string[];
 export type ElementTagsProps = keyof JSX.IntrinsicElements;
 
 export type BreakpointsProps = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
+export type PageIndexProps<Props> = {
+    entries: Props;
+};
+
+export type PageDataProps<Props> = {
+    lang?: LocaleProps;
+} & Props;
+
+export type PageDataReturnProps<Props> = Promise<
+    {
+        // meta?: Metadata;
+    } & Props
+>;
