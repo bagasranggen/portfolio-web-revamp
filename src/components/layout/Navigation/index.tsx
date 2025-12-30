@@ -158,6 +158,7 @@ const Navigation = ({
                 media={media}
                 items={items}
                 open={open}
+                onOpenChange={setOpen}
                 langItems={langItems}
                 themeItems={themeItems}
             />
