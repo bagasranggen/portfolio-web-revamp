@@ -2,16 +2,13 @@ import React from 'react';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
-import '@/assets/styles/globals.css';
-
 import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL, LOCALES, THEMES } from '@/libs/mock';
 import { LocaleProps } from '@/libs/@types';
 import { getDictionary } from '@/libs/utils';
 
 import ContextProvider from '@/store/context';
 
-import Footer from '@/components/layout/Footer';
-import Navigation from '@/components/layout/Navigation';
+import Layout from '@/components/layout/Layout';
 
 const murecho = localFont({
     src: [
@@ -81,27 +78,25 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[la
 
     return (
         <ContextProvider>
-            <html
+            <Layout
                 lang={lang}
-                data-theme="light">
-                <body className={murecho.variable}>
-                    <Navigation
-                        media={LIST_MEDIA}
-                        items={LIST_NAVIGATION[lang]}
-                        button={{
-                            open: dic.navigation.button.open,
-                            close: dic.navigation.button.close,
-                        }}
-                        activeLocale={lang}
-                        locales={LOCALES}
-                        themes={THEMES}
-                    />
-
-                    {children}
-
-                    <Footer social={LIST_SOCIAL} />
-                </body>
-            </html>
+                className={murecho.variable}
+                navigation={{
+                    media: LIST_MEDIA,
+                    items: LIST_NAVIGATION[lang],
+                    button: {
+                        open: dic.navigation.button.open,
+                        close: dic.navigation.button.close,
+                    },
+                    activeLocale: lang,
+                    locales: LOCALES,
+                    themes: THEMES,
+                }}
+                footer={{
+                    social: LIST_SOCIAL,
+                }}>
+                {children}
+            </Layout>
         </ContextProvider>
     );
 }

@@ -2,6 +2,8 @@
 
 import React, { createContext, PropsWithChildren } from 'react';
 
+import { getEnvFeature } from '@/libs/utils';
+
 export type GlobalState = {
     isDev: boolean;
     isMultiLanguage: boolean;
@@ -15,9 +17,7 @@ export const GlobalStateContext = createContext<GlobalState>({
 });
 
 export const GlobalStateContextProvider = ({ children }: PropsWithChildren) => {
-    const isDev = process.env.NODE_ENV === 'development';
-    const isMultiLanguage = process.env.NEXT_PUBLIC_FF_MULTI_LANGUAGE === '1';
-    const isThemeToggle = process.env.NEXT_PUBLIC_FF_THEME_TOGGLE === '1';
+    const { isDev, isMultiLanguage, isThemeToggle } = getEnvFeature();
 
     const defaultContext = { isDev, isMultiLanguage, isThemeToggle };
 
