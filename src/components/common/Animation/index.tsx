@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import { useAnimationStateContext } from '@/store/context';
 
@@ -22,9 +22,19 @@ const Animation = ({ type, order, trigger, children, className, ...props }: Anim
     const animationSync: AnimationSyncProps = (props as any)?.options?.sync;
     const animationOptions: any = 'options' in props ? props?.options : undefined;
 
-    const { animations, setAnimations, getAnimations } = useAnimationStateContext();
+    const { animations, setAnimations } = useAnimationStateContext();
 
     const [sync, setSync] = useState<string | undefined | AnimationSyncProps>(animationSync?.target as any);
+
+    const relatedAnimation = useMemo(() => {
+        let data = undefined;
+
+        if (animations.length > 0 && typeof sync === 'string') {
+            data = animations.find((item) => item?.id === sync);
+        }
+
+        return data;
+    }, [animations, sync]);
 
     const root = useRef(null);
     const scope = useRef<Scope | null>(null);
@@ -65,8 +75,6 @@ const Animation = ({ type, order, trigger, children, className, ...props }: Anim
         if (!animationSync) return;
         if (typeof sync !== 'string') return;
 
-        const relatedAnimation = getAnimations(sync);
-
         const { partialInViewport: depPartialInViewport } = checkIsInViewport({
             target: document.querySelector(`#${sync}`),
         });
@@ -83,7 +91,7 @@ const Animation = ({ type, order, trigger, children, className, ...props }: Anim
                 opacityDelayOffset: isSynced ? animationSync?.opacityDelayOffset : undefined,
             });
         }
-    }, [sync, animations]);
+    }, [sync, relatedAnimation]);
 
     useEffect(() => {
         const target = root.current;

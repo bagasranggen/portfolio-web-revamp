@@ -1,12 +1,11 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import { headers } from 'next/headers';
 import localFont from 'next/font/local';
 
 import '@/assets/styles/globals.css';
 
-import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL, LOCALES, THEMES, THEMES_COOKIE_KEY } from '@/libs/mock';
-import { LocaleProps, ThemesProps } from '@/libs/@types';
+import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL, LOCALES, THEMES } from '@/libs/mock';
+import { LocaleProps } from '@/libs/@types';
 import { getDictionary } from '@/libs/utils';
 
 import ContextProvider from '@/store/context';
@@ -77,15 +76,14 @@ export async function generateStaticParams() {
 }
 
 export default async function RootLayout({ children, params }: LayoutProps<'/[lang]'>) {
-    const theme = (await headers()).get(THEMES_COOKIE_KEY);
     const lang = (await params).lang as LocaleProps;
     const dic = await getDictionary(lang);
 
     return (
-        <ContextProvider theme={theme as ThemesProps}>
+        <ContextProvider>
             <html
                 lang={lang}
-                data-theme={theme}>
+                data-theme="light">
                 <body className={murecho.variable}>
                     <Navigation
                         media={LIST_MEDIA}
