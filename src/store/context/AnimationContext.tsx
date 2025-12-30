@@ -29,7 +29,7 @@ export const AnimationStateContextProvider = ({ children }: PropsWithChildren) =
                     }}
                 />
             </Suspense>
-            <AnimationStateContext.Provider value={defaultContext}>{children}</AnimationStateContext.Provider>;
+            <AnimationStateContext.Provider value={defaultContext}>{children}</AnimationStateContext.Provider>
         </>
     );
 };

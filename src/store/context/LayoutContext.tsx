@@ -25,12 +25,7 @@ export const LayoutStateContextProvider = ({ children }: PropsWithChildren) => {
 
         if (!body) return;
 
-        // console.log({ body });
-
-        // body.style.setProperty('--header-height', `${headerHeight}px`);
         body.style.setProperty('--spacing-header', `${headerHeight}px`);
-
-        // console.log();
     }, [headerHeight]);
 
     return <LayoutStateContext.Provider value={defaultContext}>{children}</LayoutStateContext.Provider>;

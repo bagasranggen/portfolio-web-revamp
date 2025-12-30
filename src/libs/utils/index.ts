@@ -6,4 +6,6 @@ export * from './clearStyle';
 export * from './cn';
 export * from './getAnimationElementOrder';
 export * from './getElementDimension';
+export * from './getLocales';
+export * from './getEnvFeature';
 export * from './joinArrayString';
