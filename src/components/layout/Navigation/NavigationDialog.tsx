@@ -2,6 +2,7 @@ import React from 'react';
 
 import { ArrayStringProps } from '@/libs/@types';
 import { joinArrayString } from '@/libs/utils';
+import { useCheckSamePath } from '@/libs/hook';
 
 import {
     Dialog,
@@ -33,15 +34,15 @@ const NavigationDialog = ({
     open,
     onOpenChange,
 }: NavigationDialogProps): React.ReactElement => {
+    const { isSamePath } = useCheckSamePath();
+
     const animationDuration = 200;
 
     let fadeDuration = undefined;
     if (items && items.length > 0) fadeDuration = animationDuration * items.length + animationDuration;
 
     return (
-        <Dialog
-            open={open}
-            onOpenChange={onOpenChange}>
+        <Dialog open={open}>
             <DialogContent
                 className="modal modal--navigation"
                 showCloseButton={false}>
@@ -100,7 +101,13 @@ const NavigationDialog = ({
                                                             as="anchor"
                                                             color="dark"
                                                             className="block"
-                                                            href={item.href}>
+                                                            href={item.href}
+                                                            onClick={() => {
+                                                                if (!isSamePath({ href: item.href })) return;
+                                                                if (!onOpenChange) return;
+
+                                                                onOpenChange(false);
+                                                            }}>
                                                             {item.children}
                                                         </Button>
                                                     </Animation>
