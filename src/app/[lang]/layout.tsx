@@ -4,7 +4,7 @@ import localFont from 'next/font/local';
 
 import { LIST_MEDIA, LIST_NAVIGATION, LIST_SOCIAL, LOCALES, THEMES } from '@/libs/mock';
 import { LocaleProps } from '@/libs/@types';
-import { getDictionary } from '@/libs/utils';
+import { getDictionary, getEnvFeature } from '@/libs/utils';
 
 import ContextProvider from '@/store/context';
 
@@ -59,13 +59,21 @@ export const metadata: Metadata = {
 };
 
 export async function generateStaticParams() {
+    const { isMultiLanguage } = getEnvFeature();
+
     const path: { lang: string }[] = [];
 
-    if (LOCALES) {
+    if (isMultiLanguage && LOCALES) {
         LOCALES.forEach((item) => {
             path.push({
                 lang: item,
             });
+        });
+    }
+
+    if (!isMultiLanguage) {
+        path.push({
+            lang: '',
         });
     }
 
